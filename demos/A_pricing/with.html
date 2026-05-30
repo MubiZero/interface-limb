@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Pro plan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* spacing — 4px scale */
+      --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+      --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+
+      /* radius — concentric (child <= parent) */
+      --radius-card: 20px;
+      --radius-md: 12px;
+      --radius-sm: 9px;
+
+      /* dark surfaces — depth by lightening, not shadow */
+      --bg: #101212;                 /* page base, near-#121212, faint teal cast */
+      --surface: #181b1b;            /* card: a step lighter than the page */
+      --surface-high: #202423;       /* nested chips: lighter still */
+
+      /* committed accent: emerald/lime, desaturated for dark */
+      --accent: #5ee6a8;
+      --accent-strong: #74f0b8;
+      --accent-ink: #04140c;         /* text on accent */
+
+      /* text on dark — 87 / 60 / 38 emphasis, never pure white */
+      --text: rgba(236, 245, 241, 0.92);
+      --text-muted: rgba(236, 245, 241, 0.60);
+      --text-faint: rgba(236, 245, 241, 0.40);
+      --border: rgba(236, 245, 241, 0.09);
+      --border-accent: rgba(94, 230, 168, 0.32);
+
+      /* motion tokens */
+      --dur-short: 130ms;
+      --dur-medium: 220ms;
+      --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+      --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: var(--space-6);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      color: var(--text);
+      /* considered page background: dark base + one soft off-center accent wash */
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(60% 80% at 78% 8%, rgba(94, 230, 168, 0.10), transparent 60%),
+        radial-gradient(50% 60% at 12% 100%, rgba(94, 230, 168, 0.05), transparent 55%);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: var(--space-8) var(--space-6) var(--space-6);
+      /* depth via a top-edge highlight + faint lift, not a heavy drop shadow */
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 1px 2px rgba(0, 0, 0, 0.30),
+        0 18px 48px rgba(0, 0, 0, 0.42);
+    }
+
+    /* asymmetric "most popular" ribbon — the only loud element up top */
+    .ribbon {
+      position: absolute;
+      top: var(--space-5);
+      right: var(--space-5);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1) var(--space-3);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+      background: rgba(94, 230, 168, 0.10);
+      border: 1px solid var(--border-accent);
+      border-radius: 999px;
+    }
+    .ribbon .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(94, 230, 168, 0.18);
+    }
+
+    .plan-name {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;            /* the plan IS the headline of this card */
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .tagline {
+      margin: var(--space-3) 0 0;
+      max-width: 30ch;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+    }
+    .price .amount {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 3.5rem;            /* base 1rem × 1.333^~4.3 region; the focal point */
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+    .price .period {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+    }
+    .billing-note {
+      margin: var(--space-2) 0 0;
+      font-size: 0.8125rem;
+      color: var(--text-faint);
+    }
+
+    .divider {
+      height: 1px;
+      margin: var(--space-6) 0;
+      background: var(--border);
+      border: 0;
+    }
+
+    .features {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: var(--space-3);
+    }
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: 0.9375rem;
+      line-height: 1.4;
+      color: var(--text);
+    }
+    /* check sized to the line it sits beside, so icon+text read as one unit */
+    .feature .check {
+      flex: none;
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(94, 230, 168, 0.12);
+      color: var(--accent-strong);
+    }
+    .feature .check svg { width: 12px; height: 12px; }
+    .feature .lead { color: var(--text); }
+    .feature .sub { color: var(--text-muted); }
+
+    .cta {
+      /* layout */
+      appearance: none;
+      width: 100%;
+      margin-top: var(--space-6);
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      border: 0;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      /* type */
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.005em;
+      /* default state */
+      color: var(--accent-ink);
+      background: var(--accent);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        0 1px 2px rgba(0, 0, 0, 0.35),
+        0 8px 22px rgba(94, 230, 168, 0.18);
+      transition:
+        transform var(--dur-short) var(--ease-enter),
+        background-color var(--dur-short) var(--ease-enter),
+        box-shadow var(--dur-short) var(--ease-enter);
+      touch-action: manipulation;
+    }
+    .cta .arrow {
+      transition: transform var(--dur-short) var(--ease-enter);
+    }
+
+    /* hover — clear but subtle lift + brighter accent (pointer devices only) */
+    @media (hover: hover) {
+      .cta:hover {
+        background: var(--accent-strong);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.5),
+          0 2px 4px rgba(0, 0, 0, 0.35),
+          0 12px 30px rgba(94, 230, 168, 0.28);
+        transform: translateY(-1px);
+      }
+      .cta:hover .arrow { transform: translateX(2px); }
+    }
+
+    /* focus — visible keyboard ring, 2px, high contrast against surface */
+    .cta:focus-visible {
+      outline: 2px solid var(--accent-strong);
+      outline-offset: 3px;
+    }
+
+    /* pressed — immediate physical acknowledgement */
+    .cta:active {
+      transform: translateY(0) scale(0.985);
+      background: var(--accent);
+      box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.18),
+        0 1px 2px rgba(0, 0, 0, 0.35);
+      transition-duration: 90ms;
+    }
+
+    /* disabled — obviously inert, not interactive */
+    .cta:disabled {
+      cursor: not-allowed;
+      color: var(--text-faint);
+      background: var(--surface-high);
+      box-shadow: inset 0 0 0 1px var(--border);
+      transform: none;
+    }
+
+    .reassurance {
+      margin: var(--space-3) 0 0;
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-faint);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 1ms !important; }
+      .cta:hover { transform: none; }
+      .cta:hover .arrow { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article class="card" aria-labelledby="plan-title">
+      <span class="ribbon"><span class="dot" aria-hidden="true"></span>Most popular</span>
+
+      <h1 class="plan-name" id="plan-title">Pro</h1>
+      <p class="tagline">For teams that need full-trace visibility and alerting that actually pages the right person.</p>
+
+      <div class="price">
+        <span class="amount">$29</span>
+        <span class="period">per user / month</span>
+      </div>
+      <p class="billing-note">Billed annually, or $34 month to month.</p>
+
+      <hr class="divider" />
+
+      <ul class="features">
+        <li class="feature">
+          <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4 4 10-10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span><span class="lead">Unlimited services</span> <span class="sub">across 90 days of trace retention</span></span>
+        </li>
+        <li class="feature">
+          <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4 4 10-10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span><span class="lead">On-call scheduling</span> <span class="sub">with PagerDuty and Slack routing</span></span>
+        </li>
+        <li class="feature">
+          <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4 4 10-10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span><span class="lead">Custom dashboards</span> <span class="sub">shareable by link or embed</span></span>
+        </li>
+        <li class="feature">
+          <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4 4 10-10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span><span class="lead">Anomaly alerts</span> <span class="sub">trained on your own baselines</span></span>
+        </li>
+        <li class="feature">
+          <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4 4 10-10" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span><span class="lead">SSO and audit logs</span> <span class="sub">SAML, SCIM, and a 1-hour SLA</span></span>
+        </li>
+      </ul>
+
+      <button type="button" class="cta">
+        Start a 14-day trial
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p class="reassurance">No card required. Cancel anytime.</p>
+    </article>
+  </main>
+</body>
+</html>

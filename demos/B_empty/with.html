@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* spacing — 4px scale */
+    --space-1: 4px;  --space-2: 8px;   --space-3: 12px; --space-4: 16px;
+    --space-5: 20px; --space-6: 24px;  --space-8: 32px; --space-10: 40px;
+    --space-12: 48px;
+
+    /* radius (concentric: outer 20 > icon 16 > button 10) */
+    --radius-sm: 10px; --radius-md: 16px; --radius-lg: 20px;
+
+    /* neutral base (Zinc-leaning) + one committed accent (emerald) */
+    --bg: #fbfbfa;
+    --bg-grid: rgba(24, 24, 27, 0.035);
+    --surface: #ffffff;
+    --text: #18181b;
+    --text-secondary: #52525b;
+    --text-muted: #8b8b93;
+    --border: rgba(24, 24, 27, 0.09);
+    --border-strong: rgba(24, 24, 27, 0.14);
+
+    --accent: #0f9b6e;
+    --accent-hover: #0c875f;
+    --accent-active: #0a7252;
+    --accent-soft: #e8f6f0;
+    --accent-ring: rgba(15, 155, 110, 0.45);
+
+    /* layered, faint elevation (ambient + key) */
+    --shadow-card:
+      0 1px 2px rgba(24, 24, 27, 0.05),
+      0 8px 24px rgba(24, 24, 27, 0.06),
+      0 2px 6px rgba(24, 24, 27, 0.04);
+    --shadow-btn:
+      0 1px 2px rgba(10, 114, 82, 0.28),
+      0 2px 8px rgba(10, 114, 82, 0.22);
+    --shadow-btn-active:
+      0 1px 1px rgba(10, 114, 82, 0.30);
+
+    /* motion tokens */
+    --dur-short: 140ms;
+    --dur-medium: 240ms;
+    --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    color: var(--text);
+    background-color: var(--bg);
+    /* considered background: faint dot grid, not a flat fill or purple glow */
+    background-image:
+      radial-gradient(circle at center, var(--bg-grid) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-position: center;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* App shell: a slim header to anchor the empty state as MAIN CONTENT */
+  .app {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-8);
+    border-bottom: 1px solid var(--border);
+    background: rgba(251, 251, 250, 0.72);
+    backdrop-filter: saturate(140%) blur(8px);
+  }
+
+  .crumb {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  /* every crumb segment is a real target: hover background, focus ring, press */
+  .crumb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+    margin: calc(var(--space-1) * -1) 0;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--dur-short) var(--ease-standard),
+                color var(--dur-short) var(--ease-standard);
+  }
+  .crumb-link:hover { background: rgba(24,24,27,0.05); color: var(--text); }
+  .crumb-link:active { background: rgba(24,24,27,0.09); }
+  .crumb-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  /* current page: same hover affordance, but marked as where you are */
+  .crumb-link[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .crumb .mark {
+    display: grid;
+    place-items: center;
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 1px 2px rgba(10,114,82,0.35);
+    transition: transform var(--dur-short) var(--ease-standard);
+  }
+  .crumb-link:hover .mark { transform: scale(1.04); }
+  .crumb .mark svg { width: 15px; height: 15px; }
+  .crumb .sep { color: var(--text-muted); font-weight: 400; }
+
+  .topbar-actions { display: inline-flex; align-items: center; gap: var(--space-3); }
+
+  /* Search: a single control that grows from a pill into an input.
+     Width animates, the icon stays put, the field takes focus on open. */
+  .search {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 34px;
+    width: 116px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: text;
+    overflow: hidden;
+    transition: width var(--dur-medium) var(--ease-standard),
+                border-color var(--dur-short) var(--ease-standard),
+                box-shadow var(--dur-short) var(--ease-standard);
+  }
+  .search:hover { border-color: var(--border-strong); }
+  .search .icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 34px; height: 34px;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+  .search .icon svg { width: 16px; height: 16px; }
+  /* collapsed label sits in flow; the input is hidden until opened */
+  .search .label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .search input {
+    flex: 1;
+    min-width: 0;
+    width: 0;
+    height: 100%;
+    /* breathing room so the caret/text never hug the icon or the right wall */
+    padding: 0 var(--space-3) 0 var(--space-2);
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--text);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-short) var(--ease-standard);
+  }
+  .search input::placeholder { color: var(--text-muted); }
+
+  /* open state: wider, soft accent ring, input live, static label gone */
+  .search.is-open {
+    width: 268px;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .search.is-open .label { display: none; }
+  .search.is-open input {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .search { transition: border-color 1ms, box-shadow 1ms; }
+  }
+
+  /* Main content area: centered empty state */
+  main {
+    display: grid;
+    place-items: center;
+    padding: var(--space-12) var(--space-6);
+  }
+
+  .empty {
+    width: 100%;
+    max-width: 460px;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-12) var(--space-10) var(--space-10);
+    animation: rise var(--dur-medium) var(--ease-enter) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Illustration: stacked-layers folder, the scan anchor */
+  .art {
+    width: 84px; height: 84px;
+    margin: 0 auto var(--space-6);
+    border-radius: var(--radius-md);
+    display: grid;
+    place-items: center;
+    background:
+      linear-gradient(180deg, #ffffff 0%, var(--accent-soft) 100%);
+    border: 1px solid rgba(15, 155, 110, 0.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.9),
+      0 6px 16px rgba(15, 155, 110, 0.12);
+    position: relative;
+  }
+  .art svg { width: 40px; height: 40px; color: var(--accent); }
+  /* a small status dot to read as "ready to fill" */
+  .art::after {
+    content: "";
+    position: absolute;
+    right: -5px; bottom: -5px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    background-image:
+      radial-gradient(circle, var(--accent) 0 4px, transparent 5px);
+    box-shadow: 0 2px 6px rgba(24,24,27,0.10);
+  }
+
+  .empty h1 {
+    margin: 0 0 var(--space-3);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;       /* ~24px, modular 1.25 from 16 base */
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-wrap: balance;
+  }
+
+  .empty p {
+    margin: 0 auto var(--space-8);
+    max-width: 38ch;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+
+  /* Primary CTA — all six microstates */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding: 0 var(--space-6);
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn);
+    transition:
+      transform var(--dur-short) var(--ease-standard),
+      background-color var(--dur-short) var(--ease-standard),
+      box-shadow var(--dur-short) var(--ease-standard);
+  }
+  .btn-primary svg { width: 18px; height: 18px; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-primary:focus-visible {
+    outline: none;
+    box-shadow:
+      var(--shadow-btn),
+      0 0 0 2px var(--surface),
+      0 0 0 4px var(--accent-ring);
+  }
+  .btn-primary:active {
+    background: var(--accent-active);
+    transform: scale(0.975);
+    box-shadow: var(--shadow-btn-active);
+  }
+
+  /* Secondary, quieter path so primary keeps the strongest contrast.
+     Separated from the CTA by generous space alone — no divider line, which
+     would stretch past the centered button and read as a stray rule.
+     Scoped under .empty so this margin wins over the generic `.empty p` rule
+     (otherwise its higher specificity zeroes the gap and the link sticks to
+     the button). */
+  .empty .alt {
+    margin: var(--space-10) 0 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+  .alt a {
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-strong);
+    padding-bottom: 1px;
+    transition: color var(--dur-short) var(--ease-standard),
+                border-color var(--dur-short) var(--ease-standard);
+    border-radius: 2px;
+  }
+  .alt a:hover { color: var(--accent); border-color: var(--accent); }
+  .alt a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .empty { animation: none; }
+    * { transition-duration: 1ms !important; }
+  }
+
+  @media (max-width: 540px) {
+    .topbar { padding: var(--space-4) var(--space-5); }
+    .topbar-actions .label { display: none; }
+    .empty { padding: var(--space-10) var(--space-6) var(--space-8); }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <nav class="crumb" aria-label="Breadcrumb">
+        <a href="#workspace" class="crumb-link">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            </svg>
+          </span>
+          Marlowe Studio
+        </a>
+        <span class="sep" aria-hidden="true">/</span>
+        <a href="#projects" class="crumb-link" aria-current="page">Projects</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <div class="search" id="search" role="search">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/>
+            </svg>
+          </span>
+          <span class="label" id="search-label">Search</span>
+          <input type="search" aria-labelledby="search-label" placeholder="Search projects…" autocomplete="off" />
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="empty" aria-labelledby="empty-title">
+        <div class="art" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 8.2 12 4l8.5 4.2L12 12.4 3.5 8.2Z"/>
+            <path d="M3.5 12 12 16.2 20.5 12"/>
+            <path d="M3.5 15.8 12 20l8.5-4.2"/>
+          </svg>
+        </div>
+
+        <h1 id="empty-title">Start your first project</h1>
+        <p>
+          Projects keep your tasks, files, and teammates in one place. Create one
+          to start tracking work, and it will show up right here.
+        </p>
+
+        <button type="button" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+          Create project
+        </button>
+
+        <p class="alt">
+          Migrating from another tool? <a href="#import">Import a project</a>
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Search: open on click/focus, give focus to the field, collapse on
+    // Escape or on blur when left empty. The field is the source of truth.
+    (function () {
+      var box = document.getElementById('search');
+      var input = box.querySelector('input');
+      function open() {
+        box.classList.add('is-open');
+        input.focus();
+      }
+      function maybeClose() {
+        if (input.value.trim() === '') box.classList.remove('is-open');
+      }
+      box.addEventListener('click', open);
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { input.value = ''; box.classList.remove('is-open'); input.blur(); }
+      });
+      input.addEventListener('blur', maybeClose);
+    })();
+  </script>
+</body>
+</html>

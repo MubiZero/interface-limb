@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Демо B — пустой экран списка «Projects»</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          background: #f4f5f7; color: #16181d; }
+  header { padding: 20px 24px 8px; }
+  h1 { font-size: 18px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  p.sub { margin: 0; color: #6b7280; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px 24px 28px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  .panel { background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.05); }
+  .panel .label { display: flex; align-items: center; gap: 8px; padding: 10px 14px; font-size: 13px;
+                   font-weight: 600; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .without .dot { background: #9ca3af; }
+  .with .dot { background: #10b981; }
+  .label .tag { margin-left: auto; font-weight: 500; color: #9ca3af; font-size: 12px; }
+  iframe { width: 100%; height: 660px; border: 0; display: block; background: #fff; }
+</style></head>
+<body>
+  <header>
+    <h1>Демо B — пустой экран списка «Projects»</h1>
+    <p class="sub">Слева — обычный ответ Claude. Справа — Claude со скиллом <b>interface-limb</b>. Обе версии сгенерированы независимыми агентами по одинаковому запросу. Наведи/нажми/потабай по элементам — состояния настоящие.</p>
+  </header>
+  <div class="grid">
+    <div class="panel without">
+      <div class="label"><span class="dot"></span>Без скилла<span class="tag">baseline</span></div>
+      <iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot; /&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+&lt;title&gt;Projects&lt;/title&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot; /&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin /&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
+&lt;style&gt;
+  :root {
+    /* Neutral product palette, faint cool tint toward the brand hue */
+    --bg:        oklch(0.985 0.003 255);
+    --surface:   oklch(1 0 0);
+    --surface-2: oklch(0.975 0.004 255);
+    --border:    oklch(0.915 0.006 255);
+    --border-2:  oklch(0.875 0.008 255);
+    --ink:       oklch(0.255 0.012 260);
+    --ink-2:     oklch(0.455 0.012 260);
+    --muted:     oklch(0.555 0.011 260);
+
+    /* Accent: a measured indigo, used only for the primary action + focus */
+    --accent:        oklch(0.545 0.165 268);
+    --accent-hover:  oklch(0.495 0.168 268);
+    --accent-soft:   oklch(0.955 0.028 268);
+    --accent-ink:    oklch(0.46 0.16 268);
+    --ring:          oklch(0.62 0.16 268 / 0.45);
+
+    --radius: 12px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 2px oklch(0.2 0.03 260 / 0.05);
+    --shadow-md: 0 4px 16px oklch(0.2 0.03 260 / 0.06), 0 1px 3px oklch(0.2 0.03 260 / 0.05);
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: &quot;Inter&quot;, system-ui, -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: &quot;cv05&quot; 1, &quot;ss01&quot; 1;
+  }
+
+  /* ---- App shell (just enough chrome to read as &quot;main content area&quot;) ---- */
+  .app {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 56px;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+  }
+
+  .brand .mark {
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    background: linear-gradient(150deg, var(--accent), oklch(0.6 0.17 290));
+    display: grid;
+    place-items: center;
+    color: #fff;
+    box-shadow: var(--shadow-sm);
+  }
+  .brand .mark svg { width: 15px; height: 15px; }
+
+  .topbar .divider {
+    width: 1px;
+    height: 22px;
+    background: var(--border-2);
+  }
+
+  .crumb {
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-weight: 450;
+  }
+
+  .topbar .spacer { flex: 1; }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    display: grid;
+    place-items: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+  }
+
+  /* ---- Content header row ---- */
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-head h1 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .page-head .count {
+    margin-left: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 999px;
+    vertical-align: middle;
+  }
+
+  .ghost-btn {
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--ink-2);
+    background: var(--surface);
+    border: 1px solid var(--border-2);
+    border-radius: 9px;
+    padding: 7px 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    transition: background 0.15s var(--ease), border-color 0.15s var(--ease), color 0.15s var(--ease);
+  }
+  .ghost-btn:hover { background: var(--surface-2); border-color: var(--muted); color: var(--ink); }
+  .ghost-btn svg { width: 14px; height: 14px; }
+
+  /* ---- The empty state itself ---- */
+  .empty-wrap {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    padding: 48px 24px 72px;
+  }
+
+  .empty {
+    width: 100%;
+    max-width: 460px;
+    text-align: center;
+  }
+
+  /* Illustration: stacked &quot;project&quot; cards forming, on a soft dotted field */
+  .illu {
+    position: relative;
+    width: 168px;
+    height: 132px;
+    margin: 0 auto 28px;
+  }
+
+  .illu .field {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center, var(--accent-soft), transparent 68%);
+    opacity: 0.9;
+  }
+
+  .illu .dots {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-image: radial-gradient(var(--border-2) 1.1px, transparent 1.1px);
+    background-size: 13px 13px;
+    -webkit-mask-image: radial-gradient(circle at center, #000 38%, transparent 72%);
+            mask-image: radial-gradient(circle at center, #000 38%, transparent 72%);
+    opacity: 0.7;
+  }
+
+  .card-stack {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  .proj-card {
+    position: absolute;
+    width: 116px;
+    border-radius: 11px;
+    background: var(--surface);
+    border: 1px solid var(--border-2);
+    box-shadow: var(--shadow-md);
+    padding: 11px 12px;
+  }
+
+  .proj-card.back {
+    transform: translateY(-22px) rotate(-7deg) scale(0.92);
+    opacity: 0.65;
+    filter: saturate(0.6);
+  }
+  .proj-card.mid {
+    transform: translateY(-2px) rotate(4deg) scale(0.96);
+    opacity: 0.85;
+  }
+  .proj-card.front {
+    transform: translateY(16px);
+    z-index: 2;
+  }
+
+  .proj-card .dot {
+    width: 16px; height: 16px;
+    border-radius: 5px;
+    margin-bottom: 9px;
+  }
+  .proj-card.front .dot { background: var(--accent); }
+  .proj-card.mid .dot   { background: oklch(0.7 0.13 200); }
+  .proj-card.back .dot  { background: oklch(0.78 0.12 70); }
+
+  .proj-card .line {
+    height: 5px;
+    border-radius: 3px;
+    background: var(--border-2);
+  }
+  .proj-card .line + .line { margin-top: 6px; }
+  .proj-card .line.short { width: 58%; }
+
+  /* The animated &quot;plus&quot; badge that lands on the front card */
+  .illu .plus {
+    position: absolute;
+    z-index: 3;
+    right: 14px;
+    bottom: 6px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 14px var(--ring);
+    border: 2px solid var(--surface);
+  }
+  .illu .plus svg { width: 15px; height: 15px; }
+
+  .empty h2 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .empty p {
+    margin: 10px auto 0;
+    max-width: 38ch;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+
+  .actions {
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font: inherit;
+    font-weight: 500;
+    font-size: 0.875rem;
+    border-radius: 10px;
+    padding: 10px 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform 0.12s var(--ease), background 0.15s var(--ease),
+                border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn svg { width: 15px; height: 15px; }
+
+  .btn-primary {
+    color: #fff;
+    background: var(--accent);
+    border: 1px solid transparent;
+    box-shadow: 0 1px 2px oklch(0.4 0.16 268 / 0.35), 0 4px 12px var(--ring);
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+
+  .btn-secondary {
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--border-2);
+  }
+  .btn-secondary:hover { background: var(--surface-2); border-color: var(--muted); }
+
+  :where(button, a):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Subtle helper hint under the actions */
+  .hint {
+    margin-top: 22px;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  .hint kbd {
+    font-family: ui-monospace, &quot;SF Mono&quot;, Menlo, monospace;
+    font-size: 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border-2);
+    border-bottom-width: 2px;
+    border-radius: 6px;
+    padding: 1px 6px;
+    color: var(--ink-2);
+  }
+
+  /* ---- Entrance motion ---- */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes plus-pop {
+    0%   { opacity: 0; transform: scale(0.4) translateY(6px); }
+    60%  { opacity: 1; transform: scale(1.06) translateY(0); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .empty &gt; * { animation: rise 0.55s var(--ease) both; }
+  .empty .illu { animation-delay: 0.02s; }
+  .empty h2    { animation-delay: 0.10s; }
+  .empty p     { animation-delay: 0.16s; }
+  .empty .actions { animation-delay: 0.22s; }
+  .empty .hint    { animation-delay: 0.28s; }
+
+  .illu .plus { animation: plus-pop 0.5s var(--ease) 0.5s both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .empty &gt; *, .illu .plus { animation: none !important; }
+  }
+
+  @media (max-width: 520px) {
+    .page-head { padding: 18px 16px; }
+    .empty-wrap { padding: 36px 18px 56px; }
+    .crumb { display: none; }
+    .topbar .divider { display: none; }
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;!-- minimal app chrome so the empty state reads as the main content area --&gt;
+    &lt;header class=&quot;topbar&quot;&gt;
+      &lt;div class=&quot;brand&quot;&gt;
+        &lt;span class=&quot;mark&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M4 7l8-4 8 4-8 4-8-4z&quot; fill=&quot;currentColor&quot; opacity=&quot;.95&quot;/&gt;&lt;path d=&quot;M4 12l8 4 8-4M4 17l8 4 8-4&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+        &lt;/span&gt;
+        Northwind
+      &lt;/div&gt;
+      &lt;span class=&quot;divider&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+      &lt;span class=&quot;crumb&quot;&gt;Workspace&lt;/span&gt;
+      &lt;div class=&quot;spacer&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;avatar&quot; title=&quot;Mubin&quot;&gt;MZ&lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;main class=&quot;content&quot;&gt;
+      &lt;div class=&quot;page-head&quot;&gt;
+        &lt;h1&gt;Projects &lt;span class=&quot;count&quot;&gt;0&lt;/span&gt;&lt;/h1&gt;
+        &lt;button class=&quot;ghost-btn&quot; type=&quot;button&quot;&gt;
+          &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;circle cx=&quot;11&quot; cy=&quot;11&quot; r=&quot;6.5&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot;/&gt;&lt;path d=&quot;M16 16l4 4&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+          Search
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;section class=&quot;empty-wrap&quot;&gt;
+        &lt;div class=&quot;empty&quot;&gt;
+          &lt;div class=&quot;illu&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;span class=&quot;field&quot;&gt;&lt;/span&gt;
+            &lt;span class=&quot;dots&quot;&gt;&lt;/span&gt;
+            &lt;div class=&quot;card-stack&quot;&gt;
+              &lt;div class=&quot;proj-card back&quot;&gt;
+                &lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;line&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;line short&quot;&gt;&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;proj-card mid&quot;&gt;
+                &lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;line&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;line short&quot;&gt;&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;proj-card front&quot;&gt;
+                &lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;line&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;line short&quot;&gt;&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span class=&quot;plus&quot;&gt;
+              &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M12 5v14M5 12h14&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;h2&gt;Start your first project&lt;/h2&gt;
+          &lt;p&gt;Projects keep your tasks, files, and teammates in one place. Create one to get going, or import an existing repository.&lt;/p&gt;
+
+          &lt;div class=&quot;actions&quot;&gt;
+            &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot;&gt;
+              &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M12 5v14M5 12h14&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+              New project
+            &lt;/button&gt;
+            &lt;button class=&quot;btn btn-secondary&quot; type=&quot;button&quot;&gt;
+              &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M12 3v11m0 0l-4-4m4 4l4-4&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;path d=&quot;M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.8&quot; stroke-linecap=&quot;round&quot;/&gt;&lt;/svg&gt;
+              Import
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          &lt;p class=&quot;hint&quot;&gt;Or press &lt;kbd&gt;N&lt;/kbd&gt; anywhere to create one.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+" title="without skill"></iframe>
+    </div>
+    <div class="panel with">
+      <div class="label"><span class="dot"></span>Со скиллом<span class="tag">interface-limb</span></div>
+      <iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot; /&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+&lt;title&gt;Projects&lt;/title&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot; /&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin /&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
+&lt;style&gt;
+  :root {
+    /* spacing — 4px scale */
+    --space-1: 4px;  --space-2: 8px;   --space-3: 12px; --space-4: 16px;
+    --space-5: 20px; --space-6: 24px;  --space-8: 32px; --space-10: 40px;
+    --space-12: 48px;
+
+    /* radius (concentric: outer 20 &gt; icon 16 &gt; button 10) */
+    --radius-sm: 10px; --radius-md: 16px; --radius-lg: 20px;
+
+    /* neutral base (Zinc-leaning) + one committed accent (emerald) */
+    --bg: #fbfbfa;
+    --bg-grid: rgba(24, 24, 27, 0.035);
+    --surface: #ffffff;
+    --text: #18181b;
+    --text-secondary: #52525b;
+    --text-muted: #8b8b93;
+    --border: rgba(24, 24, 27, 0.09);
+    --border-strong: rgba(24, 24, 27, 0.14);
+
+    --accent: #0f9b6e;
+    --accent-hover: #0c875f;
+    --accent-active: #0a7252;
+    --accent-soft: #e8f6f0;
+    --accent-ring: rgba(15, 155, 110, 0.45);
+
+    /* layered, faint elevation (ambient + key) */
+    --shadow-card:
+      0 1px 2px rgba(24, 24, 27, 0.05),
+      0 8px 24px rgba(24, 24, 27, 0.06),
+      0 2px 6px rgba(24, 24, 27, 0.04);
+    --shadow-btn:
+      0 1px 2px rgba(10, 114, 82, 0.28),
+      0 2px 8px rgba(10, 114, 82, 0.22);
+    --shadow-btn-active:
+      0 1px 1px rgba(10, 114, 82, 0.30);
+
+    /* motion tokens */
+    --dur-short: 140ms;
+    --dur-medium: 240ms;
+    --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    font-family: &#x27;DM Sans&#x27;, system-ui, sans-serif;
+    color: var(--text);
+    background-color: var(--bg);
+    /* considered background: faint dot grid, not a flat fill or purple glow */
+    background-image:
+      radial-gradient(circle at center, var(--bg-grid) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-position: center;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* App shell: a slim header to anchor the empty state as MAIN CONTENT */
+  .app {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-8);
+    border-bottom: 1px solid var(--border);
+    background: rgba(251, 251, 250, 0.72);
+    backdrop-filter: saturate(140%) blur(8px);
+  }
+
+  .crumb {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: &#x27;Space Grotesk&#x27;, system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  /* every crumb segment is a real target: hover background, focus ring, press */
+  .crumb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+    margin: calc(var(--space-1) * -1) 0;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--dur-short) var(--ease-standard),
+                color var(--dur-short) var(--ease-standard);
+  }
+  .crumb-link:hover { background: rgba(24,24,27,0.05); color: var(--text); }
+  .crumb-link:active { background: rgba(24,24,27,0.09); }
+  .crumb-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  /* current page: same hover affordance, but marked as where you are */
+  .crumb-link[aria-current=&quot;page&quot;] { color: var(--text); font-weight: 600; }
+  .crumb .mark {
+    display: grid;
+    place-items: center;
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 1px 2px rgba(10,114,82,0.35);
+    transition: transform var(--dur-short) var(--ease-standard);
+  }
+  .crumb-link:hover .mark { transform: scale(1.04); }
+  .crumb .mark svg { width: 15px; height: 15px; }
+  .crumb .sep { color: var(--text-muted); font-weight: 400; }
+
+  .topbar-actions { display: inline-flex; align-items: center; gap: var(--space-3); }
+
+  /* Search: a single control that grows from a pill into an input.
+     Width animates, the icon stays put, the field takes focus on open. */
+  .search {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 34px;
+    width: 116px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: text;
+    overflow: hidden;
+    transition: width var(--dur-medium) var(--ease-standard),
+                border-color var(--dur-short) var(--ease-standard),
+                box-shadow var(--dur-short) var(--ease-standard);
+  }
+  .search:hover { border-color: var(--border-strong); }
+  .search .icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 34px; height: 34px;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+  .search .icon svg { width: 16px; height: 16px; }
+  /* collapsed label sits in flow; the input is hidden until opened */
+  .search .label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .search input {
+    flex: 1;
+    min-width: 0;
+    width: 0;
+    height: 100%;
+    /* breathing room so the caret/text never hug the icon or the right wall */
+    padding: 0 var(--space-3) 0 var(--space-2);
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--text);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-short) var(--ease-standard);
+  }
+  .search input::placeholder { color: var(--text-muted); }
+
+  /* open state: wider, soft accent ring, input live, static label gone */
+  .search.is-open {
+    width: 268px;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .search.is-open .label { display: none; }
+  .search.is-open input {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .search { transition: border-color 1ms, box-shadow 1ms; }
+  }
+
+  /* Main content area: centered empty state */
+  main {
+    display: grid;
+    place-items: center;
+    padding: var(--space-12) var(--space-6);
+  }
+
+  .empty {
+    width: 100%;
+    max-width: 460px;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-12) var(--space-10) var(--space-10);
+    animation: rise var(--dur-medium) var(--ease-enter) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Illustration: stacked-layers folder, the scan anchor */
+  .art {
+    width: 84px; height: 84px;
+    margin: 0 auto var(--space-6);
+    border-radius: var(--radius-md);
+    display: grid;
+    place-items: center;
+    background:
+      linear-gradient(180deg, #ffffff 0%, var(--accent-soft) 100%);
+    border: 1px solid rgba(15, 155, 110, 0.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.9),
+      0 6px 16px rgba(15, 155, 110, 0.12);
+    position: relative;
+  }
+  .art svg { width: 40px; height: 40px; color: var(--accent); }
+  /* a small status dot to read as &quot;ready to fill&quot; */
+  .art::after {
+    content: &quot;&quot;;
+    position: absolute;
+    right: -5px; bottom: -5px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    background-image:
+      radial-gradient(circle, var(--accent) 0 4px, transparent 5px);
+    box-shadow: 0 2px 6px rgba(24,24,27,0.10);
+  }
+
+  .empty h1 {
+    margin: 0 0 var(--space-3);
+    font-family: &#x27;Space Grotesk&#x27;, system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;       /* ~24px, modular 1.25 from 16 base */
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-wrap: balance;
+  }
+
+  .empty p {
+    margin: 0 auto var(--space-8);
+    max-width: 38ch;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+
+  /* Primary CTA — all six microstates */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding: 0 var(--space-6);
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn);
+    transition:
+      transform var(--dur-short) var(--ease-standard),
+      background-color var(--dur-short) var(--ease-standard),
+      box-shadow var(--dur-short) var(--ease-standard);
+  }
+  .btn-primary svg { width: 18px; height: 18px; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-primary:focus-visible {
+    outline: none;
+    box-shadow:
+      var(--shadow-btn),
+      0 0 0 2px var(--surface),
+      0 0 0 4px var(--accent-ring);
+  }
+  .btn-primary:active {
+    background: var(--accent-active);
+    transform: scale(0.975);
+    box-shadow: var(--shadow-btn-active);
+  }
+
+  /* Secondary, quieter path so primary keeps the strongest contrast.
+     Separated from the CTA by generous space alone — no divider line, which
+     would stretch past the centered button and read as a stray rule.
+     Scoped under .empty so this margin wins over the generic `.empty p` rule
+     (otherwise its higher specificity zeroes the gap and the link sticks to
+     the button). */
+  .empty .alt {
+    margin: var(--space-10) 0 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+  .alt a {
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-strong);
+    padding-bottom: 1px;
+    transition: color var(--dur-short) var(--ease-standard),
+                border-color var(--dur-short) var(--ease-standard);
+    border-radius: 2px;
+  }
+  .alt a:hover { color: var(--accent); border-color: var(--accent); }
+  .alt a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .empty { animation: none; }
+    * { transition-duration: 1ms !important; }
+  }
+
+  @media (max-width: 540px) {
+    .topbar { padding: var(--space-4) var(--space-5); }
+    .topbar-actions .label { display: none; }
+    .empty { padding: var(--space-10) var(--space-6) var(--space-8); }
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class=&quot;app&quot;&gt;
+    &lt;header class=&quot;topbar&quot;&gt;
+      &lt;nav class=&quot;crumb&quot; aria-label=&quot;Breadcrumb&quot;&gt;
+        &lt;a href=&quot;#workspace&quot; class=&quot;crumb-link&quot;&gt;
+          &lt;span class=&quot;mark&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+              &lt;path d=&quot;M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z&quot;/&gt;
+            &lt;/svg&gt;
+          &lt;/span&gt;
+          Marlowe Studio
+        &lt;/a&gt;
+        &lt;span class=&quot;sep&quot; aria-hidden=&quot;true&quot;&gt;/&lt;/span&gt;
+        &lt;a href=&quot;#projects&quot; class=&quot;crumb-link&quot; aria-current=&quot;page&quot;&gt;Projects&lt;/a&gt;
+      &lt;/nav&gt;
+
+      &lt;div class=&quot;topbar-actions&quot;&gt;
+        &lt;div class=&quot;search&quot; id=&quot;search&quot; role=&quot;search&quot;&gt;
+          &lt;span class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+              &lt;circle cx=&quot;11&quot; cy=&quot;11&quot; r=&quot;7&quot;/&gt;&lt;path d=&quot;m20 20-3-3&quot;/&gt;
+            &lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;span class=&quot;label&quot; id=&quot;search-label&quot;&gt;Search&lt;/span&gt;
+          &lt;input type=&quot;search&quot; aria-labelledby=&quot;search-label&quot; placeholder=&quot;Search projects…&quot; autocomplete=&quot;off&quot; /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+      &lt;section class=&quot;empty&quot; aria-labelledby=&quot;empty-title&quot;&gt;
+        &lt;div class=&quot;art&quot; aria-hidden=&quot;true&quot;&gt;
+          &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;1.75&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+            &lt;path d=&quot;M3.5 8.2 12 4l8.5 4.2L12 12.4 3.5 8.2Z&quot;/&gt;
+            &lt;path d=&quot;M3.5 12 12 16.2 20.5 12&quot;/&gt;
+            &lt;path d=&quot;M3.5 15.8 12 20l8.5-4.2&quot;/&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+
+        &lt;h1 id=&quot;empty-title&quot;&gt;Start your first project&lt;/h1&gt;
+        &lt;p&gt;
+          Projects keep your tasks, files, and teammates in one place. Create one
+          to start tracking work, and it will show up right here.
+        &lt;/p&gt;
+
+        &lt;button type=&quot;button&quot; class=&quot;btn-primary&quot;&gt;
+          &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;path d=&quot;M12 5v14M5 12h14&quot;/&gt;
+          &lt;/svg&gt;
+          Create project
+        &lt;/button&gt;
+
+        &lt;p class=&quot;alt&quot;&gt;
+          Migrating from another tool? &lt;a href=&quot;#import&quot;&gt;Import a project&lt;/a&gt;
+        &lt;/p&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    // Search: open on click/focus, give focus to the field, collapse on
+    // Escape or on blur when left empty. The field is the source of truth.
+    (function () {
+      var box = document.getElementById(&#x27;search&#x27;);
+      var input = box.querySelector(&#x27;input&#x27;);
+      function open() {
+        box.classList.add(&#x27;is-open&#x27;);
+        input.focus();
+      }
+      function maybeClose() {
+        if (input.value.trim() === &#x27;&#x27;) box.classList.remove(&#x27;is-open&#x27;);
+      }
+      box.addEventListener(&#x27;click&#x27;, open);
+      input.addEventListener(&#x27;keydown&#x27;, function (e) {
+        if (e.key === &#x27;Escape&#x27;) { input.value = &#x27;&#x27;; box.classList.remove(&#x27;is-open&#x27;); input.blur(); }
+      });
+      input.addEventListener(&#x27;blur&#x27;, maybeClose);
+    })();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+" title="with skill"></iframe>
+    </div>
+  </div>
+</body></html>

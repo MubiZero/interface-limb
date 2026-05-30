@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pro Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #eef1f6;
+    --card-bg: #ffffff;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --brand: #4f46e5;
+    --brand-strong: #4338ca;
+    --ring: rgba(79, 70, 229, 0.35);
+    --check: #4f46e5;
+    --hair: #e9edf3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #ffffff 0%, transparent 60%),
+      var(--bg);
+    color: var(--ink);
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .card {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 36px 32px 32px;
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 24px 48px -16px rgba(15, 23, 42, 0.18);
+    border: 1px solid var(--hair);
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 5px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6, #4f46e5);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--brand-strong);
+    background: #eef0ff;
+    border: 1px solid #e0e3ff;
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+
+  .plan-name {
+    margin-top: 18px;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .tagline {
+    margin-top: 6px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .price {
+    margin-top: 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .price .amount {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .price .currency {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+
+  .price .period {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .divider {
+    margin: 26px 0 22px;
+    height: 1px;
+    background: var(--hair);
+  }
+
+  .features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14.5px;
+    color: #334155;
+  }
+
+  .check {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    border-radius: 999px;
+    background: #eef0ff;
+    display: grid;
+    place-items: center;
+  }
+
+  .check svg { width: 12px; height: 12px; }
+  .check svg path { stroke: var(--check); }
+
+  .cta {
+    margin-top: 28px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--brand) 0%, var(--brand-strong) 100%);
+    box-shadow: 0 10px 20px -8px var(--ring);
+    transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+
+  .cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 28px -10px var(--ring);
+    filter: saturate(1.05);
+  }
+
+  .cta:active { transform: translateY(0); }
+
+  .cta:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .footnote {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+  <main class="card" role="region" aria-label="Pro plan pricing">
+    <span class="badge">Most popular</span>
+
+    <h1 class="plan-name">Pro</h1>
+    <p class="tagline">For growing teams who need more power, speed, and support.</p>
+
+    <div class="price">
+      <span class="currency">$</span>
+      <span class="amount">24</span>
+      <span class="period">/ month</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <ul class="features">
+      <li>
+        <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Unlimited projects and workspaces
+      </li>
+      <li>
+        <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Up to 20 team members
+      </li>
+      <li>
+        <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Advanced analytics and reporting
+      </li>
+      <li>
+        <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Priority email and chat support
+      </li>
+      <li>
+        <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Custom integrations and API access
+      </li>
+    </ul>
+
+    <button class="cta" type="button">Get started with Pro</button>
+    <p class="footnote">14-day free trial. No credit card required.</p>
+  </main>
+</body>
+</html>

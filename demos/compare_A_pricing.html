@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Демо A — карточка тарифа SaaS «Pro»</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          background: #f4f5f7; color: #16181d; }
+  header { padding: 20px 24px 8px; }
+  h1 { font-size: 18px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  p.sub { margin: 0; color: #6b7280; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px 24px 28px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  .panel { background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.05); }
+  .panel .label { display: flex; align-items: center; gap: 8px; padding: 10px 14px; font-size: 13px;
+                   font-weight: 600; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .without .dot { background: #9ca3af; }
+  .with .dot { background: #10b981; }
+  .label .tag { margin-left: auto; font-weight: 500; color: #9ca3af; font-size: 12px; }
+  iframe { width: 100%; height: 660px; border: 0; display: block; background: #fff; }
+</style></head>
+<body>
+  <header>
+    <h1>Демо A — карточка тарифа SaaS «Pro»</h1>
+    <p class="sub">Слева — обычный ответ Claude. Справа — Claude со скиллом <b>interface-limb</b>. Обе версии сгенерированы независимыми агентами по одинаковому запросу. Наведи/нажми/потабай по элементам — состояния настоящие.</p>
+  </header>
+  <div class="grid">
+    <div class="panel without">
+      <div class="label"><span class="dot"></span>Без скилла<span class="tag">baseline</span></div>
+      <iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot; /&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+&lt;title&gt;Pro Plan&lt;/title&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot; /&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin /&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
+&lt;style&gt;
+  :root {
+    --bg: #eef1f6;
+    --card-bg: #ffffff;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --brand: #4f46e5;
+    --brand-strong: #4338ca;
+    --ring: rgba(79, 70, 229, 0.35);
+    --check: #4f46e5;
+    --hair: #e9edf3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: &quot;Inter&quot;, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, sans-serif;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #ffffff 0%, transparent 60%),
+      var(--bg);
+    color: var(--ink);
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .card {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 36px 32px 32px;
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 24px 48px -16px rgba(15, 23, 42, 0.18);
+    border: 1px solid var(--hair);
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: &quot;&quot;;
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 5px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6, #4f46e5);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--brand-strong);
+    background: #eef0ff;
+    border: 1px solid #e0e3ff;
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+
+  .plan-name {
+    margin-top: 18px;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .tagline {
+    margin-top: 6px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .price {
+    margin-top: 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .price .amount {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .price .currency {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+
+  .price .period {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .divider {
+    margin: 26px 0 22px;
+    height: 1px;
+    background: var(--hair);
+  }
+
+  .features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14.5px;
+    color: #334155;
+  }
+
+  .check {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    border-radius: 999px;
+    background: #eef0ff;
+    display: grid;
+    place-items: center;
+  }
+
+  .check svg { width: 12px; height: 12px; }
+  .check svg path { stroke: var(--check); }
+
+  .cta {
+    margin-top: 28px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--brand) 0%, var(--brand-strong) 100%);
+    box-shadow: 0 10px 20px -8px var(--ring);
+    transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+
+  .cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 28px -10px var(--ring);
+    filter: saturate(1.05);
+  }
+
+  .cta:active { transform: translateY(0); }
+
+  .cta:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .footnote {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;card&quot; role=&quot;region&quot; aria-label=&quot;Pro plan pricing&quot;&gt;
+    &lt;span class=&quot;badge&quot;&gt;Most popular&lt;/span&gt;
+
+    &lt;h1 class=&quot;plan-name&quot;&gt;Pro&lt;/h1&gt;
+    &lt;p class=&quot;tagline&quot;&gt;For growing teams who need more power, speed, and support.&lt;/p&gt;
+
+    &lt;div class=&quot;price&quot;&gt;
+      &lt;span class=&quot;currency&quot;&gt;$&lt;/span&gt;
+      &lt;span class=&quot;amount&quot;&gt;24&lt;/span&gt;
+      &lt;span class=&quot;period&quot;&gt;/ month&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+    &lt;ul class=&quot;features&quot;&gt;
+      &lt;li&gt;
+        &lt;span class=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 13l4 4L19 7&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+        Unlimited projects and workspaces
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;span class=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 13l4 4L19 7&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+        Up to 20 team members
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;span class=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 13l4 4L19 7&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+        Advanced analytics and reporting
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;span class=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 13l4 4L19 7&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+        Priority email and chat support
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;span class=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 13l4 4L19 7&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+        Custom integrations and API access
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;button class=&quot;cta&quot; type=&quot;button&quot;&gt;Get started with Pro&lt;/button&gt;
+    &lt;p class=&quot;footnote&quot;&gt;14-day free trial. No credit card required.&lt;/p&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+" title="without skill"></iframe>
+    </div>
+    <div class="panel with">
+      <div class="label"><span class="dot"></span>Со скиллом<span class="tag">interface-limb</span></div>
+      <iframe srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot; /&gt;
+  &lt;title&gt;Pro plan — Sentinel&lt;/title&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot; /&gt;
+  &lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin /&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
+  &lt;style&gt;
+    :root {
+      /* spacing — 4px scale */
+      --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+      --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+
+      /* radius — concentric (child &lt;= parent) */
+      --radius-card: 20px;
+      --radius-md: 12px;
+      --radius-sm: 9px;
+
+      /* dark surfaces — depth by lightening, not shadow */
+      --bg: #101212;                 /* page base, near-#121212, faint teal cast */
+      --surface: #181b1b;            /* card: a step lighter than the page */
+      --surface-high: #202423;       /* nested chips: lighter still */
+
+      /* committed accent: emerald/lime, desaturated for dark */
+      --accent: #5ee6a8;
+      --accent-strong: #74f0b8;
+      --accent-ink: #04140c;         /* text on accent */
+
+      /* text on dark — 87 / 60 / 38 emphasis, never pure white */
+      --text: rgba(236, 245, 241, 0.92);
+      --text-muted: rgba(236, 245, 241, 0.60);
+      --text-faint: rgba(236, 245, 241, 0.40);
+      --border: rgba(236, 245, 241, 0.09);
+      --border-accent: rgba(94, 230, 168, 0.32);
+
+      /* motion tokens */
+      --dur-short: 130ms;
+      --dur-medium: 220ms;
+      --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+      --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: var(--space-6);
+      font-family: &#x27;DM Sans&#x27;, system-ui, sans-serif;
+      color: var(--text);
+      /* considered page background: dark base + one soft off-center accent wash */
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(60% 80% at 78% 8%, rgba(94, 230, 168, 0.10), transparent 60%),
+        radial-gradient(50% 60% at 12% 100%, rgba(94, 230, 168, 0.05), transparent 55%);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: var(--space-8) var(--space-6) var(--space-6);
+      /* depth via a top-edge highlight + faint lift, not a heavy drop shadow */
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 1px 2px rgba(0, 0, 0, 0.30),
+        0 18px 48px rgba(0, 0, 0, 0.42);
+    }
+
+    /* asymmetric &quot;most popular&quot; ribbon — the only loud element up top */
+    .ribbon {
+      position: absolute;
+      top: var(--space-5);
+      right: var(--space-5);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1) var(--space-3);
+      font-family: &#x27;Space Grotesk&#x27;, sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+      background: rgba(94, 230, 168, 0.10);
+      border: 1px solid var(--border-accent);
+      border-radius: 999px;
+    }
+    .ribbon .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(94, 230, 168, 0.18);
+    }
+
+    .plan-name {
+      margin: 0;
+      font-family: &#x27;Space Grotesk&#x27;, sans-serif;
+      font-weight: 700;
+      font-size: 2rem;            /* the plan IS the headline of this card */
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .tagline {
+      margin: var(--space-3) 0 0;
+      max-width: 30ch;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+    }
+    .price .amount {
+      font-family: &#x27;Space Grotesk&#x27;, sans-serif;
+      font-weight: 700;
+      font-size: 3.5rem;            /* base 1rem × 1.333^~4.3 region; the focal point */
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+    .price .period {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+    }
+    .billing-note {
+      margin: var(--space-2) 0 0;
+      font-size: 0.8125rem;
+      color: var(--text-faint);
+    }
+
+    .divider {
+      height: 1px;
+      margin: var(--space-6) 0;
+      background: var(--border);
+      border: 0;
+    }
+
+    .features {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: var(--space-3);
+    }
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: 0.9375rem;
+      line-height: 1.4;
+      color: var(--text);
+    }
+    /* check sized to the line it sits beside, so icon+text read as one unit */
+    .feature .check {
+      flex: none;
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(94, 230, 168, 0.12);
+      color: var(--accent-strong);
+    }
+    .feature .check svg { width: 12px; height: 12px; }
+    .feature .lead { color: var(--text); }
+    .feature .sub { color: var(--text-muted); }
+
+    .cta {
+      /* layout */
+      appearance: none;
+      width: 100%;
+      margin-top: var(--space-6);
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      border: 0;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      /* type */
+      font-family: &#x27;Space Grotesk&#x27;, sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.005em;
+      /* default state */
+      color: var(--accent-ink);
+      background: var(--accent);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        0 1px 2px rgba(0, 0, 0, 0.35),
+        0 8px 22px rgba(94, 230, 168, 0.18);
+      transition:
+        transform var(--dur-short) var(--ease-enter),
+        background-color var(--dur-short) var(--ease-enter),
+        box-shadow var(--dur-short) var(--ease-enter);
+      touch-action: manipulation;
+    }
+    .cta .arrow {
+      transition: transform var(--dur-short) var(--ease-enter);
+    }
+
+    /* hover — clear but subtle lift + brighter accent (pointer devices only) */
+    @media (hover: hover) {
+      .cta:hover {
+        background: var(--accent-strong);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.5),
+          0 2px 4px rgba(0, 0, 0, 0.35),
+          0 12px 30px rgba(94, 230, 168, 0.28);
+        transform: translateY(-1px);
+      }
+      .cta:hover .arrow { transform: translateX(2px); }
+    }
+
+    /* focus — visible keyboard ring, 2px, high contrast against surface */
+    .cta:focus-visible {
+      outline: 2px solid var(--accent-strong);
+      outline-offset: 3px;
+    }
+
+    /* pressed — immediate physical acknowledgement */
+    .cta:active {
+      transform: translateY(0) scale(0.985);
+      background: var(--accent);
+      box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.18),
+        0 1px 2px rgba(0, 0, 0, 0.35);
+      transition-duration: 90ms;
+    }
+
+    /* disabled — obviously inert, not interactive */
+    .cta:disabled {
+      cursor: not-allowed;
+      color: var(--text-faint);
+      background: var(--surface-high);
+      box-shadow: inset 0 0 0 1px var(--border);
+      transform: none;
+    }
+
+    .reassurance {
+      margin: var(--space-3) 0 0;
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-faint);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 1ms !important; }
+      .cta:hover { transform: none; }
+      .cta:hover .arrow { transform: none; }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main&gt;
+    &lt;article class=&quot;card&quot; aria-labelledby=&quot;plan-title&quot;&gt;
+      &lt;span class=&quot;ribbon&quot;&gt;&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;Most popular&lt;/span&gt;
+
+      &lt;h1 class=&quot;plan-name&quot; id=&quot;plan-title&quot;&gt;Pro&lt;/h1&gt;
+      &lt;p class=&quot;tagline&quot;&gt;For teams that need full-trace visibility and alerting that actually pages the right person.&lt;/p&gt;
+
+      &lt;div class=&quot;price&quot;&gt;
+        &lt;span class=&quot;amount&quot;&gt;$29&lt;/span&gt;
+        &lt;span class=&quot;period&quot;&gt;per user / month&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;p class=&quot;billing-note&quot;&gt;Billed annually, or $34 month to month.&lt;/p&gt;
+
+      &lt;hr class=&quot;divider&quot; /&gt;
+
+      &lt;ul class=&quot;features&quot;&gt;
+        &lt;li class=&quot;feature&quot;&gt;
+          &lt;span class=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 12.5l4 4 10-10&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+          &lt;span&gt;&lt;span class=&quot;lead&quot;&gt;Unlimited services&lt;/span&gt; &lt;span class=&quot;sub&quot;&gt;across 90 days of trace retention&lt;/span&gt;&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;feature&quot;&gt;
+          &lt;span class=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 12.5l4 4 10-10&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+          &lt;span&gt;&lt;span class=&quot;lead&quot;&gt;On-call scheduling&lt;/span&gt; &lt;span class=&quot;sub&quot;&gt;with PagerDuty and Slack routing&lt;/span&gt;&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;feature&quot;&gt;
+          &lt;span class=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 12.5l4 4 10-10&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+          &lt;span&gt;&lt;span class=&quot;lead&quot;&gt;Custom dashboards&lt;/span&gt; &lt;span class=&quot;sub&quot;&gt;shareable by link or embed&lt;/span&gt;&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;feature&quot;&gt;
+          &lt;span class=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 12.5l4 4 10-10&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+          &lt;span&gt;&lt;span class=&quot;lead&quot;&gt;Anomaly alerts&lt;/span&gt; &lt;span class=&quot;sub&quot;&gt;trained on your own baselines&lt;/span&gt;&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;feature&quot;&gt;
+          &lt;span class=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;&gt;&lt;path d=&quot;M5 12.5l4 4 10-10&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;&lt;/span&gt;
+          &lt;span&gt;&lt;span class=&quot;lead&quot;&gt;SSO and audit logs&lt;/span&gt; &lt;span class=&quot;sub&quot;&gt;SAML, SCIM, and a 1-hour SLA&lt;/span&gt;&lt;/span&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;button type=&quot;button&quot; class=&quot;cta&quot;&gt;
+        Start a 14-day trial
+        &lt;svg class=&quot;arrow&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M5 12h13M13 6l6 6-6 6&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.4&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;&lt;/svg&gt;
+      &lt;/button&gt;
+      &lt;p class=&quot;reassurance&quot;&gt;No card required. Cancel anytime.&lt;/p&gt;
+    &lt;/article&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+" title="with skill"></iframe>
+    </div>
+  </div>
+</body></html>

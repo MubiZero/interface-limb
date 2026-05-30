@@ -1,0 +1,26 @@
+{
+  "skill_name": "interface-limb",
+  "evals": [
+    {
+      "id": 0,
+      "name": "web-build-settings-card",
+      "prompt": "This NotificationSettings React component works but looks really plain and developer-default. Make it feel premium and polished. Rewrite the component (Tailwind is available) and briefly explain the key changes you made and why.",
+      "expected_output": "A rewritten React/Tailwind component with real interaction states (hover/active/focus/disabled/loading), 4px-based spacing, refined typography, soft elevation, semantic toggle styling, and a short rationale tying changes to premium-UI principles.",
+      "files": ["files/plain-settings.tsx"]
+    },
+    {
+      "id": 1,
+      "name": "mobile-build-login-screen",
+      "prompt": "Here's a basic Flutter login screen. It functions but feels generic. Make it feel like a high-end, premium app. Give me the improved Dart and call out what you changed.",
+      "expected_output": "Improved Flutter screen addressing keyboard handling (scroll/avoid inset), press feedback (scale), haptics on submit, loading-in-button, refined spacing/typography, focus/error states, plus a rationale.",
+      "files": ["files/login_screen.dart"]
+    },
+    {
+      "id": 2,
+      "name": "review-dashboard-premium",
+      "prompt": "I'm building a dark-mode analytics dashboard in React. Cards, a sidebar, charts, a data table that shows a spinner while loading and 'No results' when empty. It all works but it feels cheap and flat compared to apps like Linear or Vercel. Review my approach and tell me specifically what to change to make it feel premium. I don't have the code handy, just go off the description.",
+      "expected_output": "A structured premium-UI review: dark-theme depth via lighter surfaces (not shadows), shimmer skeletons instead of spinners, a teaching empty state instead of 'No results', hierarchy/spacing/typography guidance, interaction states, and subtle motion — each finding paired with a concrete fix and reason.",
+      "files": []
+    }
+  ]
+}

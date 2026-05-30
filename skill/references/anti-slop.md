@@ -1,0 +1,82 @@
+# Anti-slop — the refuse-and-rewrite list
+
+AI tends to produce a recognizable "default" interface: safe, templated, and instantly
+identifiable as machine-made. Good fundamentals aren't enough — you also have to *avoid the
+tells*. Treat the items below as bans: if you're about to ship one, stop and rewrite. Each
+has a reason, because the point isn't ritual avoidance — it's understanding why the pattern
+reads as generic so you can make a better choice.
+
+## The "obviously AI" tells (fix these first)
+
+- **Fake product UI built from divs.** The #1 tell. Don't hand-build a fake terminal, dashboard,
+  chat, or task-list out of `<div>`s to fill a hero. Use a real screenshot, a generated image, or
+  `https://picsum.photos/seed/{slug}/{w}/{h}` — never a broken Unsplash hotlink.
+- **Em-dashes (—) anywhere.** The single strongest LLM signature in copy. Use commas, colons,
+  semicolons, or parentheses instead. Scan *all* strings including alt text, captions, and buttons.
+  Only the hyphen `-` (ranges, compounds) and minus sign are allowed.
+- **Default Inter + purple/blue glow gradient + nested cards.** The 2025–26 "AI SaaS" uniform.
+  Avoid Inter as the *default* (see fonts below); ban purple/blue radial "glow" gradients; never
+  nest a card inside a card.
+- **Buzzword copy.** "Elevate, Seamless, Unleash, Supercharge, Leverage, Streamline, World-class,
+  Enterprise-grade, Next-gen, Game-changer, Mission-critical." Write what the thing actually does.
+- **Lorem ipsum / "John Doe" / "Acme Inc" / round fake numbers.** Use realistic content: real-ish
+  names, organic figures (`47.2%`, not `99.99%`), varied dates, unique avatars. Placeholder content
+  reads as unfinished.
+
+## Layout / composition bans
+
+- **No nested cards.** A card inside a card is almost always wrong — flatten, or use spacing/dividers.
+- **No identical card grids.** Rows of same-size icon + heading + text cards. Vary size/role, or use
+  a different component entirely.
+- **Long lists (>5 items) need a different component** — not a longer `<ul>`. Reach for a 2-column
+  grouped list, card grid, tabs/accordion, or scroll-snap pills.
+- **No "eyebrow" on every section** (tiny uppercase tracked "ABOUT / PRICING" above each heading) and
+  no "01· / 02·" numbered section markers as a reflex. Cap eyebrows at ~one per three sections.
+- **Cap consecutive image+text "zigzag" splits at 2.** A third alternating split in a row is monotony.
+- **Diversify layout families.** Across ~8 sections use ≥4 different layout shapes; don't repeat one.
+- **No decorative side-stripes** (`border-left` >1px as an accent), **no diagonal stripe backgrounds**
+  (`repeating-linear-gradient`), **no hand-drawn/doodle SVGs.** Ship real assets or nothing.
+
+## Color bans
+
+- **No gradient text** (`background-clip: text` over a gradient) as decoration.
+- **No "ghost card":** don't combine a `1px` border *and* a soft `box-shadow` (blur ≥16px) on the same
+  element — pick one way to define the edge.
+- **No decorative glassmorphism.** Blur/glass only when there's a functional reason (content behind it),
+  never as default flair — and verify ≥4.5:1 text contrast over the blur.
+- **Avoid the AI-cream / premium-consumer palette by default:** warm beige/sand backgrounds with
+  brass/clay/oxblood accents are now a reflexive AI look. Use a deliberate palette instead — a neutral
+  base (Zinc / Slate / Stone) plus one committed high-contrast accent (Emerald, Electric Blue, Deep
+  Rose, Burnt Orange), and rotate so it isn't the same accent every project.
+- **Prefer OKLCH** for new color work (perceptually even lightness). Tint neutrals only slightly toward
+  the brand hue (≈0.005–0.015 chroma), not a generic warm/cool drift.
+
+## Typography bans
+
+- **Don't default to Inter / Roboto / Open Sans.** Reach for Geist, Outfit, Cabinet Grotesk, Satoshi,
+  Plus Jakarta Sans, Space Grotesk. (Inter is *fine when chosen*; the problem is reflexive default.)
+- **Avoid Lucide / Feather as the reflexive icon set** — Phosphor, Tabler, Radix, HugeIcons read fresher.
+  Never hand-roll SVG icons.
+- **Hero text ceiling ~6rem (96px).** Bigger reads as shouting. **Display tracking floor −0.04em** —
+  tighter and letters touch.
+- **Never mix two fonts in one headline.** Emphasize with italic/bold of the *same* family. Pair on a
+  contrast axis (serif + sans) or use one family across weights; max 3 families.
+- **No all-caps body text.** Uppercase only for ≤4-word labels/badges.
+- Use `text-wrap: balance` on h1–h3, `text-wrap: pretty` on long prose, `font-variant-numeric:
+  tabular-nums` on numbers in tables/dashboards.
+
+## Motion bans
+
+- **No bounce/elastic easing.** Use ease-out (quart/quint/expo) — see standards.md durations/curves.
+- **Don't `transform: scale` an `<img>` on hover.** Animate the card's background/border/shadow instead.
+- **Don't gate an element's visibility on a scroll/class-triggered transition** (it can get stuck hidden
+  on background tabs). Reveal animations enhance an already-visible default.
+- **Don't attach `window` scroll listeners in React** — use IntersectionObserver / `useScroll` / CSS
+  scroll-driven animation, and clean up effects.
+
+## Per-context: the same choice can be right or wrong by industry
+
+Context flips many of these. The clearest example: **AI-purple `#6366F1` is correct for an AI/chatbot
+product but reads as untrustworthy in fintech, legal, healthcare, or government** — those want a
+restrained navy/trust-blue palette, AAA contrast, and visible security/credibility signals. Always
+check the choice against the product's vertical (see [direction.md](direction.md)).
