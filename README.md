@@ -59,6 +59,7 @@ skill/                  the skill itself
   references/           progressive-disclosure detail
     direction.md        pick a deliberate aesthetic instead of the default
     web.md              React / Tailwind / CSS tokens
+    angular-primeng.md  Angular + PrimeNG styled-mode presets, [dt]/[pt], @defer
     mobile.md           Flutter / React Native, haptics, keyboard handling
     standards.md        the cited cheat-sheet of exact numbers and sources
     anti-slop.md        the bans, with reasons
