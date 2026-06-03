@@ -8,7 +8,8 @@ description: >-
   Turns generic, "developer-default" output into interfaces that feel considered and
   high-quality, grounded in concrete cited standards (WCAG contrast & target sizes,
   Material/Apple motion & dark-theme values, modular type scales, interaction states,
-  haptics). Covers web (React/Tailwind/CSS) and mobile (Flutter/React Native). Reach
+  haptics). Covers web (React/Tailwind/CSS, Angular/PrimeNG) and mobile (Flutter/React
+  Native). Reach
   for this on ANY frontend/UI work — building from scratch or elevating existing
   screens — even when the user just says "build the login screen," "make a dashboard,"
   "design the settings page," or "improve how this looks," without naming design
@@ -46,6 +47,9 @@ The flow is **direction → build → pre-flight**, not "write code then maybe p
 2. Identify the platform — web, mobile, or both — and read the matching reference file for concrete
    API/token guidance:
    - [references/web.md](references/web.md) — React, Tailwind, CSS variables, responsive, shadcn-style tokens.
+   - [references/angular-primeng.md](references/angular-primeng.md) — Angular + PrimeNG styled-mode presets, design
+     tokens, `[dt]`/`[pt]` overrides (not `::ng-deep`), `@defer` loading, dark mode. Read this when the stack is
+     a component library, not hand-authored Tailwind — `web.md`'s general rules still apply on top.
    - [references/mobile.md](references/mobile.md) — Flutter / React Native, haptics, keyboard, permissions.
 3. Keep [references/standards.md](references/standards.md) open — the cited cheat-sheet of the exact
    numbers (contrast ratios, target sizes, motion durations, dark-theme overlays, type scale). Use
@@ -296,8 +300,8 @@ A premium feel only scales if it lives in the component system, not in scattered
   stay parallel. And **persist meaningful view state in the URL** (filters, tabs, selection) so
   refresh, back, and share all work — a quiet but unmistakable sign of a considered product.
 
-The platform reference files show concretely how to express these in React/Tailwind and in
-Flutter/React Native.
+The platform reference files show concretely how to express these in React/Tailwind, in
+Angular/PrimeNG, and in Flutter/React Native.
 
 ## 10. Avoid the AI-default look
 
