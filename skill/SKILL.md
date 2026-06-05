@@ -333,6 +333,50 @@ Copy carries as much of the "considered" feeling as spacing does. Full library i
 - **Loading copy is specific and time-boxed** ("Analyzing… ~30–60s"); empty/no-results copy suggests a
   next step, not a bare "0 results".
 - **Terminology lock:** one word per concept across the product (Delete, not Delete/Remove/Trash).
+- **One language per locale.** Inside a single locale the UI speaks one language — no "Step 1 / Owner
+  code / Update channel" stranded inside a Russian screen, no Russian words forgotten in English. This
+  is about **mixing**, not about Latin script as such: for an en-locale Latin is correct, and brand
+  names ("Stripe"), technical identifiers (slug, hostname, timezone) and established acronyms (PC, VIP,
+  API) are fair-game exceptions in any locale. The rule is *don't half-localize.*
+
+## 12. Multi-step flows: one screen, one question
+
+When a task naturally splits into "pick this, then configure that," prefer a **wizard of small screens
+over one dense screen.** Two short steps almost always beat one two-column layout with nested scrolls.
+
+- **One question per screen.** If a screen is answering more than one thing, it's hiding a missing step.
+  A role picker and a name + seat configurator are *two* questions — split them. Five simple steps beat
+  one stacked, scroll-locked everything-page.
+- **Stepper carries the context.** Use a top stepper for the "where am I" signal and put per-step
+  context (org/branch/owner) in the eyebrow, not inside the subtitle paragraph — keep the eyebrow for
+  *where we are*, the h1 for *what we ask*, the subtitle for *direction*. That eyebrow/h1/subtitle/body
+  hierarchy is the load-bearing pattern of a clean wizard.
+- **Adapt the next screen to the previous answer.** Don't show fields that don't apply because the
+  earlier step ruled them out. A "seats on the floor map" section is irrelevant for a back-office role
+  — drop it, narrow the screen, ship the simpler version.
+- **Back must really go back.** Each step keeps the previous answers cached so going back never wipes
+  what the user already typed. URL/state-restore parity matters here, not just on refresh.
+
+## 13. Native shells: meet platform expectations, don't ship web defaults
+
+When the app is a native desktop shell wrapping a web view (Electron, Tauri, WPF + WebView2, etc.),
+the surrounding chrome must feel like the OS, not like a webpage that happens to be fullscreen.
+
+- **Cursors and selection match the platform.** Buttons get `cursor: default`, not `cursor: pointer`.
+  Non-input UI text is `user-select: none` so the wizard never lets the user blue-highlight a heading
+  the way a webpage would. Inputs and content meant to be copied stay selectable.
+- **Custom titlebar — finish the set.** If you replace the OS titlebar with a custom one, ship the
+  *full* set: minimize, maximize/restore, close — plus native drag region on the empty header. Shipping
+  only minimize + close is **half-finished**: users immediately spot the missing maximize and lose
+  trust in the rest of the polish.
+- **Drag with the OS, not with JavaScript.** Native window drag means `WM_NCLBUTTONDOWN + HTCAPTION`
+  (Windows) or the platform equivalent, not a custom mouse-move listener that fights snapping and
+  multi-monitor. Block drag on actual controls (buttons, inputs, focusable rows).
+- **Right-click and keyboard behave like the OS.** No browser context menu on UI chrome (it reveals
+  "Reload" / "Inspect" / "Save as" and breaks the illusion). Default browser shortcuts (Ctrl+F,
+  Ctrl+P) either map to something meaningful in the app or are intercepted.
+- **Bundle, don't lazy-load like a web page.** The shell loads from disk; show no network spinner for
+  what is local. Reserve loading states for actual remote calls.
 
 ## Pre-flight: before you call it done
 
@@ -354,6 +398,15 @@ A quick gate to catch the things that slip through. Don't claim completion until
   concentric radii, matches the existing design system.
 - **Mobile-web (if applicable):** `dvh` not `vh`, space reserved for async content (no layout shift),
   per-field errors, no double-submit. (Details in [references/web.md](references/web.md).)
+- **Flow honest?** If the screen answers more than one question, it should be a wizard. No nested
+  scrolls inside fixed columns when a vertical flow would do.
+- **Native shell complete (if applicable)?** Custom titlebar has minimize + maximize + close, native
+  drag works, cursors and selection match the OS, no browser context menu on chrome.
+- **One language per locale?** No stray Latin labels inside a Russian UI (or vice versa) — except
+  brand names, identifiers, and established acronyms.
+- **Content fits — no clipping?** Long names ellipsis cleanly, scroll containers don't cut off
+  siblings, the submit button doesn't overlap the list it submits about. Cropped UI is a bug, not
+  an "edge case the user will figure out."
 
 ---
 
