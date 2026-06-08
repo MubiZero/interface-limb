@@ -338,6 +338,11 @@ Copy carries as much of the "considered" feeling as spacing does. Full library i
   is about **mixing**, not about Latin script as such: for an en-locale Latin is correct, and brand
   names ("Stripe"), technical identifiers (slug, hostname, timezone) and established acronyms (PC, VIP,
   API) are fair-game exceptions in any locale. The rule is *don't half-localize.*
+- **Strings are unified and really translated, not faked.** A phrase with a count or variable is one ICU
+  message (`{count, plural, …}` / `{name}`), never number + hand-pluralized word + concatenation. And when
+  a catalog forces every locale to carry every key, fill them with real translations — copying the source
+  language passes the parity check while lying that it's localized (a false "done"). Full guidance in
+  [references/ux-writing.md](references/ux-writing.md).
 
 ## 12. Multi-step flows: one screen, one question
 

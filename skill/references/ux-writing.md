@@ -54,3 +54,19 @@ in error or success states.
 If the UI may be translated, leave room: German/Finnish text runs ~30–40% longer than English, CJK
 ~30% shorter. Don't pack text to the pixel, and keep numbers/dates as separate formatted strings
 (thousands separators, `1.2K`, locale-aware or relative dates — avoid ambiguous `01/02/03`).
+
+## Localization integrity — unify the string, translate for real
+
+- **Don't fragment a sentence into glued pieces.** "{count} signals for {period}" is **one** message with
+  placeholders and a plural block, not a number + a manually-pluralized word + string concatenation in the
+  component. Hand-rolled plural helpers (`pluralRu([...])`) are per-language and silently wrong in every
+  other locale.
+- **Use ICU MessageFormat for anything with a count or variable.** `{count, plural, one {# signal} other
+  {# signals}}` lets each locale carry its own correct grammar (Russian one/few/many, English one/other,
+  Tajik its own). A `t()` with no interpolation/plural support is itself a flag — upgrade the engine, don't
+  pour more fragmented strings into it.
+- **Never fake a translation to satisfy a catalog.** When a catalog enforces that every locale has every
+  key, fill them with **real** translations, not copies of the source language. A copied value passes the
+  parity check while lying that it's localized: a false "done" worse than an explicit, tracked gap.
+  Translate for real, or make the missing-locale gap visible and tracked — green on fake data is a false
+  signal.
