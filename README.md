@@ -54,17 +54,22 @@ Cited throughout: WCAG, Material Design 3, Apple HIG, NN/g, and the Vercel Web I
 ## What is inside
 
 ```
-skill/                  the skill itself
-  SKILL.md              the principles, the flow (direction -> build -> pre-flight)
-  references/           progressive-disclosure detail
-    direction.md        pick a deliberate aesthetic instead of the default
-    web.md              React / Tailwind / CSS tokens
-    angular-primeng.md  Angular + PrimeNG styled-mode presets, [dt]/[pt], @defer
-    mobile.md           Flutter / React Native, haptics, keyboard handling
-    standards.md        the cited cheat-sheet of exact numbers and sources
-    anti-slop.md        the bans, with reasons
-    ux-writing.md       copy as UI
-  evals/                test prompts used to develop and verify the skill
+.claude-plugin/         plugin + marketplace manifests (install via /plugin)
+  marketplace.json
+  plugin.json
+skills/
+  interface-limb/       the skill itself
+    SKILL.md            the principles, the flow (direction -> build -> pre-flight)
+    references/         progressive-disclosure detail
+      direction.md         pick a deliberate aesthetic instead of the default
+      web.md               React / Tailwind / CSS tokens
+      angular-primeng.md   Angular + PrimeNG styled-mode presets, [dt]/[pt], @defer
+      mobile.md            Flutter / React Native, haptics, keyboard handling
+      marketing-landing.md hero, social proof, conversion CTAs, scan patterns
+      standards.md         the cited cheat-sheet of exact numbers and sources
+      anti-slop.md         the bans, with reasons
+      ux-writing.md        copy as UI
+    evals/              test prompts used to develop and verify the skill
 demos/                  the two showcase screens, with/without and a live compare page
 dist/                   interface-limb.skill, the packaged bundle
 assets/                 the screenshots above
@@ -72,17 +77,32 @@ assets/                 the screenshots above
 
 ## Install
 
-**Quickest:** copy the skill folder into your Claude Code skills directory.
+**Recommended — as a plugin via the marketplace.** This is the modern path and keeps the skill
+updatable with `/plugin`:
+
+```
+/plugin marketplace add MubiZero/interface-limb
+/plugin install interface-limb@mubizero-skills
+```
+
+Or from the CLI:
+
+```bash
+claude plugin marketplace add MubiZero/interface-limb
+claude plugin install interface-limb@mubizero-skills
+```
+
+**Manual — copy the skill folder** into your Claude Code skills directory:
 
 ```bash
 git clone https://github.com/MubiZero/interface-limb.git
-cp -r interface-limb/skill ~/.claude/skills/interface-limb
+cp -r interface-limb/skills/interface-limb ~/.claude/skills/interface-limb
 ```
 
 **From the bundle:** download [`dist/interface-limb.skill`](dist/interface-limb.skill) (a zip with an
 `interface-limb/` folder inside) and unzip it into `~/.claude/skills/`.
 
-Either way, restart Claude Code. The skill announces itself when it triggers on UI work.
+Any of the three, then restart Claude Code. The skill announces itself when it triggers on UI work.
 
 ## How it was built
 

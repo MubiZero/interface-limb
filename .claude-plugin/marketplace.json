@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "mubizero-skills",
+  "owner": {
+    "name": "MubiZero",
+    "url": "https://github.com/MubiZero"
+  },
+  "metadata": {
+    "description": "Skills by MubiZero for Claude Code."
+  },
+  "plugins": [
+    {
+      "name": "interface-limb",
+      "source": ".",
+      "description": "A design-sense layer that turns generic developer-default UI into considered interfaces, grounded in cited standards. Covers web, mobile, and marketing/landing pages.",
+      "version": "1.1.0",
+      "license": "MIT",
+      "homepage": "https://github.com/MubiZero/interface-limb",
+      "category": "design",
+      "keywords": ["design", "ui", "ux", "frontend", "accessibility", "landing-page"]
+    }
+  ]
+}

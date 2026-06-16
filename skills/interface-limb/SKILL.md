@@ -4,7 +4,8 @@ description: >-
   Design intelligence for building and improving application interfaces — apply
   whenever you plan, design, build, implement, review, refine, or fix any UI for a
   web or mobile app: screens, components, forms, navigation, dashboards, onboarding,
-  settings, modals, and whole app shells, including their empty/loading/error states.
+  settings, modals, whole app shells, and marketing/landing pages (hero, social
+  proof, conversion CTAs), including their empty/loading/error states.
   Turns generic, "developer-default" output into interfaces that feel considered and
   high-quality, grounded in concrete cited standards (WCAG contrast & target sizes,
   Material/Apple motion & dark-theme values, modular type scales, interaction states,
@@ -51,6 +52,9 @@ The flow is **direction → build → pre-flight**, not "write code then maybe p
      tokens, `[dt]`/`[pt]` overrides (not `::ng-deep`), `@defer` loading, dark mode. Read this when the stack is
      a component library, not hand-authored Tailwind — `web.md`'s general rules still apply on top.
    - [references/mobile.md](references/mobile.md) — Flutter / React Native, haptics, keyboard, permissions.
+   - [references/marketing-landing.md](references/marketing-landing.md) — for landing / marketing pages: hero anatomy,
+     social proof, conversion flow, scan patterns. Read this when the screen has to *convince a visitor*, not just
+     serve a logged-in user — it sits on top of the platform rules above.
 3. Keep [references/standards.md](references/standards.md) open — the cited cheat-sheet of the exact
    numbers (contrast ratios, target sizes, motion durations, dark-theme overlays, type scale). Use
    those figures instead of guessing; this file states the principle, that file gives the value and source.
@@ -111,11 +115,29 @@ a shadow on press), not a tooltip.
 ## 2. Visual hierarchy: control the eye
 
 Size, position, and color decide what the user looks at first. This is the backbone of
-premium feel — without hierarchy, even beautiful components read as noise.
+premium feel — without hierarchy, even beautiful components read as noise. The failure mode
+to fear is **flatness: when every element shares the same size and weight, nothing stands
+out, the user has no entry point, and "everything is important" collapses into "nothing is."**
+
+You have three levers to direct the eye — use all three, not just size:
+
+- **Size** — bigger = more important.
+- **Contrast** — a brighter/heavier element pulls focus from quieter ones.
+- **Negative space** — isolation is emphasis; an element with room around it reads as
+  important even at the same size (see section 3).
+
+Apply them like this:
 
 - **Most important = bigger and higher.** Promote the primary value/action with size and
   top placement. Demote secondary info by making it smaller and quieter (lower contrast,
   muted color), not by hiding it.
+- **Place key elements along the natural scan path.** The eye doesn't read a screen evenly.
+  Text-dense pages get scanned in an **F-pattern** (two horizontal sweeps near the top, then a
+  vertical skim down the left edge); sparse, visual pages — landing heroes, splash screens — get
+  scanned in a **Z-pattern** (top-left → top-right, diagonal down, then bottom-right). Put the
+  load-bearing elements *on* those lines instead of fighting them: logo top-left, primary nav or
+  CTA top-right, the headline first in the flow, and the conversion action where the path ends.
+  Aligning to the scan path is the cheapest way to control attention.
 - **Use imagery as accents and scan anchors.** A well-placed product image, avatar, or
   thumbnail gives the eye a fixed point and makes a list scannable far faster than text
   alone — this is why marketplace apps (e.g. Uzum-style storefronts) lean on imagery.
@@ -149,6 +171,13 @@ premium feel — without hierarchy, even beautiful components read as noise.
 You don't need a fancy type system. One quality sans-serif, used with care, looks more
 professional than three fonts thrown together.
 
+- **Type carries the brand's emotion before a word is read.** The face *is* a message: the
+  same headline set wrong can turn a serious, well-funded product into a discount flyer, or a
+  playful app into a tax form. Choose the family for the feeling the vertical needs (mood and
+  vertical pairings in [references/direction.md](references/direction.md)) — then tune it.
+  **Readability outranks novelty every time:** a clever font nobody can read is a worse choice
+  than a plain one they can. Keep to a **"rule of two": at most 2 (occasionally 3) families** —
+  fewer, used well, always beats more.
 - **One good sans-serif is enough.** Establish a small type scale from that single family
   using weight and size. Generate the sizes from a **modular scale** (`size = base × ratio^n`)
   with a ratio of **1.25** or **1.333** rather than picking sizes arbitrarily — this is the same
@@ -328,6 +357,11 @@ Copy carries as much of the "considered" feeling as spacing does. Full library i
 
 - **Buttons = verb + object, named for the outcome:** "Save changes", "Create account", "Delete 5
   items" — not "OK" / "Submit" / "Yes". "Cancel" → "Keep editing" when that's clearer.
+- **Make CTAs intent-driven, and never leave a dead end.** Name the button for the action the user
+  is about to take — "Book a demo", "Start free trial" — not a vague "Contact us" or "Learn more".
+  And the foot of every screen or flow should offer one obvious next step (the primary action
+  repeated, or the logical follow-on), so the user is never stranded at the bottom wondering what to
+  do next.
 - **Errors never blame the user and answer what/why/next:** "Email addresses need an @ symbol. Try:
   name@example.com" — placed inline with `role="alert"`, active voice, no "Oops!".
 - **Loading copy is specific and time-boxed** ("Analyzing… ~30–60s"); empty/no-results copy suggests a
@@ -383,6 +417,28 @@ the surrounding chrome must feel like the OS, not like a webpage that happens to
 - **Bundle, don't lazy-load like a web page.** The shell loads from disk; show no network spinner for
   what is local. Reserve loading states for actual remote calls.
 
+## 14. Marketing & landing pages: persuade, don't just present
+
+An app screen *informs* someone who's already in. A landing page has a harder job: **convince a
+stranger, in seconds, before they leave.** Everything above still applies, but persuasion adds its
+own rules. Full playbook in [references/marketing-landing.md](references/marketing-landing.md); the
+load-bearing ones:
+
+- **The hero earns the scroll.** Above the fold, answer four questions fast: *who you are, what you
+  offer, who it's for,* and *why it's worth it* (the USP). If a visitor can't tell what this is and
+  why they should care without scrolling, the page has already failed — no amount of polish below
+  rescues a hero that doesn't sell.
+- **Social proof is woven through, not parked in the footer.** Logos are the weakest form; concrete
+  **results and transformations** persuade — "grew revenue 40% in two weeks", not "trusted by teams."
+  Place proof next to the claims and CTAs it backs, all along the page, where doubt actually
+  surfaces — not in one graveyard row at the bottom that nobody reads.
+- **One conversion goal, repeated.** Decide the single action the page exists to drive, and lead
+  every section toward it. Repeat the primary CTA at natural decision points (after the hero, after
+  the proof, at the foot) so the user never has to scroll back to act.
+- **Let it breathe — crowding reads as cheap.** Generous negative space signals confidence and a
+  premium product; a cramped, wall-to-wall page is read subconsciously as low-rent no matter how
+  strong the copy. Space is a trust signal, not wasted screen.
+
 ## Pre-flight: before you call it done
 
 A quick gate to catch the things that slip through. Don't claim completion until these pass:
@@ -407,6 +463,10 @@ A quick gate to catch the things that slip through. Don't claim completion until
   scrolls inside fixed columns when a vertical flow would do.
 - **Native shell complete (if applicable)?** Custom titlebar has minimize + maximize + close, native
   drag works, cursors and selection match the OS, no browser context menu on chrome.
+- **Marketing/landing page (if applicable)?** The hero answers who / what / for-whom / why above the
+  fold; there's one clear conversion goal with the CTA repeated (not stranded at the bottom); social
+  proof shows concrete results and sits along the journey, not only in the footer; key elements fall
+  on the F/Z scan path.
 - **One language per locale?** No stray Latin labels inside a Russian UI (or vice versa) — except
   brand names, identifiers, and established acronyms.
 - **Content fits — no clipping?** Long names ellipsis cleanly, scroll containers don't cut off
@@ -434,7 +494,7 @@ When using this skill to **review** an interface (rather than build), structure 
 ```
 
 Tag each finding with the relevant area (Direction, Hierarchy, Spacing, Typography, Color/Depth,
-States, Motion, Empty/Loading, Anti-slop, Copy, Responsive, Architecture) so the user can see
-coverage at a glance. Pay special attention to **missing states** (loading/empty/error and the
+States, Motion, Empty/Loading, Anti-slop, Copy, Responsive, Architecture, Hero, Social proof,
+Conversion) so the user can see coverage at a glance. Pay special attention to **missing states** (loading/empty/error and the
 interaction microstates) and **AI-default tells** — those are the most common gaps. Always pair the
 problem with a specific, actionable fix and a one-line reason, and lead with the highest-impact issue.
