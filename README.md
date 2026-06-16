@@ -13,26 +13,6 @@ dashboard"*, or *"improve how this looks"* are enough to trigger it.
 Two screens, each built by Claude with the skill active. Same models, same frameworks, the
 difference is entirely in the handling of hierarchy, spacing, states, and the quiet details.
 
-### A pricing card
-
-![Pricing card built with interface-limb](assets/A_pricing.png)
-
-Dark theme done properly: a near-`#121212` base (not pure black), depth from *lightening* surfaces
-rather than heavy shadow, a single committed accent, text at tiered opacity, and a CTA with real
-hover, focus-ring, and pressed states.
-
-### An empty state
-
-![Projects empty state built with interface-limb](assets/B_empty.png)
-
-The moment most products skip. A positive title ("Start your first project", not "No projects"),
-a single direct action, and a quiet secondary path kept at a comfortable distance from the primary
-button. The breadcrumb and search control actually respond, they are not dead decoration.
-
-> **See them live (and compare against the default output):**
-> [pricing](https://mubizero.github.io/interface-limb/demos/compare_A_pricing.html) ·
-> [empty state](https://mubizero.github.io/interface-limb/demos/compare_B_empty.html)
-
 ## Why a skill, not a prompt
 
 Great app UI does not come from technical complexity. It comes from dozens of small, non-obvious
