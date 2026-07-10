@@ -439,6 +439,49 @@ load-bearing ones:
   premium product; a cramped, wall-to-wall page is read subconsciously as low-rent no matter how
   strong the copy. Space is a trust signal, not wasted screen.
 
+## 15. Behavioral psychology: shape the decision, not just the screen
+
+Users don't evaluate a screen field by field — they react to how a choice is framed. These
+are default-shaping techniques worth applying anywhere a user makes a decision: onboarding,
+forms, pricing, upgrade/downgrade prompts.
+
+- **Smart defaults, not blank slates.** An empty form asks the user to make N decisions from
+  nothing; a pre-filled one asks them to confirm or edit — far less friction, and a default
+  reads as a recommendation. Default to the most likely choice (last used value, most common
+  plan, inferred locale/timezone) and make the override obvious. Never default to something
+  reversible-but-costly (a paid tier, a destructive toggle) without that override being visible.
+- **Never start progress at 0%.** A bar or checklist that starts empty demotivates before the
+  user begins; one that starts partway ("Profile 20% complete") triggers the goal-gradient
+  effect — motivation to finish rises as the visible distance to the goal shrinks. Give credit
+  for steps already taken (account created, email verified) as real progress, not an empty
+  checklist, and keep that indicator visible through the whole flow. This is the progress
+  layer on top of the onboarding-as-empty-state guidance in section 8.
+- **Give value before asking for anything.** Reciprocity: let the user experience a real result
+  (a free calculation, an unlocked preview, a working demo) before a paywall or signup wall.
+  Asking for an email or a card *first* forces a trust decision before any value has been shown;
+  the same ask placed right after value lands converts far better — sequence beats wording.
+- **Let the user build something before they commit.** People value what they've put effort
+  into (the IKEA effect) — a workspace they've named, a dashboard they've arranged, a first
+  project they've created feels *theirs*, and walking away now feels like abandoning something,
+  not just skipping a signup. Where the flow allows it, let setup/customization happen before
+  registration, and place the account-creation step right after something has been built.
+- **Frame around loss, not just gain.** "You'll lose access to 12 saved projects" moves people
+  more than "Upgrade for more storage" — loss aversion means the fear of losing what you have
+  outweighs the appeal of gaining something new. Keep this honest: show concrete, real stakes
+  (real counts, real items at risk) when a trial ends or a downgrade is chosen — this is the
+  same "concrete beats generic" principle from section 4, applied to retention copy.
+- **Anchor before you price.** The first number a user sees recalibrates what "expensive" means
+  for everything shown after it (the contrast effect) — leading with the highest tier makes the
+  middle tier look reasonable by comparison, and a struck-through original price makes a
+  discount register instantly. Order pricing tiers and comparisons deliberately, not just
+  left-to-right by build convenience. Pairs with section 14's landing-page persuasion rules
+  when the pricing lives on a marketing page.
+
+The line these sit on top of is honesty, not manipulation: real progress, real value, real
+stakes, real prices. A fabricated progress bar or an invented "only 2 left" erodes exactly the
+trust section 10's anti-slop rules protect — a psychology trick built on a fake fact is a dark
+pattern, not craft.
+
 ## Pre-flight: before you call it done
 
 A quick gate to catch the things that slip through. Don't claim completion until these pass:
@@ -472,6 +515,10 @@ A quick gate to catch the things that slip through. Don't claim completion until
 - **Content fits — no clipping?** Long names ellipsis cleanly, scroll containers don't cut off
   siblings, the submit button doesn't overlap the list it submits about. Cropped UI is a bug, not
   an "edge case the user will figure out."
+- **Decisions well-framed?** Forms carry smart defaults instead of blank fields, onboarding progress
+  never starts at 0%, real value or a working preview lands before any signup/paywall ask, and
+  pricing tiers or discounts are ordered deliberately (anchor, then contrast) — all grounded in real
+  numbers, never fabricated urgency.
 
 ---
 
@@ -494,7 +541,7 @@ When using this skill to **review** an interface (rather than build), structure 
 ```
 
 Tag each finding with the relevant area (Direction, Hierarchy, Spacing, Typography, Color/Depth,
-States, Motion, Empty/Loading, Anti-slop, Copy, Responsive, Architecture, Hero, Social proof,
-Conversion) so the user can see coverage at a glance. Pay special attention to **missing states** (loading/empty/error and the
+States, Motion, Empty/Loading, Anti-slop, Copy, Psychology, Responsive, Architecture, Hero,
+Social proof, Conversion) so the user can see coverage at a glance. Pay special attention to **missing states** (loading/empty/error and the
 interaction microstates) and **AI-default tells** — those are the most common gaps. Always pair the
 problem with a specific, actionable fix and a one-line reason, and lead with the highest-impact issue.
