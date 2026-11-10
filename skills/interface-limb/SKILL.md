@@ -1,547 +1,214 @@
 ---
 name: interface-limb
 description: >-
-  Design intelligence for building and improving application interfaces — apply
-  whenever you plan, design, build, implement, review, refine, or fix any UI for a
-  web or mobile app: screens, components, forms, navigation, dashboards, onboarding,
-  settings, modals, whole app shells, and marketing/landing pages (hero, social
-  proof, conversion CTAs), including their empty/loading/error states.
-  Turns generic, "developer-default" output into interfaces that feel considered and
-  high-quality, grounded in concrete cited standards (WCAG contrast & target sizes,
-  Material/Apple motion & dark-theme values, modular type scales, interaction states,
-  haptics). Covers web (React/Tailwind/CSS, Angular/PrimeNG) and mobile (Flutter/React
-  Native). Reach
-  for this on ANY frontend/UI work — building from scratch or elevating existing
-  screens — even when the user just says "build the login screen," "make a dashboard,"
-  "design the settings page," or "improve how this looks," without naming design
-  explicitly.
+  Design intelligence for application interfaces, system first: before drawing a screen, find
+  (or set up) the product's design system — tokens, shared components, and one shared surface per
+  kind of job — build only from it, render the result and judge it by eye, and measure how well the
+  code keeps to it. Use it whenever you plan, build, review, refine, redesign or fix any UI for a web,
+  mobile or desktop app (screens, components, forms, dialogs, sheets, navigation, dashboards,
+  onboarding, settings, checkout, POS/till screens, landing pages, empty/loading/error states), and
+  whenever someone asks "do we have a design system", "why does this look AI-made / vibe-coded",
+  "make it look professional / premium", "unify these screens", "too many dialogs", or "audit the UI",
+  even if they never say the word design. Grounded in cited standards (WCAG contrast and targets,
+  Material/Apple motion and dark theme, modular type scales). Covers React/Tailwind/CSS,
+  Angular/PrimeNG, Flutter and React Native.
 ---
 
 # Interface Limb
 
-This is the design layer you bring to every interface you build — a natural extension
-of how you write the UI, not a separate step. Great app UI doesn't come from technical
-complexity; it comes from dozens of small, non-obvious decisions, applied consistently,
-by someone who understands how people actually perceive and use a screen. The same
-feature, built by a junior or a senior with the same framework, differs entirely in the
-handling of hierarchy, spacing, states, motion, and the empty/loading moments. This skill
-makes that handling explicit and backs it with cited standards — so the UI you ship feels
-considered, not "developer-default."
-
-Apply it whenever you touch an interface:
-- **Building** a new screen or component — work the principles below in *as you go*, from
-  the first layout decision, not as a cleanup pass bolted on afterward.
-- **Improving / refining** existing UI — elevate screens that look generic, flat, or basic.
-- **Reviewing** UI — audit against each section and report concrete fixes (format at the end).
-
-The goal is never decoration for its own sake. Every principle here exists to make
-the interface easier to understand and more pleasant to trust. When you apply one,
-say *why* it helps, not just *what* to change.
-
-## How to use this skill
-
-The flow is **direction → build → pre-flight**, not "write code then maybe polish."
-
-1. **Decide the direction first** (section 0, details in [references/direction.md](references/direction.md)).
-   Read the brief *and the existing codebase*; pick a deliberate aesthetic instead of defaulting to
-   the generic AI look. Skipping this is the #1 reason AI UI looks templated.
-2. Identify the platform — web, mobile, or both — and read the matching reference file for concrete
-   API/token guidance:
-   - [references/web.md](references/web.md) — React, Tailwind, CSS variables, responsive, shadcn-style tokens.
-   - [references/angular-primeng.md](references/angular-primeng.md) — Angular + PrimeNG styled-mode presets, design
-     tokens, `[dt]`/`[pt]` overrides (not `::ng-deep`), `@defer` loading, dark mode. Read this when the stack is
-     a component library, not hand-authored Tailwind — `web.md`'s general rules still apply on top.
-   - [references/mobile.md](references/mobile.md) — Flutter / React Native, haptics, keyboard, permissions.
-   - [references/marketing-landing.md](references/marketing-landing.md) — for landing / marketing pages: hero anatomy,
-     social proof, conversion flow, scan patterns. Read this when the screen has to *convince a visitor*, not just
-     serve a logged-in user — it sits on top of the platform rules above.
-3. Keep [references/standards.md](references/standards.md) open — the cited cheat-sheet of the exact
-   numbers (contrast ratios, target sizes, motion durations, dark-theme overlays, type scale). Use
-   those figures instead of guessing; this file states the principle, that file gives the value and source.
-4. Build through the principles below — foundations (hierarchy, spacing, type) first; depth and color
-   next; then states, motion, and the empty/loading moments. As you go, avoid the tells in
-   [references/anti-slop.md](references/anti-slop.md) and write copy per [references/ux-writing.md](references/ux-writing.md).
-5. Bake the result into the component system, not one-off screens (section 9), then run the
-   **Pre-flight checklist** before calling it done.
-
-**The accessibility floor is part of the craft, not separate from it.** A beautiful UI that keyboard
-users can't focus, or whose text fails contrast, isn't high-quality — it's broken with a nice coat of
-paint. The non-negotiable minimums: text contrast **≥ 4.5:1** (≥ 3:1 for large text and non-text UI
-like borders/icons/focus rings); touch targets **≥ 44pt (iOS) / 48dp (Android) / 24px (web)**; and a
-visible keyboard focus indicator on everything focusable. Full values and sources in
-[references/standards.md](references/standards.md).
-
----
-
-## 0. Direction: decide what this should be
-
-Before tokens and components, decide *what you're making* — otherwise you'll reach for the reflexive
-default and the result will look machine-generated. Full method in [references/direction.md](references/direction.md);
-the essentials:
-
-- **Read the brief and the codebase.** Infer page kind, audience, vibe, and any hard constraints
-  (regulated industry, accessibility). If a design system already exists (CSS vars, Tailwind config,
-  component library, fonts), **match it — don't rewrite it.** State a one-line *Design Read* so your
-  direction is explicit and correctable, and ask at most one clarifying question.
-- **Set three dials to the brief:** DESIGN_VARIANCE (safe ↔ asymmetric), MOTION_INTENSITY (static ↔
-  choreographed), VISUAL_DENSITY (spacious ↔ cockpit). A meditation app and an analytics cockpit sit at
-  opposite ends; say where yours sits and why.
-- **Pick a real aesthetic, not adjectives.** Write a one-sentence *scene* (who uses this, where, in what
-  mood), name concrete anchor references and an anti-reference, then sanity-check: if you could guess the
-  look from the product category alone, push further.
-- **Tailor to the vertical.** The same component is designed differently for fintech vs. kids vs. a
-  dashboard — palette, density, motion, and trust signals all shift. (Table in direction.md.)
-- For a **redesign**, work **Scan → Diagnose → Fix**: read the stack, list every generic pattern and
-  *missing state*, then upgrade in max-impact order (fonts → color → states → layout → components →
-  loading/empty/error → type polish) — working *with* the existing stack, not replacing it.
-
----
-
-## 1. Foundations: make it self-explanatory
-
-A good interface tells you how it works without a manual. Two ideas do the heavy lifting:
-
-- **Signifiers** — visible cues that an element is interactive: a button looks pressable,
-  an input looks fillable, a row with a chevron looks tappable. If a thing does something,
-  it should *look* like it does something.
-- **Affordances** — the action the element actually allows. Keep signifier and affordance
-  honest: nothing should look tappable but do nothing, and nothing interactive should look
-  like dead text.
-
-When you place an element, ask: "Would a first-time user know what this does and that they
-can touch it?" If not, the fix is usually a clearer signifier (contrast, a border, an icon,
-a shadow on press), not a tooltip.
-
-## 2. Visual hierarchy: control the eye
-
-Size, position, and color decide what the user looks at first. This is the backbone of
-premium feel — without hierarchy, even beautiful components read as noise. The failure mode
-to fear is **flatness: when every element shares the same size and weight, nothing stands
-out, the user has no entry point, and "everything is important" collapses into "nothing is."**
-
-You have three levers to direct the eye — use all three, not just size:
-
-- **Size** — bigger = more important.
-- **Contrast** — a brighter/heavier element pulls focus from quieter ones.
-- **Negative space** — isolation is emphasis; an element with room around it reads as
-  important even at the same size (see section 3).
-
-Apply them like this:
-
-- **Most important = bigger and higher.** Promote the primary value/action with size and
-  top placement. Demote secondary info by making it smaller and quieter (lower contrast,
-  muted color), not by hiding it.
-- **Place key elements along the natural scan path.** The eye doesn't read a screen evenly.
-  Text-dense pages get scanned in an **F-pattern** (two horizontal sweeps near the top, then a
-  vertical skim down the left edge); sparse, visual pages — landing heroes, splash screens — get
-  scanned in a **Z-pattern** (top-left → top-right, diagonal down, then bottom-right). Put the
-  load-bearing elements *on* those lines instead of fighting them: logo top-left, primary nav or
-  CTA top-right, the headline first in the flow, and the conversion action where the path ends.
-  Aligning to the scan path is the cheapest way to control attention.
-- **Use imagery as accents and scan anchors.** A well-placed product image, avatar, or
-  thumbnail gives the eye a fixed point and makes a list scannable far faster than text
-  alone — this is why marketplace apps (e.g. Uzum-style storefronts) lean on imagery.
-  Use it deliberately, not as filler.
-- **Contrast is a tool, not a default.** Reserve your strongest contrast for the one thing
-  that matters most on the screen. If everything shouts, nothing is heard.
-
-## 3. Spacing and layout: let it breathe
-
-- **Whitespace beats rigid grids.** Don't obsess over snapping every element to a strict
-  grid. The more impactful skill is using generous, intentional space to group related
-  things and separate unrelated ones. Cramped is the #1 tell of an amateur layout.
-- **Use a 4px spacing system.** Pick spacing values from a 4px scale (4, 8, 12, 16, 24,
-  32, 48…). This isn't superstition — a shared base unit makes every gap relate to every
-  other gap, producing a quiet mathematical harmony the user feels but can't name. Avoid
-  arbitrary `13px` / `7px` values.
-- **Group by proximity.** Elements that belong together sit close; a clear gap signals a
-  new group — proximity communicates structure more cheaply than borders or boxes. Don't crowd
-  a secondary or optional path (a quiet "Skip" / fine-print link) against the primary CTA;
-  separate it with real whitespace. Prefer that gap to a divider line, which overshoots a
-  centered, narrower element and reads as a stray rule.
-- **Verify spacing renders — don't just declare it.** A more-specific descendant reset (the
-  classic `.card p { margin: 0 }`) silently zeroes a `margin-top` you set on a child for
-  separation, collapsing the gap back to nothing — and it's invisible in the source, so it
-  survives review. When a deliberate gap "isn't showing up," suspect an override: scope your
-  rule to win (`.card .alt`, not bare `.alt`) and confirm the *computed* gap, not just the
-  declaration. This single trap is the most common reason intended whitespace vanishes.
-
-## 4. Typography: one font, tuned well
-
-You don't need a fancy type system. One quality sans-serif, used with care, looks more
-professional than three fonts thrown together.
-
-- **Type carries the brand's emotion before a word is read.** The face *is* a message: the
-  same headline set wrong can turn a serious, well-funded product into a discount flyer, or a
-  playful app into a tax form. Choose the family for the feeling the vertical needs (mood and
-  vertical pairings in [references/direction.md](references/direction.md)) — then tune it.
-  **Readability outranks novelty every time:** a clever font nobody can read is a worse choice
-  than a plain one they can. Keep to a **"rule of two": at most 2 (occasionally 3) families** —
-  fewer, used well, always beats more.
-- **One good sans-serif is enough.** Establish a small type scale from that single family
-  using weight and size. Generate the sizes from a **modular scale** (`size = base × ratio^n`)
-  with a ratio of **1.25** or **1.333** rather than picking sizes arbitrarily — this is the same
-  4px-style harmony applied to type.
-- **Use two well-separated weights, not three close ones.** e.g. 400 body / 700 heading; the
-  weak 400/600 pairing doesn't read as a hierarchy. Max two families total.
-- **Tighten letter-spacing slightly on larger text.** Headings (≥~32px) look more refined with
-  a touch of negative tracking (`-0.01em` to `-0.03em`). Body text stays at 0.
-- **Tune line-height for readability.** Body copy wants ~`1.5`; headings tighter (`1.1–1.2`).
-  Default browser line-heights are a giveaway of unconsidered type.
-- **Keep the measure comfortable.** Cap text line length at ~**66 characters** (`max-width: 66ch`);
-  past ~80 the eye loses its place returning to the next line.
-- **Match icon size to the line height of adjacent text.** An icon next to a label should
-  share its optical height and baseline so the pair reads as one unit. Mismatched icon/text
-  sizing is a small thing that quietly cheapens a UI.
-
-## 5. Color and depth
-
-- **One brand color, plus a semantic set, in roughly 60-30-10 proportion.** A single primary
-  brand color for identity and key actions; a small semantic palette — success, warning, error,
-  info — for status. Allocate the screen ~60% neutral background / ~30% secondary surface /
-  ~10% accent. Don't overload the brand color with meanings it shouldn't carry.
-- **Light-theme shadows: soft, layered, faint.** Real elevation comes from two light sources —
-  a soft ambient shadow plus a sharper offset key shadow — so stack **2–3 box-shadow layers**,
-  not one blur. Keep opacities low (ambient ~12%, key ~14–20% black) and increase **blur/spread**
-  (not opacity) with elevation. A single harsh dark drop shadow reads as dated — the user should
-  sense depth, not see the shadow.
-- **Dark theme is not "light theme inverted."** Three rules change:
-  - **Base surface is dark gray `#121212`, not pure black.** Black kills shadow visibility and
-    fatigues the eye under light text.
-  - **Create depth by lightening, not by shadow.** On dark backgrounds shadows barely show.
-    Make elevated surfaces *lighter* than what's behind them via a white overlay that scales with
-    elevation (e.g. ~5% at 1dp up to ~16% at 24dp) — a card floats because it's a brighter shade.
-  - **Dial down text and borders, and desaturate brand colors.** Never pure-white body text — it
-    vibrates; use ~**87% / 60% / 38%** opacity for primary / secondary / disabled text over
-    near-white. Use low-contrast hairline borders. Saturated brand hues also vibrate on dark —
-    shift them to lighter, less-saturated tones.
-- **Text over images: gradient or blur, not a flat scrim.** When text sits on a photo, avoid
-  dumping a solid dark overlay that flattens the image. Use a linear gradient (transparent →
-  dark toward the text) or a progressive/graduated blur so the photo stays attractive while
-  the text stays legible.
-
-## 6. Interaction states: every state, every element
-
-This is where "premium" is won or lost. The teams behind Linear/Vercel/Stripe audit **six
-microstates** on every interactive element before shipping it. Anything a user can touch must
-visibly respond to each situation it can be in:
-
-- **Default** — the resting look.
-- **Hover** (pointer platforms) — a clear but subtle shift signaling "this is reachable."
-- **Pressed / active** — immediate feedback at the moment of contact (see motion below).
-- **Focus** — a visible keyboard focus indicator (`:focus-visible`, not `:focus`). Never
-  `outline: none` with nothing in its place — that's an accessibility failure. A solid **2px
-  outline at ≥ 3:1 contrast** against the unfocused state is the simplest thing that satisfies it.
-- **Disabled** — obviously inert (reduced contrast), and not hoverable/pressable.
-- **Loading** — the element shows it's working (spinner-in-button, skeleton, progress), with the
-  indicator *inside* the element so layout doesn't jump.
-- **Error** — for inputs and flows, a clear, specific error state with a path to recovery.
-
-Hit two floors while you're here: every interactive element meets the **target-size minimum**
-(44pt iOS / 48dp Android / ≥24px web — pad transparently if the visual is smaller), and every
-state keeps **≥ 3:1 contrast** for its non-text cues (borders, icons, the focus ring itself).
-
-**Form fields** have their own premium tells: validate **on blur, not on every keystroke** (and
-never block typing); show errors **inline, next to the field**; use **persistent labels outside
-the field** — placeholder-as-label is harmful because it vanishes on focus and often fails
-contrast; and **don't pre-disable the submit button** — let the user submit so validation can
-surface, disabling only during the in-flight request.
-
-Skipping states is the most common reason a UI feels "unfinished" even when it functions.
-
-**Spend the states on the quiet controls too, not just the hero button.** The trap is lavishing
-six microstates on the primary CTA while every *structural* control stays dead: breadcrumbs, nav
-items, tabs, icon buttons, search fields, list rows, avatars, chips, table headers. Those are
-exactly where "dead UI" hides, because they look finished while doing nothing on hover/focus/press.
-Before you call a screen done, point at each thing that *looks* touchable and confirm it visibly
-responds — if it doesn't, it reads as a screenshot, not an app.
-
-**A control that looks actionable must actually act** (or be visibly `disabled`). A Search button,
-toggle, or menu trigger that does nothing when used is worse than not drawing it — it breaks the
-trust the rest of the polish buys. Wire the core interaction (a search control expands to a focused
-input, a toggle flips), or at minimum give a real focus/press response and a clear destination.
-
-**Mobile keyboard handling** is a flagship tell of a high-class app: when the keyboard
-appears, inputs should smoothly move into view and never be covered, with the surrounding
-layout adapting gracefully. See [references/mobile.md](references/mobile.md).
-
-## 7. Micro-interactions and motion
-
-Subtlety is the rule. Animation should confirm and guide, never perform.
-
-- **Respond within 100ms.** Press/hover/selection feedback must *begin* within ~100ms to feel
-  instantaneous — that's the perception budget. If an action can take longer than ~1s, show a
-  loading indicator; longer than ~10s, show determinate progress.
-- **Press feedback.** A button should physically acknowledge the press — a slight scale-down
-  (e.g. to ~0.96–0.98) and/or a brief color/elevation change — then spring back. This tiny
-  cue confirms the user's intent landed.
-- **Optimistic UI.** When success is very likely, update the UI immediately and reconcile when
-  the server responds; on failure, roll back or offer Undo. Waiting on the network for every
-  toggle feels sluggish; optimism feels premium.
-- **Haptics (mobile).** A light vibration on a toggle flip, a successful submit, or a
-  selection change creates physical trust in a digital action. Match weight to importance, use
-  sparingly (overuse trains users to disable it), don't double up on haptics the OS controls
-  already play, and sync the tick to the visual change. See [references/mobile.md](references/mobile.md).
-- **Pick durations by scale, and make exits faster than entrances.** Micro-feedback (toggle,
-  hover) **100–150ms**; standard transitions (dropdown, tooltip) **200–300ms**; large/modal
-  **400–500ms**. Never exceed ~500ms for routine motion — past that it drags. Use **ease-out**
-  for elements *entering* and **ease-in** for elements *leaving* (an exit can be ~30% shorter,
-  since the user no longer needs to track it). Avoid linear easing; animate only `transform`
-  and `opacity`, never `transition: all`.
-- **Respect reduced-motion.** Honor the OS/browser "reduce motion" setting — replace large
-  translation/scale/parallax with a near-instant opacity fade, but keep *essential* motion
-  (like a loading spinner). Make it one global switch, not per-component.
-
-## 8. Loading and empty states: the moments most people skip
-
-These are exactly where premium products distinguish themselves, because most don't bother.
-
-- **Match the loading indicator to the wait.** Under ~1s, show nothing. For ~2–10s, use a
-  spinner for a single module or a **skeleton** for a full-page load. Past 10s, use a progress
-  bar. Skeletons must **mirror the final layout exactly** so content swaps in without shifting.
-  Add a small **show-delay (~150–300ms)** and a **minimum visible time (~300–500ms)** so the
-  indicator never flashes. A shimmer sweep signals ongoing work and shortens the perceived wait
-  (honor reduced-motion).
-- **Empty states do three jobs:** communicate status (is it loading, errored, or genuinely
-  empty?), teach in context ("Star items to see them here"), and offer a **direct primary
-  action** to fill it. Phrase the title **positively** ("Start by adding your first project",
-  not "You have no projects"). First-use empty states are your best onboarding surface — better
-  than a forced upfront tutorial.
-- **Prime permissions before requesting them.** Never fire a system permission dialog (camera,
-  notifications, location) cold or at launch. First show a contextual screen that explains *why*
-  and what the user gains, triggered **just-in-time** when they tap the feature — then call the
-  system prompt. Giving a reason measurably raises grant rates (research shows ~12%, up to ~81%
-  with a strong rationale). On denial, explain the cost and offer a path to Settings.
-
-## 9. Systematize it
-
-A premium feel only scales if it lives in the component system, not in scattered screens.
-
-- Encode states (default/hover/pressed/focus/disabled/loading/error) as **component variants**,
-  so every instance gets them for free.
-- Encode spacing, color, radius, shadow, type, **motion durations and easing curves** as
-  **design tokens** (CSS variables / Tailwind theme / Flutter ThemeData), so a change propagates
-  everywhere and nothing drifts. Named motion tokens (`duration-short`, `ease-enter`) keep
-  animation consistent instead of scattered magic numbers.
-- Build empty, loading, and error states as **first-class states of the component**, not
-  afterthoughts bolted on later.
-- **Keep radii concentric** — a child's border-radius should be ≤ its parent's so nested curves
-  stay parallel. And **persist meaningful view state in the URL** (filters, tabs, selection) so
-  refresh, back, and share all work — a quiet but unmistakable sign of a considered product.
-
-The platform reference files show concretely how to express these in React/Tailwind, in
-Angular/PrimeNG, and in Flutter/React Native.
-
-## 10. Avoid the AI-default look
-
-Good fundamentals aren't enough — you also have to dodge the patterns that make a UI read as
-machine-generated. These are *bans*: if you're about to ship one, rewrite. The worst offenders (full
-list with reasons in [references/anti-slop.md](references/anti-slop.md)):
-
-- **No fake product UI built from divs** (fake terminals/dashboards/chats to fill a hero) — use a real
-  or generated image. This is the single biggest "obviously AI" tell.
-- **No em-dashes (—) in copy** — the strongest text tell; use commas, colons, or parentheses.
-- **No default Inter + purple/blue glow gradient + nested cards** — the AI-SaaS uniform. Pick a
-  non-default font (Geist, Outfit, Satoshi…), a deliberate palette (neutral base + one committed
-  accent, not AI-cream/beige), and never nest a card in a card.
-- **No identical card grids, eyebrow-on-every-section, or >2 consecutive image/text zigzags** — vary
-  the layout families across a page.
-- **No buzzwords or Lorem/“John Doe”/round fake numbers** — write real copy and realistic content.
-- **Context flips the rules:** AI-purple is right for a chatbot but wrong for fintech/health/legal,
-  which want restraint and trust signals. Check the choice against the vertical.
-
-## 11. Words are UI
-
-Copy carries as much of the "considered" feeling as spacing does. Full library in
-[references/ux-writing.md](references/ux-writing.md); the load-bearing rules:
-
-- **Buttons = verb + object, named for the outcome:** "Save changes", "Create account", "Delete 5
-  items" — not "OK" / "Submit" / "Yes". "Cancel" → "Keep editing" when that's clearer.
-- **Make CTAs intent-driven, and never leave a dead end.** Name the button for the action the user
-  is about to take — "Book a demo", "Start free trial" — not a vague "Contact us" or "Learn more".
-  And the foot of every screen or flow should offer one obvious next step (the primary action
-  repeated, or the logical follow-on), so the user is never stranded at the bottom wondering what to
-  do next.
-- **Errors never blame the user and answer what/why/next:** "Email addresses need an @ symbol. Try:
-  name@example.com" — placed inline with `role="alert"`, active voice, no "Oops!".
-- **Loading copy is specific and time-boxed** ("Analyzing… ~30–60s"); empty/no-results copy suggests a
-  next step, not a bare "0 results".
-- **Terminology lock:** one word per concept across the product (Delete, not Delete/Remove/Trash).
-- **One language per locale.** Inside a single locale the UI speaks one language — no "Step 1 / Owner
-  code / Update channel" stranded inside a Russian screen, no Russian words forgotten in English. This
-  is about **mixing**, not about Latin script as such: for an en-locale Latin is correct, and brand
-  names ("Stripe"), technical identifiers (slug, hostname, timezone) and established acronyms (PC, VIP,
-  API) are fair-game exceptions in any locale. The rule is *don't half-localize.*
-- **Strings are unified and really translated, not faked.** A phrase with a count or variable is one ICU
-  message (`{count, plural, …}` / `{name}`), never number + hand-pluralized word + concatenation. And when
-  a catalog forces every locale to carry every key, fill them with real translations — copying the source
-  language passes the parity check while lying that it's localized (a false "done"). Full guidance in
-  [references/ux-writing.md](references/ux-writing.md).
-
-## 12. Multi-step flows: one screen, one question
-
-When a task naturally splits into "pick this, then configure that," prefer a **wizard of small screens
-over one dense screen.** Two short steps almost always beat one two-column layout with nested scrolls.
-
-- **One question per screen.** If a screen is answering more than one thing, it's hiding a missing step.
-  A role picker and a name + seat configurator are *two* questions — split them. Five simple steps beat
-  one stacked, scroll-locked everything-page.
-- **Stepper carries the context.** Use a top stepper for the "where am I" signal and put per-step
-  context (org/branch/owner) in the eyebrow, not inside the subtitle paragraph — keep the eyebrow for
-  *where we are*, the h1 for *what we ask*, the subtitle for *direction*. That eyebrow/h1/subtitle/body
-  hierarchy is the load-bearing pattern of a clean wizard.
-- **Adapt the next screen to the previous answer.** Don't show fields that don't apply because the
-  earlier step ruled them out. A "seats on the floor map" section is irrelevant for a back-office role
-  — drop it, narrow the screen, ship the simpler version.
-- **Back must really go back.** Each step keeps the previous answers cached so going back never wipes
-  what the user already typed. URL/state-restore parity matters here, not just on refresh.
-
-## 13. Native shells: meet platform expectations, don't ship web defaults
-
-When the app is a native desktop shell wrapping a web view (Electron, Tauri, WPF + WebView2, etc.),
-the surrounding chrome must feel like the OS, not like a webpage that happens to be fullscreen.
-
-- **Cursors and selection match the platform.** Buttons get `cursor: default`, not `cursor: pointer`.
-  Non-input UI text is `user-select: none` so the wizard never lets the user blue-highlight a heading
-  the way a webpage would. Inputs and content meant to be copied stay selectable.
-- **Custom titlebar — finish the set.** If you replace the OS titlebar with a custom one, ship the
-  *full* set: minimize, maximize/restore, close — plus native drag region on the empty header. Shipping
-  only minimize + close is **half-finished**: users immediately spot the missing maximize and lose
-  trust in the rest of the polish.
-- **Drag with the OS, not with JavaScript.** Native window drag means `WM_NCLBUTTONDOWN + HTCAPTION`
-  (Windows) or the platform equivalent, not a custom mouse-move listener that fights snapping and
-  multi-monitor. Block drag on actual controls (buttons, inputs, focusable rows).
-- **Right-click and keyboard behave like the OS.** No browser context menu on UI chrome (it reveals
-  "Reload" / "Inspect" / "Save as" and breaks the illusion). Default browser shortcuts (Ctrl+F,
-  Ctrl+P) either map to something meaningful in the app or are intercepted.
-- **Bundle, don't lazy-load like a web page.** The shell loads from disk; show no network spinner for
-  what is local. Reserve loading states for actual remote calls.
-
-## 14. Marketing & landing pages: persuade, don't just present
-
-An app screen *informs* someone who's already in. A landing page has a harder job: **convince a
-stranger, in seconds, before they leave.** Everything above still applies, but persuasion adds its
-own rules. Full playbook in [references/marketing-landing.md](references/marketing-landing.md); the
-load-bearing ones:
-
-- **The hero earns the scroll.** Above the fold, answer four questions fast: *who you are, what you
-  offer, who it's for,* and *why it's worth it* (the USP). If a visitor can't tell what this is and
-  why they should care without scrolling, the page has already failed — no amount of polish below
-  rescues a hero that doesn't sell.
-- **Social proof is woven through, not parked in the footer.** Logos are the weakest form; concrete
-  **results and transformations** persuade — "grew revenue 40% in two weeks", not "trusted by teams."
-  Place proof next to the claims and CTAs it backs, all along the page, where doubt actually
-  surfaces — not in one graveyard row at the bottom that nobody reads.
-- **One conversion goal, repeated.** Decide the single action the page exists to drive, and lead
-  every section toward it. Repeat the primary CTA at natural decision points (after the hero, after
-  the proof, at the foot) so the user never has to scroll back to act.
-- **Let it breathe — crowding reads as cheap.** Generous negative space signals confidence and a
-  premium product; a cramped, wall-to-wall page is read subconsciously as low-rent no matter how
-  strong the copy. Space is a trust signal, not wasted screen.
-
-## 15. Behavioral psychology: shape the decision, not just the screen
-
-Users don't evaluate a screen field by field — they react to how a choice is framed. These
-are default-shaping techniques worth applying anywhere a user makes a decision: onboarding,
-forms, pricing, upgrade/downgrade prompts.
-
-- **Smart defaults, not blank slates.** An empty form asks the user to make N decisions from
-  nothing; a pre-filled one asks them to confirm or edit — far less friction, and a default
-  reads as a recommendation. Default to the most likely choice (last used value, most common
-  plan, inferred locale/timezone) and make the override obvious. Never default to something
-  reversible-but-costly (a paid tier, a destructive toggle) without that override being visible.
-- **Never start progress at 0%.** A bar or checklist that starts empty demotivates before the
-  user begins; one that starts partway ("Profile 20% complete") triggers the goal-gradient
-  effect — motivation to finish rises as the visible distance to the goal shrinks. Give credit
-  for steps already taken (account created, email verified) as real progress, not an empty
-  checklist, and keep that indicator visible through the whole flow. This is the progress
-  layer on top of the onboarding-as-empty-state guidance in section 8.
-- **Give value before asking for anything.** Reciprocity: let the user experience a real result
-  (a free calculation, an unlocked preview, a working demo) before a paywall or signup wall.
-  Asking for an email or a card *first* forces a trust decision before any value has been shown;
-  the same ask placed right after value lands converts far better — sequence beats wording.
-- **Let the user build something before they commit.** People value what they've put effort
-  into (the IKEA effect) — a workspace they've named, a dashboard they've arranged, a first
-  project they've created feels *theirs*, and walking away now feels like abandoning something,
-  not just skipping a signup. Where the flow allows it, let setup/customization happen before
-  registration, and place the account-creation step right after something has been built.
-- **Frame around loss, not just gain.** "You'll lose access to 12 saved projects" moves people
-  more than "Upgrade for more storage" — loss aversion means the fear of losing what you have
-  outweighs the appeal of gaining something new. Keep this honest: show concrete, real stakes
-  (real counts, real items at risk) when a trial ends or a downgrade is chosen — this is the
-  same "concrete beats generic" principle from section 4, applied to retention copy.
-- **Anchor before you price.** The first number a user sees recalibrates what "expensive" means
-  for everything shown after it (the contrast effect) — leading with the highest tier makes the
-  middle tier look reasonable by comparison, and a struck-through original price makes a
-  discount register instantly. Order pricing tiers and comparisons deliberately, not just
-  left-to-right by build convenience. Pairs with section 14's landing-page persuasion rules
-  when the pricing lives on a marketing page.
-
-The line these sit on top of is honesty, not manipulation: real progress, real value, real
-stakes, real prices. A fabricated progress bar or an invented "only 2 left" erodes exactly the
-trust section 10's anti-slop rules protect — a psychology trick built on a fake fact is a dark
-pattern, not craft.
+Good interfaces are not made screen by screen. They come from a small system — a few tokens, a
+few components, one way to do each kind of job — applied everywhere, and from someone who looks at
+the rendered result and is honest about it. AI-built UI fails in the opposite way: it builds every
+component from scratch, picks its own colors and layout, gives every element the same weight, fills
+it with placeholders, and never looks at what it drew. Each screen can be "fine"; the product still
+reads as vibe-coded, because nothing is shared and nobody decided anything.
+
+This skill is a workflow, not a list of tips. The tips live in the reference files; the workflow
+makes sure they are applied in the right order and to the right layer.
+
+**Size the workflow to the change.** A one-property fix (a gap, a color, a word, a missing state on one
+control) skips steps 0, 1 and 4: make it with the existing tokens and say so. Steps 0–5 in full are for a
+new screen, a redesign, a review, or any question about the design system. When the person iterates with
+you on a feature and has said not to rebuild or screenshot until they say "done", their rule wins: render
+in step 4 only when they ask, and say what you could not check.
+
+## The workflow
+
+Work through these steps in order. Step 0 and step 4 are the ones most often skipped, and they are
+the ones that make the difference.
+
+### 0. Read the product's design system before touching a screen
+
+Find out what already exists, in three layers ([references/design-system.md](references/design-system.md)):
+
+1. **Tokens** — color roles, type scale, spacing scale, radii, elevation, motion. Where: CSS
+   variables, Tailwind config, `ThemeData` / `ThemeExtension`, a `tokens.json`.
+2. **Components** — the shared widgets everyone should use: buttons, fields, rows, chips, cards,
+   sheets, empty states. Where: `components/`, `widgets/`, a `kit`, an installed library.
+3. **Patterns** — one shared surface per kind of job: confirm with a reason, pick one of a list,
+   type a number, type one word, a detail panel, a list row, a filter sheet. These are usually the
+   missing layer, and their absence is why a product grows 300 dialogs that all look slightly different.
+
+Then **measure** how well the code keeps to it: run `scripts/ds_audit.sh <src-dir>` (literal colors,
+font sizes, weights, paddings, radii and durations vs. token use; count of dialogs and sheets). Read
+the numbers as a symptom map, not a grade: 300 `copyWith(fontWeight:)` overrides mean the type
+scale does not cover what screens need; a second app with its own token file means two design systems.
+
+Say what you found in two or three lines ("Tokens: yes, 4-pt spacing, two fonts. Components: 10,
+no button or card. Patterns: none. Adherence: 18 % of paddings are literals; guest app has its own
+theme."). If the user asks "do we have a design system and how good is it", this is the answer;
+use the maturity scale in design-system.md.
+
+**If a system exists, match it — never start a second one.** If it is thin, extend it (step 2) as
+you go instead of styling the screen locally.
+
+### 1. Decide direction, and what "premium" means to this product's buyer
+
+"Make it pop" and "make it premium" leave the model to guess, and the guess is the AI default.
+Decide before building ([references/direction.md](references/direction.md)):
+
+- **Who judges this, and what reads as care to them?** Calm and warm (health), sharp and dense
+  (trading, an operations console), playful (consumer). This is a decision, not an adjective.
+- **Real references, not adjectives:** 2–4 real screens from shipped products solving the same
+  problem (Mobbin, the category leaders) plus one anti-reference. Copy their *reasons*, not their pixels.
+- **One decision only this product would make** — its own icon set, type, an illustration language, a
+  status color system. "Fine" is the floor now; the signature is what says someone cared.
+- Set the three dials (variance, motion, density) and say where this sits.
+
+For a restructure — new navigation, merged screens, a new main screen, a new flow — **draw a mock
+in the product's own tokens first and get approval of one area at a time.** Code written before
+agreement on the shape gets written twice.
+
+### 2. Build from the system, never around it
+
+- **Use the component; if it is missing, add it to the system, not to the screen.** A screen that
+  needs a styled list row gets the shared row, extended if necessary. One-off styling is how drift starts.
+- **Use the pattern for the job.** Before writing a dialog or sheet, ask which job it is (confirm,
+  pick one, number, word, detail, form, wizard) and use that shared surface. If the same job appears
+  twice with different code, merge them — that is a behavioral consolidation, and it is usually worth
+  more than any visual polish. Catalog and migration method in design-system.md.
+- **Don't hand-build the hard interactive components.** Toasts that stack, drawers you can drag,
+  command menus that work from the keyboard, animated numbers: use the specialist library or the
+  platform's own component, then style it with your tokens ([references/libraries.md](references/libraries.md)).
+  Default library styling is its own AI look — change radius, color and type so it looks like this product.
+- Spacing, type, color, radius and motion come **only from tokens**. A literal (`13px`, `Color(0xFF…)`,
+  `fontSize: 15`, `Duration(milliseconds: 180)`) needs a reason, or it goes into the tokens.
+
+### 3. Compose the screen: the seven things every good UI has
+
+Same components, very different results — the difference is these seven
+([references/review-by-eye.md](references/review-by-eye.md) has the before/after detail):
+
+1. **One focal point.** What is the screen for? Make that the biggest, highest-contrast thing and turn
+   everything else down — usually by removing, not adding. One primary button; the second becomes
+   secondary or a link.
+2. **Spacing on a scale that groups.** 4/8-pt values only; a label sits closer to its input than
+   groups sit to each other. Evenly spread padding is the AI tell: nothing looks grouped.
+3. **Hierarchy from weight and color first, size second.** A title can be only a little bigger but
+   heavier and darker; secondary text is quieter, not smaller-and-smaller. Few sizes per card.
+4. **Color mostly neutral, one accent where it matters** — the primary action, focus, links, status.
+   When everything is colored nothing stands out. Color that carries information (a chart, a status)
+   beats color as decoration. Don't let the model pick the palette.
+5. **Real content.** Real names, prices, counts, copy for this product. Placeholder content makes a
+   finished design look like a template.
+6. **The details match everywhere.** One radius family (nested radius ≤ parent), hairline borders,
+   soft layered shadows (or lightening in dark theme), one icon set at one size and stroke, aligned
+   edges on one grid.
+7. **Motion comes from where the user acted.** A menu grows from its button, a sheet follows the
+   finger, exits are faster than entrances, ease-out, short. No motion and same-fade-for-everything
+   both read cheap.
+
+Also **design for the content you can't see**: a card must work with a dark photo and a bright one,
+a long name and a short one, 3 items and 300. Put text off the photo, give icons over images their
+own plate, ellipsize, and test the extremes.
+
+### 4. Render it and look — then judge it like a stranger
+
+Never call UI done from the code. Render it at the real sizes (phone ~390, tablet ~820, desktop
+1366–1440; dark theme if the product has one) with realistic data, open the image yourself, and
+check:
+
+- The seven questions above, answered yes one by one.
+- The AI tells in [references/anti-slop.md](references/anti-slop.md) (emoji icons, gradient letter
+  avatars, KPIs repeated across pages, cards that do nothing, purple glow, twin equal buttons…).
+- Clipping, overlap, text running under a button, an empty column, a scroll inside a scroll.
+- Every state: empty, loading, error, long list, one item, disabled, offline.
+
+Fix what you see and look again. A screenshot of the problem pasted back is the fastest bug report;
+use it on yourself.
+
+### 5. Measure and bake it in
+
+Rerun `scripts/ds_audit.sh` and compare: no new literals, fewer one-off surfaces. Encode what you
+added as tokens, component variants and patterns so the next screen gets it for free. Fix drift in
+the shared layer (one fix, many screens), not screen by screen. One class of problem is one change.
+
+## The accessibility floor is part of the craft
+
+Text contrast ≥ 4.5:1 (≥ 3:1 large text and non-text UI: borders, icons, focus rings); touch targets
+≥ 44 pt iOS / 48 dp Android / 24 px web (pad invisibly if the visual is smaller); a visible keyboard
+focus indicator on everything focusable; honor reduced motion. Exact values and sources:
+[references/standards.md](references/standards.md). A beautiful screen that fails these is broken.
+
+## Interaction states: every state, every element — including the quiet ones
+
+Default, hover (pointer), pressed, focus (`:focus-visible`), disabled, loading (inside the element,
+no layout jump), error (inline, with a way out). Spend them on the structural controls too — tabs,
+rows, chips, icon buttons, search — that is where "dead UI" hides. A control that looks actionable
+must act or be visibly disabled. Forms: labels outside the field, validate on blur, errors next to
+the field, don't pre-disable submit. Encode states as component variants (step 2), never per screen.
+
+## Reference map — read what the task needs
+
+| Read | When |
+|---|---|
+| [design-system.md](references/design-system.md) | Always at step 0; when asked about the design system; before merging screens |
+| [direction.md](references/direction.md) | New product, redesign, "make it premium", choosing fonts and palette |
+| [review-by-eye.md](references/review-by-eye.md) | Step 3–4; any review or "why does this look off"; lists, cards, filters, pricing |
+| [anti-slop.md](references/anti-slop.md) | Step 4, every time |
+| [libraries.md](references/libraries.md) | Toasts, drawers, command menus, animated numbers, picking a component library |
+| [craft.md](references/craft.md) | Type, color and dark theme, motion, loading/empty, wizards, desktop shells, framing a decision |
+| [standards.md](references/standards.md) | Any number: contrast, targets, durations, type ratio, dark-theme overlays |
+| [web.md](references/web.md) | React, Tailwind, CSS variables, shadcn-style tokens, responsive |
+| [angular-primeng.md](references/angular-primeng.md) | Angular with PrimeNG presets and tokens |
+| [mobile.md](references/mobile.md) | Flutter / React Native: theme, haptics, keyboard, permissions |
+| [marketing-landing.md](references/marketing-landing.md) | A page that must convince a stranger |
+| [ux-writing.md](references/ux-writing.md) | Buttons, errors, empty states, one language per locale |
+
+Multi-step flows: one question per screen, keep answers when going back, adapt the next step to the
+last answer. Native desktop shells: platform cursors and selection, full titlebar set, OS drag.
+Decisions: smart defaults, progress that never starts at 0 %, value before the ask, honest stakes.
+Details for all three in [references/craft.md](references/craft.md).
 
 ## Pre-flight: before you call it done
 
-A quick gate to catch the things that slip through. Don't claim completion until these pass:
-
-- **States complete — including the quiet controls?** Every interactive element has
-  default/hover/pressed/focus/disabled/loading — not just the hero button. Walk the *structural*
-  controls (breadcrumbs, nav, tabs, icon buttons, search, list rows) and confirm each visibly
-  responds. Every data view has loading + empty + error states (not just the happy path).
-- **Nothing decorative-but-dead?** Every control that *looks* actionable actually does something
-  (or is visibly `disabled`) — no Search button that ignores clicks, no toggle that won't flip.
-- **Accessibility floor met?** Contrast ≥ 4.5:1 (3:1 large/non-text), targets ≥ 44pt/48dp/24px, visible
-  focus on everything focusable, respects reduced-motion.
-- **Anti-slop scan?** No em-dashes in copy, no fake-div product UI, no nested cards, no default-Inter +
-  purple-glow, layout families varied, realistic content (no Lorem/round fakes).
-- **Motion honest?** If you set MOTION_INTENSITY high, the UI actually animates; only `transform`/
-  `opacity` animated; durations within the standards.md budget.
-- **Consistent?** Spacing on the 4px scale, tokens (not magic numbers), one terminology per concept,
-  concentric radii, matches the existing design system.
-- **Mobile-web (if applicable):** `dvh` not `vh`, space reserved for async content (no layout shift),
-  per-field errors, no double-submit. (Details in [references/web.md](references/web.md).)
-- **Flow honest?** If the screen answers more than one question, it should be a wizard. No nested
-  scrolls inside fixed columns when a vertical flow would do.
-- **Native shell complete (if applicable)?** Custom titlebar has minimize + maximize + close, native
-  drag works, cursors and selection match the OS, no browser context menu on chrome.
-- **Marketing/landing page (if applicable)?** The hero answers who / what / for-whom / why above the
-  fold; there's one clear conversion goal with the CTA repeated (not stranded at the bottom); social
-  proof shows concrete results and sits along the journey, not only in the footer; key elements fall
-  on the F/Z scan path.
-- **One language per locale?** No stray Latin labels inside a Russian UI (or vice versa) — except
-  brand names, identifiers, and established acronyms.
-- **Content fits — no clipping?** Long names ellipsis cleanly, scroll containers don't cut off
-  siblings, the submit button doesn't overlap the list it submits about. Cropped UI is a bug, not
-  an "edge case the user will figure out."
-- **Decisions well-framed?** Forms carry smart defaults instead of blank fields, onboarding progress
-  never starts at 0%, real value or a working preview lands before any signup/paywall ask, and
-  pricing tiers or discounts are ordered deliberately (anchor, then contrast) — all grounded in real
-  numbers, never fabricated urgency.
-
----
+- **System:** built only from tokens, components and patterns; anything new was added to the system,
+  not the screen; the audit shows no new literals or one-off dialogs.
+- **Seven things:** one focal point; spacing on the scale and grouped; hierarchy by weight/color;
+  one accent; real content; details match; motion from the origin.
+- **Rendered and looked at** at real sizes, both themes, with extreme content; no clipping.
+- **States:** every interactive element and every data view, including empty/loading/error.
+- **Accessibility floor** met.
+- **Anti-slop scan** clean.
+- **Restructure?** It was mocked and approved first.
 
 ## Review output format
 
-When using this skill to **review** an interface (rather than build), structure findings as:
+When reviewing rather than building:
 
 ```
 ## Interface review
+### Design system (step 0)
+Tokens / components / patterns: <found, gaps>; adherence: <numbers from ds_audit>; maturity <0–4>.
 ### Strengths
-- <what already works, briefly>
-
-### Findings (ordered by impact)
-1. [States] <issue> → <concrete fix> — <why it matters>
-2. [Anti-slop] <issue> → <concrete fix> — <why it matters>
-...
-
+- <what already works>
+### Findings (ordered by impact; a class of problem, not a single place)
+1. [Pattern] <issue> → <fix in the shared layer> — <why it matters to the person using it>
+2. [Hierarchy] …
 ### Quick wins
 - <1–3 small changes with outsized payoff>
 ```
 
-Tag each finding with the relevant area (Direction, Hierarchy, Spacing, Typography, Color/Depth,
-States, Motion, Empty/Loading, Anti-slop, Copy, Psychology, Responsive, Architecture, Hero,
-Social proof, Conversion) so the user can see coverage at a glance. Pay special attention to **missing states** (loading/empty/error and the
-interaction microstates) and **AI-default tells** — those are the most common gaps. Always pair the
-problem with a specific, actionable fix and a one-line reason, and lead with the highest-impact issue.
+Tags: System, Pattern, Direction, Focal point, Spacing, Typography, Color, Content, Details, Motion,
+States, Accessibility, Anti-slop, Copy, Responsive. Lead with the highest-impact class, pair every
+problem with a concrete fix, and prefer fixes that land in the shared layer.

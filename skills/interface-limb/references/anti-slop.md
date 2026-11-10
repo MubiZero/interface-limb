@@ -23,6 +23,25 @@ reads as generic so you can make a better choice.
   names, organic figures (`47.2%`, not `99.99%`), varied dates, unique avatars. Placeholder content
   reads as unfinished.
 
+## Tells from vibe-coded products (seen across many AI-built apps)
+
+- **Emoji as icons.** Swap them for one interface icon set (Phosphor, Tabler, Radix) at one size and
+  stroke. A few products use emoji as their voice on purpose; that is a decision, not a default.
+- **The model picked the colors.** Bright, unrelated hues on buttons, badges and icons. Decide the
+  palette yourself (neutral base, one accent, status colors), and let charts carry color.
+- **The model picked the layout.** Repeated KPI rows (the same four numbers on three pages), a sidebar
+  full of counts nobody needs there, every card the same size and weight.
+- **Gradient circles with initials** as the account avatar. Use a real photo, a quiet monogram in the
+  product's tokens, or an account card. (Initials on a person's row are fine; the gradient is the tell.)
+- **Cards that do nothing** — a decorative "summary" with no action or new information. Delete it.
+- **Two equal buttons side by side** ("Get started" / "Learn more" in the same weight). One leads.
+- **Everything colored and everything moving.** When every element has the accent or an animation,
+  nothing stands out.
+- **Default component-library look** (stock shadcn radius, gray and font) — restyle with the tokens.
+- **Shouting actions:** all-caps buttons, oversized CTAs, badges with an icon plus "20 % off discount".
+- **Placeholder plans and features:** five pricing tiers, the cheaper one listed after the dearer one,
+  vague feature bullets.
+
 ## Layout / composition bans
 
 - **No nested cards.** A card inside a card is almost always wrong — flatten, or use spacing/dividers.
@@ -35,7 +54,9 @@ reads as generic so you can make a better choice.
 - **Cap consecutive image+text "zigzag" splits at 2.** A third alternating split in a row is monotony.
 - **Diversify layout families.** Across ~8 sections use ≥4 different layout shapes; don't repeat one.
 - **No decorative side-stripes** (`border-left` >1px as an accent), **no diagonal stripe backgrounds**
-  (`repeating-linear-gradient`), **no hand-drawn/doodle SVGs.** Ship real assets or nothing.
+  (`repeating-linear-gradient`), **no hand-drawn/doodle SVGs.** Ship real assets or nothing. The one
+  exception is a stripe that *encodes state* as part of the product's status language (an order that is
+  late, a menu category) and is also said in words or a badge — never color alone.
 
 ## Color bans
 

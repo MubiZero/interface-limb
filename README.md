@@ -1,8 +1,10 @@
 # interface-limb
 
-A design-sense layer for [Claude Code](https://claude.com/claude-code) skills. It turns generic,
-"developer-default" UI into interfaces that feel considered, and it backs every decision with a
-cited standard instead of taste alone.
+A system-first design layer for [Claude Code](https://claude.com/claude-code). Before drawing a
+screen it finds (or sets up) the product's design system: tokens, shared components, and one
+shared surface per kind of job. It builds only from that system, renders the result and judges it
+by eye, and measures how well the code keeps to it. Every rule is backed by a cited standard
+instead of taste alone.
 
 Reach for it on any frontend work, building a screen from scratch or elevating one that already
 exists. You do not have to say "design": prompts like *"build the login screen"*, *"make a
@@ -12,6 +14,22 @@ dashboard"*, or *"improve how this looks"* are enough to trigger it.
 
 Two screens, each built by Claude with the skill active. Same models, same frameworks, the
 difference is entirely in the handling of hierarchy, spacing, states, and the quiet details.
+
+## Why system first
+
+AI-built UI looks vibe-coded for the same few reasons everywhere: every component is built from
+scratch, the model picks the colors and the layout, every element gets the same weight, the
+content is placeholder, nobody looks at the rendered result, and the same job (confirm, pick one,
+type a number) is solved by a new dialog each time. Polishing screens one by one does not fix
+that. Version 2 of the skill works on the layer that does:
+
+1. **Read the design system** (tokens, components, patterns) and measure adherence with
+   `scripts/ds_audit.sh` before touching a screen.
+2. **Decide what "premium" means to this buyer,** with real references and one signature decision.
+3. **Build only from the system;** a missing piece is added to the system, a duplicate surface is merged.
+4. **Compose with the seven things every good UI has:** one focal point, spacing that groups,
+   hierarchy by weight and color, one accent, real content, matching details, motion from the origin.
+5. **Render and look,** then measure again.
 
 ## Why a skill, not a prompt
 
@@ -39,9 +57,15 @@ Cited throughout: WCAG, Material Design 3, Apple HIG, NN/g, and the Vercel Web I
   plugin.json
 skills/
   interface-limb/       the skill itself
-    SKILL.md            the principles, the flow (direction -> build -> pre-flight)
+    SKILL.md            the workflow: system -> direction -> build -> compose -> look -> measure
+    scripts/
+      ds_audit.sh          literal values vs tokens, type overrides, weights, surface counts
     references/         progressive-disclosure detail
-      direction.md         pick a deliberate aesthetic instead of the default
+      design-system.md     the three layers, maturity scale, pattern catalog, consolidating surfaces
+      review-by-eye.md     render protocol, the seven questions, checks for lists, filters, pricing
+      libraries.md         foundations, specialists, designed components; Flutter and RN equivalents
+      craft.md             type, color and dark theme, motion, loading/empty, wizards, framing
+      direction.md         pick a deliberate aesthetic; what "premium" means to the buyer
       web.md               React / Tailwind / CSS tokens
       angular-primeng.md   Angular + PrimeNG styled-mode presets, [dt]/[pt], @defer
       mobile.md            Flutter / React Native, haptics, keyboard handling

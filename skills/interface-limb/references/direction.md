@@ -118,7 +118,31 @@ prefer Noto / Be Vietnam Pro families.
 
 ## Multi-page consistency
 
-For multi-screen work, write one **`design-system/MASTER.md`** as the source of truth (tokens,
+If the product has no design system yet (see [design-system.md](design-system.md), maturity 0–1), write one **`design-system/MASTER.md`** as the source of truth (tokens,
 palette, type, key component CSS, the vertical's anti-patterns, the pre-flight checklist), and a
 per-page file that records only *deviations*. Rule: check the page file first; if it specifies
 something it overrides MASTER; otherwise MASTER governs. This keeps many screens coherent.
+
+
+## 6. What "premium" means to this buyer — decide it before prompting
+
+"Make it pop" and "make it premium" leave the model to guess, and the guess is the generic look.
+Buyers read the look as a story about care: a look that came straight from a prompt says nobody here
+cared, and that costs most with the customers who spend most and in high-trust fields (health,
+finance, law), where a careless look makes people wonder what else was skipped.
+
+- **Name the feeling for this buyer** in one line: calm and warm, sharp and fast, dense and exact,
+  playful but serious. That line drives palette, type, density and motion.
+- **Feed real references, not adjectives.** Two to four screens from shipped products that solve the
+  same problem (Mobbin, the category leaders) and one anti-reference. Say what to take from each.
+- **Give the model a designer's rules**, not taste words: this skill, the product's tokens, the pattern
+  catalog.
+- **Add one thing only this product would have**: its own icon set or illustration language, a type
+  choice, a status color system, a signature interaction. "Fine" is what everyone ships now; the
+  signature is the proof of care. Name it before release: "the one decision in this screen only we
+  would have made is…".
+- **The website is the first preview of the product.** Build it from the product's own parts (real
+  screens, real components, real data) so moving from site to app feels like one experience.
+- **Design first, then build.** For anything structural, a mock (in the product's tokens) and a short
+  spec agreed before code; then build to it. Ask the questions you are unsure of before executing
+  rather than guessing the gaps.

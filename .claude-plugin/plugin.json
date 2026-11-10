@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "interface-limb",
   "displayName": "Interface Limb",
-  "version": "1.2.0",
-  "description": "A design-sense layer for Claude Code: turns generic developer-default UI into considered interfaces, grounded in cited standards (WCAG, Material, Apple HIG, NN/g). Covers web, mobile, and marketing/landing pages.",
+  "version": "2.0.0",
+  "description": "A system-first design layer for Claude Code: finds or sets up the product's design system (tokens, components, one surface per job), builds only from it, renders and judges the result by eye, and measures adherence. Grounded in cited standards (WCAG, Material, Apple HIG, NN/g). Covers web, mobile and landing pages.",
   "author": {
     "name": "MubiZero",
     "url": "https://github.com/MubiZero"
