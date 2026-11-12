@@ -94,6 +94,8 @@ A row and its expanded options, a card and its footer, a chip group and its labe
 - **Every sheet has one clear exit and one primary action;** a sheet that is a step in a process says where it returns.
 - **A sheet taller than a short screen scrolls,** and its primary action is sticky at the bottom. Test at 360×640.
 - **Esc closes the topmost modal**; focus returns to the control that opened it.
+- **The corner button says what it does:** «×» when it closes the sheet, «‹» when it goes back one step inside it.
+  A back arrow on a sheet that has nowhere to go back to reads as broken.
 
 ## Scroll and focus are part of the action
 

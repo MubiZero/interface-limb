@@ -80,9 +80,23 @@ next order. Refund is a separate, reasoned action on a closed order.
 
 ## Assigning work to people
 
+Every row carries a **button that says what the tap does** («Assign», «Take cash and assign», «Call to shift») — a
+bare list of names with status tags does not read as something to pick from. Group by when they can go («Free · On
+the road · Off shift»); the line under a name says something useful (deliveries today, «on the road · #733 · takes it
+next»), not the group's name again; jargon tags («hands in first») become a sentence of what will happen («holds
+66.00: you take it before he leaves»). **Always an exit for someone not on the list** («+ Other courier»: a phone
+number and a note; they get the job by SMS) — real operations use a taxi or a friend when staff are busy.
+
 A list of people sorted by who can take it now, each with their state and the reason («free», «on the road», «holds
 cash — hands in first», «off shift — Call»); assigning notifies them; changing frees the previous one; the work's
 next step («Hand over · change 9.00») and the person's state move together.
+
+## Things in transit
+
+An object that is away (an order on the road, a document out for signature, a repair at a vendor) still needs its
+actions where people look for it: complete it («Delivered»), contact who has it, reassign, re-send the message, and
+**bring it back** («Not delivered: return to the till» — it waits again, unassigned). The person who has it shows what
+they carry and its state on their own card; money they hold is taken when they are back, not while they are away.
 
 ## Notifications and inbox
 

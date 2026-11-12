@@ -40,6 +40,12 @@ in error or success states.
 - Empty-state and no-results copy **suggests a next step:** "No results for 'foo'. Try a broader
   search." not a bare "0 results". (See the three jobs of an empty state in [states.md](states.md).)
 
+## Notifications and status lines
+
+Dry and factual, in one shape: «object: what happened» («Order 737: courier Karim, SMS sent»). No narration, no
+metaphors, no exclamation, no em-dash stories. Say what the system did and what is pending («SMS will send when
+online»), not how it feels about it.
+
 ## Consistency and tone
 
 - **Terminology lock:** one word per concept across the whole product. Pick *Delete* (not

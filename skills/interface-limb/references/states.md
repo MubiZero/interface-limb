@@ -55,10 +55,17 @@ Never let an event that waits for a person live only in a badge.
   action on wide screens. One stack.
 - **What:** one short line in the user's words, the object named («Order 737 handed over»), optionally one action
   («Undo», «Open»). Never two actions, never a paragraph.
+- **Tone: dry, «object: what happened».** «Order 737: courier Karim, SMS sent», «Farhod: called to the shift, SMS
+  sent», «No connection. Queued: 2 sales, will send automatically». Not narration («Farhod has been summoned — SMS
+  flew off»), not an em-dash story, not a cheer. Names stay in the nominative so no language needs to decline them.
 - **How long:** plain 3–4 s; with an action 6 s; money or someone else affected 8 s; never auto-dismiss something the
   user must read to act. Hover or touch pauses the timer. WCAG 2.2.1 (timing adjustable) applies to anything
   essential.
 - **Stacking:** up to three; a toast with an action is not destroyed by the next one.
+- **Dismissable:** a swipe sideways or toward the nearest edge removes it (and Esc on desktop); it never blocks what is
+  under it for its whole life.
+- **Out of the way of an open sheet:** on a phone, while a bottom sheet is open, toasts stand at the top so they do not
+  cover the sheet's rows and its primary button.
 - **Accessible:** `role="status"` / live region polite; errors assertive.
 
 ## Data states: the full list

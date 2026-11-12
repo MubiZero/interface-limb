@@ -70,6 +70,13 @@ Verify a sample of its findings before acting: a report is not proof.
 Instrument the jobs (started, finished, abandoned, time), watch support questions and crash reports, and read them as
 design input: a repeated question is a label or a missing state.
 
+## A fresh pass before every showing
+
+The owner's first glance finds what the builder no longer sees. Before showing a round, take a deliberately fresh pass
+yourself on the phone size: read every toast and label aloud as the person at the counter would say it, ask of every
+list «is it obvious what to tap and what it will do», of every object «what can I do with it now, and how do I undo
+it», and look at every screen in both themes. Fix those, then show.
+
 ## Writing findings
 
 - One finding is a **class** of problem («tab rows overflow at 3+ tabs on every width»), with where it shows, why it

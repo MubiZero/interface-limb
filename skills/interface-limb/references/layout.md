@@ -76,6 +76,16 @@ wide screen and hides the list the user is working through.
 - The bottom navigation has 3–5 items, each with a label; the same jobs as on the desktop
   ([discovery.md](discovery.md)).
 
+## Fixed things stay where they are
+
+- **An action that stands at the right stays at the right** when its neighbors are hidden on another screen: keep the
+  row's structure (the tabs stay, or their space does), do not let `display:none` on a sibling slide the buttons to the
+  left.
+- **Two layers in one slot are centered on the same axis:** a brand name and an update message stacked in one grid cell
+  are each `align-self:center`, or the shorter one sits at the top of the taller one's box.
+- **A state pill and its button share a line without wrapping:** the button never wraps (`white-space:nowrap`), the
+  pill ellipsizes, and the pill's text is short enough for the narrowest width («no courier · 6 min»).
+
 ## Checks at every width
 
 After **every** layout change, check the widths you support — not only the one you were fixing: 360, 390–412, 768,
