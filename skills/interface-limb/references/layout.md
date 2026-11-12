@@ -86,6 +86,26 @@ wide screen and hides the list the user is working through.
 - **A state pill and its button share a line without wrapping:** the button never wraps (`white-space:nowrap`), the
   pill ellipsizes, and the pill's text is short enough for the narrowest width («no courier · 6 min»).
 
+## Spatial plans: rooms, floors, seats, maps of things
+
+A plan of real space (a dining room, a warehouse, an office, a seat map) is drawn **to real size** (centimetres, a
+catalogue of object sizes), so a small room and a big one follow the same rules:
+
+- **Small space: whole, centred, capped** — objects must not swell to fill the screen.
+- **Big space: never smaller than a fingertip.** If the whole room would make the smallest object smaller than ~48 px,
+  open at the smallest touchable scale, centred where something waits; pan by drag, zoom by pinch, Ctrl+wheel and
+  visible − / + buttons, with «Whole room» for an overview. In the overview, a tap on an object too small to hit zooms
+  to it first; only the second tap opens it.
+- **Level of detail follows the size on screen,** not the device: big — everything; middle — the number and one short
+  fact; small — the number and a coloured dot (the detail lives in the side list and the accessible name). Badges
+  shorten with the object, so dense rows do not collide.
+- **Group by named areas** (by the window, booths, bar) where the space is large; the phone's list view uses them as
+  headers.
+- **An editor arranges it:** drag with snapping and alignment guides to neighbours' edges and centres, add from the
+  catalogue, rows of N with a chosen gap, rotate, duplicate, size of the room, undo. A collision (chairs that do not
+  fit, an object through a wall) is outlined and named, not forbidden — real rooms are tight, the owner decides. Arrange
+  on a tablet or desktop; a phone says honestly it is too small for it.
+
 ## Checks at every width
 
 After **every** layout change, check the widths you support — not only the one you were fixing: 360, 390–412, 768,
