@@ -128,3 +128,13 @@ segmented control for 2–4 exclusive modes, a switch for on/off that applies at
 - **Make it visible**: a short design-system doc (what each token, component and pattern is for),
   ideally a gallery screen or golden tests that render every component in every state.
 - **Rerun the audit** before shipping a UI change; a rising literal count is a regression.
+- **Guard tests in the build** turn the rules into failures instead of reminders: no spacing literal outside the
+  scale, no color hex outside the theme, no duration or curve outside the motion module, no haptic call outside the
+  feel module, every string key used and present in every language. A rule a test checks stays kept.
+- **Behavior is part of the system:** the gesture grammar, the action classes and their way back, the feedback
+  patterns and the attention ladder are written down next to the tokens ([interaction.md](interaction.md),
+  [states.md](states.md)) and implemented once (a `SwipeAction`, an `Undo` toast, a `Pressable`, a `Feel` haptics map).
+- **Handoff:** each component's spec lists its anatomy, sizes from tokens, all states, behavior (gestures, keyboard),
+  accessibility (role, name), and the content extremes it was drawn with ([components.md](components.md)).
+- **Versioning:** a change to a token or component says what it changes on screen; deprecations keep the old name
+  working for a release and the audit counts remaining uses.

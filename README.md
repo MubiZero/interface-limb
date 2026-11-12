@@ -20,16 +20,21 @@ difference is entirely in the handling of hierarchy, spacing, states, and the qu
 AI-built UI looks vibe-coded for the same few reasons everywhere: every component is built from
 scratch, the model picks the colors and the layout, every element gets the same weight, the
 content is placeholder, nobody looks at the rendered result, and the same job (confirm, pick one,
-type a number) is solved by a new dialog each time. Polishing screens one by one does not fix
-that. Version 2 of the skill works on the layer that does:
+type a number) is solved by a new dialog each time. And it *behaves* vibe-coded: buttons that do nothing or only
+pretend (a toast where a process should be), things that pile up with no way to remove them, an «Undo» on a payment, a
+sheet that will not close, an order that vanishes between two screens. Polishing screens one by one does not fix that.
+Version 3 of the skill works on the layers that do:
 
-1. **Read the design system** (tokens, components, patterns) and measure adherence with
-   `scripts/ds_audit.sh` before touching a screen.
-2. **Decide what "premium" means to this buyer,** with real references and one signature decision.
-3. **Build only from the system;** a missing piece is added to the system, a duplicate surface is merged.
-4. **Compose with the seven things every good UI has:** one focal point, spacing that groups,
-   hierarchy by weight and color, one accent, real content, matching details, motion from the origin.
-5. **Render and look,** then measure again.
+1. **Read the design system** (tokens, components, patterns, and the behavior layer: gestures, the way back, feedback)
+   and measure adherence with `scripts/ds_audit.sh` before touching a screen.
+2. **Learn the people and their jobs:** roles and conditions, jobs as steps, the inventory of what exists, variants.
+3. **Decide what "premium" means to this buyer,** with real references and one signature decision.
+4. **Build only from the system;** a missing piece is added to the system, a duplicate surface is merged.
+5. **Compose with seven things** (focal point, spacing, hierarchy, one accent, real content, matching details, repeated
+   elements measured on the data) **and design the behavior with seven questions** (every control acts, every action
+   has its way back, one gesture grammar, consequences before commit, one pattern per message, scroll and focus follow
+   the action, motion from one module).
+6. **Render every width, press every control, walk every job end to end,** then measure again.
 
 ## Why a skill, not a prompt
 
@@ -57,22 +62,39 @@ Cited throughout: WCAG, Material Design 3, Apple HIG, NN/g, and the Vercel Web I
   plugin.json
 skills/
   interface-limb/       the skill itself
-    SKILL.md            the workflow: system -> direction -> build -> compose -> look -> measure
+    SKILL.md            the workflow: system -> people and jobs -> direction -> build -> look -> behave -> render, press -> bake in
     scripts/
       ds_audit.sh          literal values vs tokens, type overrides, weights, surface counts
+      dead_buttons.js      presses every visible control; ok / SELF (only itself changed) / DEAD
+      shoot_widths.sh      renders desktop, tablet and phone widths (phones through iframes) to PNGs
     references/         progressive-disclosure detail
-      design-system.md     the three layers, maturity scale, pattern catalog, consolidating surfaces
-      review-by-eye.md     render protocol, the seven questions, checks for lists, filters, pricing
-      libraries.md         foundations, specialists, designed components; Flutter and RN equivalents
-      craft.md             type, color and dark theme, motion, loading/empty, wizards, framing
-      direction.md         pick a deliberate aesthetic; what "premium" means to the buyer
-      web.md               React / Tailwind / CSS tokens
-      angular-primeng.md   Angular + PrimeNG styled-mode presets, [dt]/[pt], @defer
-      mobile.md            Flutter / React Native, haptics, keyboard handling
-      marketing-landing.md hero, social proof, conversion CTAs, scan patterns
-      standards.md         the cited cheat-sheet of exact numbers and sources
-      anti-slop.md         the bans, with reasons
+      design-system.md     the layers (tokens, components, patterns, behavior), maturity, guard tests, handoff
+      discovery.md         roles and conditions, jobs as steps, inventory, variants, navigation
+      contexts.md          operations/POS/kiosk, admin, SaaS, consumer, large screens, desktop shells, trust
+      direction.md         a deliberate aesthetic; what "premium" means to the buyer
+      redesign.md          one area at a time; rules while drawing; the remarks register
+      prototype.md         interactive mocks that are alive, and how to verify them
+      layout.md            grids, density, repeated elements measured on data, master-detail, thumb half
+      visual.md            type, color and dark theme, icons, photos
+      components.md        which control for which job; anatomy and states
+      patterns.md          search, tables, drafts, sign-in, checkout, assigning people, wizards, decisions
+      interaction.md       gesture grammar, the way back, compound targets, sheets, scroll and focus, keyboard
+      motion.md            one motion module, named moves, a real spring, reduced motion
+      states.md            feedback patterns, attention ladder, toasts, loading/empty/error/offline
+      input.md             forms, numbers and money, codes and PINs, required choices
       ux-writing.md        copy as UI
+      i18n.md              plurals, names in sentences, expansion, RTL, formats
+      accessibility.md     beyond the floor: semantics, focus, gestures, time, reflow
+      performance.md       response and frame budgets, layout shift
+      critique.md          heuristics, briefing critics, testing with people
+      review-by-eye.md     render protocol, the seven questions, checks
+      anti-slop.md         visual and behavior tells, with reasons
+      libraries.md         foundations, specialists; Flutter and RN equivalents
+      standards.md         the cited numbers: contrast, targets, motion, springs, gestures, WCAG 2.2
+      web.md               React / Tailwind / CSS tokens
+      angular-primeng.md   Angular + PrimeNG presets
+      mobile.md            Flutter / React Native, haptics, keyboard
+      marketing-landing.md hero, proof, conversion
     evals/              test prompts used to develop and verify the skill
 demos/                  the two showcase screens, with/without and a live compare page
 dist/                   interface-limb.skill, the packaged bundle

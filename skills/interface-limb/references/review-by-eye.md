@@ -16,6 +16,12 @@ the pixels. This file is the protocol for looking, and the checks that catch the
   or a web build for Flutter, simulator/emulator captures for native) so the same set can be retaken
   after changes and compared before/after.
 
+- **Every width after every change** (360, 390, 412, 768, 1024, 1366, 1440): a fix at one breaks another. Phone
+  widths in headless Chrome only through iframes (`scripts/shoot_widths.sh`); a hidden browser tab does not run
+  transitions, so its screenshots lie.
+- **Behavior is part of looking:** after the pictures, press every control (`scripts/dead_buttons.js`) and walk each
+  job end to end ([prototype.md](prototype.md), [interaction.md](interaction.md)).
+
 ## 2. The seven questions (ask each, answer yes or fix)
 
 1. **What is the one thing this screen is for — and is it the most obvious thing on it?** Look for:

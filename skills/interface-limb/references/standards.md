@@ -67,6 +67,35 @@ Easing (Material 3 — same source):
 Reduced motion: honor `prefers-reduced-motion: reduce` (MDN — https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).
 Replace large translation/scale/parallax with a near-instant opacity fade, but keep *essential* motion (e.g. a loading spinner).
 
+## Springs, gestures and timing
+
+- **One spring for arrivals** (sheets, panels, toasts, a released item): critically-damped to slightly under-damped,
+  e.g. stiffness ≈ 380, damping ≈ 30, mass 1 (damping ratio ≈ 0.77) → settles in ~400–450 ms with no visible wobble.
+  iOS: `.spring(response: 0.4, dampingFraction: 0.8)`; Android Compose: `spring(dampingRatio = 0.8f, stiffness =
+  Spring.StiffnessMediumLow)`; Flutter: `SpringDescription(mass: 1, stiffness: 380, damping: 30)`; web: sample the
+  spring into CSS `linear()` easing.
+- **Stagger** 25–35 ms between items, capped at ~12 items (longer lists appear together after that).
+- **Long press:** 400–500 ms (Android's default long-press timeout is 400 ms; iOS `UILongPressGestureRecognizer`
+  default 0.5 s).
+- **Touch slop:** ~8–10 px (Android `ViewConfiguration.getScaledTouchSlop`, Flutter `kTouchSlop = 18` logical px for
+  drags) — movement beyond it turns a press into a scroll.
+- **Swipe commit:** ~30–40 % of the row width, or a fling faster than ~0.6 px/ms.
+- **Sheet close:** dragged past ~25 % of its height, or a downward fling.
+- **Ignore taps on a scrim for ~300 ms** after it opens (the opening touch's own release).
+- **Toasts:** 3–4 s plain, 6 s with an action, 8 s when money or other people are affected; pause on hover/touch
+  (WCAG 2.2.1 Timing Adjustable: https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable).
+- **Doherty threshold:** keep system response under ~400 ms to hold attention.
+
+## Gestures, pointers and focus (WCAG 2.2)
+
+- 2.5.1 Pointer Gestures (A): every path/multi-point gesture has a single-pointer alternative.
+- 2.5.2 Pointer Cancellation (A): act on the up event; moving away cancels.
+- 2.5.7 Dragging Movements (AA): every drag has a non-drag alternative.
+- 2.5.8 Target Size Minimum (AA): ≥ 24×24 CSS px (or enough spacing); 44/48 for touch-first products.
+- 2.4.11 Focus Not Obscured (AA): the focused element is not hidden under sticky bars or toasts.
+- 3.3.7 Redundant Entry (A) and 3.3.8 Accessible Authentication (AA).
+- Source: https://www.w3.org/TR/WCAG22/
+
 ## Haptics
 
 iOS (UIFeedbackGenerator — https://developer.apple.com/design/human-interface-guidelines/playing-haptics):

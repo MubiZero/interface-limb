@@ -23,6 +23,19 @@ reads as generic so you can make a better choice.
   names, organic figures (`47.2%`, not `99.99%`), varied dates, unique avatars. Placeholder content
   reads as unfinished.
 
+## Behavior tells (the product does not do what it shows)
+
+- **Dead or fake controls.** A button that does nothing, a search field that is a picture of a field, a language switch
+  that only lights itself up. Every control acts, or says honestly that its screen is not there yet.
+- **A toast instead of a process.** «Courier assigned» after one tap with no choice of courier; «Paid» with no payment
+  screen. A button that stands for a process opens the process.
+- **Undo on something final.** «Payment taken · Undo». Final actions are named and have a separate inverse (refund).
+- **Things that pile up with no way to remove them** (empty tabs, drafts, filters).
+- **A sheet that only closes by its tiny «×»** (no drag, no scrim, no Esc).
+- **Events that wait for a person shown only as a badge.**
+- **Objects that vanish between screens** (paid on one screen, missing from the list on the next).
+- **Mock furniture inside the product** («What to try», explanations of design decisions in the UI copy).
+
 ## Tells from vibe-coded products (seen across many AI-built apps)
 
 - **Emoji as icons.** Swap them for one interface icon set (Phosphor, Tabler, Radix) at one size and

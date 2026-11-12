@@ -6,20 +6,52 @@
       "name": "web-build-settings-card",
       "prompt": "This NotificationSettings React component works but looks really plain and developer-default. Make it feel premium and polished. Rewrite the component (Tailwind is available) and briefly explain the key changes you made and why.",
       "expected_output": "A rewritten React/Tailwind component with real interaction states (hover/active/focus/disabled/loading), 4px-based spacing, refined typography, soft elevation, semantic toggle styling, and a short rationale tying changes to premium-UI principles.",
-      "files": ["files/plain-settings.tsx"]
+      "files": [
+        "files/plain-settings.tsx"
+      ]
     },
     {
       "id": 1,
       "name": "mobile-build-login-screen",
       "prompt": "Here's a basic Flutter login screen. It functions but feels generic. Make it feel like a high-end, premium app. Give me the improved Dart and call out what you changed.",
       "expected_output": "Improved Flutter screen addressing keyboard handling (scroll/avoid inset), press feedback (scale), haptics on submit, loading-in-button, refined spacing/typography, focus/error states, plus a rationale.",
-      "files": ["files/login_screen.dart"]
+      "files": [
+        "files/login_screen.dart"
+      ]
     },
     {
       "id": 2,
       "name": "review-dashboard-premium",
       "prompt": "I'm building a dark-mode analytics dashboard in React. Cards, a sidebar, charts, a data table that shows a spinner while loading and 'No results' when empty. It all works but it feels cheap and flat compared to apps like Linear or Vercel. Review my approach and tell me specifically what to change to make it feel premium. I don't have the code handy, just go off the description.",
       "expected_output": "A structured premium-UI review: dark-theme depth via lighter surfaces (not shadows), shimmer skeletons instead of spinners, a teaching empty state instead of 'No results', hierarchy/spacing/typography guidance, interaction states, and subtle motion — each finding paired with a concrete fix and reason.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "mock-tabs-and-way-back",
+      "prompt": "This is an HTML prototype of a point-of-sale order screen with order tabs: 'Order 1', 'Phone call' and a '+ New' button. The owner pressed '+ New' several times and now asks how to get rid of the empty tabs. Fix the prototype's tab behavior.",
+      "expected_output": "Classifies tab creation as a 'created' action: '+ New' does not stack empty tabs (goes to the existing empty one), an empty tab disappears when left, the active tab gets a close control with a 44-48 px hit area, closing a tab with content offers Undo, one tab always stays, '+ New' stays outside the scrolling tab row, the active tab scrolls into view; verifies by pressing every control, not by screenshots.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "payment-short-cash",
+      "prompt": "Our Flutter till's cash payment screen has quick-sum buttons (207, 250, 500) and if the guest gives less than the total, the cashier has to accept the cash and then start a second payment for the rest. The owner finds it confusing. Redesign the payment step.",
+      "expected_output": "One payment screen with cash, card, transfer and split; the amount typed on a bottom keypad; change or shortfall shown live in the danger color; the primary button states the result and stays readable when disabled; a short cash amount offers 'Rest by card' that turns the same screen into a split with the cash kept; unlabelled quick sums removed; tabular figures; result screen with the change first that pauses on touch; payment is final (no Undo toast), refund is a separate action.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "review-interactive-mock",
+      "prompt": "Review this interactive HTML mock of a delivery dispatch screen before I show it to the owner. Be thorough.",
+      "expected_output": "Walks the main jobs end to end on phone and desktop sizes, presses every control and reports dead/fake controls and toast-instead-of-process actions, checks that objects persist across screens, growing lists at 1/3/5/15 items, short-screen sheets, way back per action class, variants (offline, roles), measures targets and contrast, separates live checks from code reading, lists what was not checked, and orders findings as classes with shared-layer fixes.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "name": "sheet-and-gestures",
+      "prompt": "Add swipe and long-press interactions to our React Native order list: swipe to remove, long press for options, and make the order sheet feel native.",
+      "expected_output": "Uses one gesture grammar (swipe left removes with Undo, swipe right does the row's main next step, long press opens choices and never acts), each gesture with a visible alternative (WCAG 2.5.1/2.5.7), reveal-under-row feedback with a commit threshold and spring-back, sheet draggable from anywhere when its list is at the top, scrim ignores the opening tap, motion from one module with a spring, haptics mapped by meaning, reduced motion honored.",
       "files": []
     }
   ]

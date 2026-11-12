@@ -38,7 +38,7 @@ in error or success states.
 - Loading copy is **specific and time-boxed:** "Analyzing your data… this usually takes 30–60 seconds",
   not "Loading…". For long AI responses, **stream tokens** instead of showing a spinner.
 - Empty-state and no-results copy **suggests a next step:** "No results for 'foo'. Try a broader
-  search." not a bare "0 results". (See the three jobs of an empty state in [craft.md](craft.md).)
+  search." not a bare "0 results". (See the three jobs of an empty state in [states.md](states.md).)
 
 ## Consistency and tone
 
