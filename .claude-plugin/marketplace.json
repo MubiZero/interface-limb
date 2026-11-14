@@ -13,7 +13,7 @@
       "name": "interface-limb",
       "source": ".",
       "description": "A design-sense layer that turns generic developer-default UI into considered interfaces, grounded in cited standards. Covers web, mobile, and marketing/landing pages.",
-      "version": "3.0.1",
+      "version": "3.0.2",
       "license": "MIT",
       "homepage": "https://github.com/MubiZero/interface-limb",
       "category": "design",

@@ -21,6 +21,9 @@ the pixels. This file is the protocol for looking, and the checks that catch the
   transitions, so its screenshots lie.
 - **Behavior is part of looking:** after the pictures, press every control (`scripts/dead_buttons.js`) and walk each
   job end to end ([prototype.md](prototype.md), [interaction.md](interaction.md)).
+- **Gate, don't just look once.** A render pass that stops at "I opened the images" misses what only shows up
+  comparing them. Hold the screen until every width is clean, then close it — don't carry a known gap into the
+  next change hoping it self-resolves.
 
 ## 2. The seven questions (ask each, answer yes or fix)
 
@@ -46,6 +49,17 @@ the pixels. This file is the protocol for looking, and the checks that catch the
    finger and settle, notifications slide in from an edge and stack, close faster than open, ease-out.
 
 ## 3. Checks that catch the most
+
+### Across widths, not just within one
+- **Section height drifts between breakpoints.** The same block is three lines at 1440 and eleven at 390 because
+  a card grid became a single column — check that nothing above the fold at one width got pushed below it at
+  another, not just that each width looks fine alone.
+- **A slot is empty only at one width.** An image, icon or badge that a responsive rule hides or collapses at a
+  specific breakpoint and nothing fills the gap it leaves.
+- **Column alignment holds across sizes.** Numbers and labels that line up at desktop but drift once the layout
+  reflows to two columns then one.
+- **Dev or placeholder content survives at only one width** — a debug badge, a Lorem block, a "TODO" string
+  that a conditional render only shows below some breakpoint and nobody saw because testing stayed at desktop.
 
 ### Content you don't control
 - **Icons or text over a photo** must survive a bright photo, a dark one and a busy one: give them a
