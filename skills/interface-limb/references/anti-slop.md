@@ -99,6 +99,17 @@ reads as generic so you can make a better choice.
 - Use `text-wrap: balance` on h1–h3, `text-wrap: pretty` on long prose, `font-variant-numeric:
   tabular-nums` on numbers in tables/dashboards.
 
+## Surfaces you didn't draw yourself
+
+The parts of the page you never styled still carry the design — text selection, the caret, custom
+scrollbars, focus rings, underline offset, and tabular numerals all ship with browser defaults that
+belong to no design system. Theme them from the tokens. This is the cheapest signal that a page was
+built rather than assembled, and the one most often skipped.
+
+- **No geometric masks standing in for organic contours.** A circle, polygon, or radial-gradient
+  cutout approximating a photo's subject edge is the cheap version of a cutout and reads worse than
+  omitting it. Derive an alpha matte from the real image, or use a real cut-out asset.
+
 ## Motion bans
 
 - **No bounce/elastic easing.** Use ease-out (quart/quint/expo) — see standards.md durations/curves.

@@ -40,6 +40,29 @@ Nielsen's ten, phrased as checks:
 Plus the **cognitive walkthrough** for each job: at each step, will the user know what to do, see the control, connect
 it to their goal, and understand the feedback?
 
+**Scoring over time (optional):** when the same surface gets re-reviewed across sessions, score each applicable
+heuristic 0–4 (0 absent, 4 excellent; most real interfaces land 2–3) instead of pass/fail, and track the total out of
+4× the number scored (some heuristics — flexibility, help in context — can be n/a on a landing page; renormalize the
+denominator when they are). A single review does not need the number; a trend across rounds does, and it is honest
+only when "4" means genuinely excellent, not "good enough for now."
+
+## Quick self-check before real people are available
+
+Five archetypes to walk the job through yourself when no round of real users is scheduled yet — a cheap filter before
+a showing, not a replacement for "Testing with people" below. Pick 2–3 that fit the surface, name the exact element
+that fails them, not a generic worry:
+
+- **The impatient expert** — skips onboarding, hunts for a shortcut or bulk action immediately. Fails on forced
+  tutorials, no keyboard path, one-at-a-time flows where batch is natural.
+- **The first-timer** — reads every label, hesitates before anything unfamiliar. Fails on icon-only nav, jargon, no
+  confirmation that an action worked.
+- **The person on a screen reader or keyboard only** — tabs linearly, can't see hover-only state. Fails on invisible
+  focus, meaning carried by color alone, a control a screen reader cannot name.
+- **The one who pokes at the edges** — empty list, 1 item, 1000 items, a very long name, a refresh mid-flow. Fails on
+  silent breakage, lost state, an empty state with no next step.
+- **The distracted phone user** — one thumb, interrupted mid-task, patchy signal. Fails on primary actions out of
+  thumb reach, lost progress on interruption, a tap target under 44 px.
+
 ## Briefing a critic (a person or an agent)
 
 Give them the work, not only the images:
