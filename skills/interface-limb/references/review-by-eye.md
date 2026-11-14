@@ -21,9 +21,10 @@ the pixels. This file is the protocol for looking, and the checks that catch the
   transitions, so its screenshots lie.
 - **Behavior is part of looking:** after the pictures, press every control (`scripts/dead_buttons.js`) and walk each
   job end to end ([prototype.md](prototype.md), [interaction.md](interaction.md)).
-- **Gate, don't just look once.** A render pass that stops at "I opened the images" misses what only shows up
-  comparing them. Hold the screen until every width is clean, then close it — don't carry a known gap into the
-  next change hoping it self-resolves.
+- **Gate, but bounded.** A render pass that stops at "I opened the images" misses what only shows up comparing
+  them — don't carry a known gap into the next change hoping it self-resolves. But this is not an open loop:
+  one batched fix round for everything the render turned up, one re-render to confirm, then stop. Open-ended
+  re-polishing past that burns the person's money doing worse what a real finish review does better.
 
 ## 2. The seven questions (ask each, answer yes or fix)
 
