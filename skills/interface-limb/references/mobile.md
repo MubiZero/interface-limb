@@ -99,6 +99,28 @@ colors on Material buttons so states are declarative.
 ```
 Keep the loading indicator inside the button so layout doesn't jump.
 
+## Platform chrome and native idiom (iOS HIG)
+
+A Flutter or RN app on iPhone is judged against native apps. What changes code (Apple HIG; Flutter `SafeArea`,
+`MediaQuery.padding`):
+
+- **Safe areas:** nothing interactive under the status bar, Dynamic Island, or home indicator (bottom inset ≈ 34 pt).
+  Only backgrounds and decoration bleed to the edges. Test an iPhone SE (375 pt wide) and a Dynamic Island model.
+- **Chrome sizes to budget for:** nav bar 44 pt (≈ 96 pt with a large title), tab bar 49 pt plus the home inset, status
+  bar 44–54 pt on Dynamic Island devices. Content margins 16–20 pt; rows and targets ≥ 44 pt.
+- **System gestures stay the system's:** never override the edge swipe-back, swipe-down to dismiss a modal, or
+  pull-to-refresh where the platform uses them. A custom horizontal swipe on a row must not start at the left edge.
+- **Navigation:** 2–5 tabs, no hamburger drawer as the main nav on iOS; the back button carries the previous screen's
+  title; destructive actions in red, and irreversible ones confirmed ([interaction.md](interaction.md)).
+- **Type and color follow the system:** text styles that scale with Dynamic Type (test the largest step), body 17 pt,
+  nothing under 11 pt, left-aligned never justified, lines 35–50 characters on a phone; semantic colors that flip
+  with Dark Mode instead of hex literals, red/green/blue keep their system meaning (destructive/success/tint).
+- **Icons:** SF Symbols (or one outline set matched to them) for in-app icons; the app icon has no text and ships
+  light, dark and tinted variants on iOS 18+.
+- **Android counterpart:** 48 dp targets, system back (predictive back) respected, edge-to-edge with insets handled,
+  Material motion tokens ([standards.md](standards.md)).
+- **Real device before done:** safe areas, haptics, keyboard and gestures only show on hardware; say so when not checked.
+
 ## Haptics — physical trust
 
 A light vibration on meaningful events (toggle, successful submit, selection change) makes

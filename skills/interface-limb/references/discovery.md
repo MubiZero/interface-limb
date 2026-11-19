@@ -92,6 +92,14 @@ forms, a job done in under a minute, fewer "where is it" questions). Then build 
 signal, and look at it before extending. If the signal cannot be named, the request is not understood yet: ask for the
 job behind it (step 1), not for the mock.
 
+- **Rank the assumptions** behind the request (about the business, about the person) by risk × uncertainty; test the
+  riskiest and least known first, with the cheapest experiment that answers it (a sketch, a clickable mock, a fake
+  door) before code.
+- **Agree what "worked" and "did not work" mean before looking at results;** do not pick the metric afterwards.
+- A fake door or smoke test says it is a test and lets the person leave. A disproved hypothesis is a result: record it
+  next to the remarks register ([redesign.md](redesign.md)) so it is not proposed again.
+- Judge by outcomes (a job done, an error gone), not by output (screens shipped).
+
 ## Output of discovery
 
 Four written lists before the first pixel: roles and conditions, jobs as steps (with the screen each step is on), the
