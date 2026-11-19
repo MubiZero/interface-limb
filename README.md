@@ -33,7 +33,7 @@ What to read from it:
 
 - A plain Sonnet already makes a clean, competent page, with its own green brand, icons and a working cancel dialog.
   The skill's first version of this run was *not* better on the first screen (generic blue, a black square for a
-  logo, a dead corner in the plan card); that comparison is what produced the direction card and the pro bar in  version 3.2.
+  logo, a dead corner in the plan card); that comparison is what produced the direction card and the pro bar in version 3.2.
 - With the skill the screen has a point of view: a hero plan card with the decisive number, a real card face, an icon
   language, usage bars with a warning mark and a "you pass the limit around Nov 26" pace marker, and a dark theme.
 - The behavior is where it pulls away: a cancel dialog that shows a timeline of what changes and when, an *Undo* in the
