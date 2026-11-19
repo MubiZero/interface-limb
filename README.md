@@ -1,6 +1,6 @@
 # interface-limb
 
-[![version](https://img.shields.io/badge/version-3.1.0-0f766e)](.claude-plugin/plugin.json)
+[![version](https://img.shields.io/badge/version-3.2.0-0f766e)](.claude-plugin/plugin.json)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-d97757)](https://claude.com/claude-code)
 [![check](https://github.com/MubiZero/interface-limb/actions/workflows/check.yml/badge.svg)](https://github.com/MubiZero/interface-limb/actions/workflows/check.yml)
@@ -18,16 +18,34 @@ React Native.
 
 ## What it produces
 
-Two screens built by Claude with the skill active, from one plain prompt each. Same model, same framework; the
-difference is hierarchy, spacing, states and the quiet details.
+One task, given word for word to two Sonnet agents: *a billing settings page for "Marlowe Studio": current plan (Pro,
+$29 per user per month, 8 seats), usage, payment method, invoices, a way to cancel; one self-contained HTML file.*
+The first agent had no skills and no guidance. The second read this skill and followed it. Screenshots taken the same
+way for both, pressing the same controls.
 
-| Pricing card | Empty state |
-|---|---|
-| ![Pro pricing card built with the skill](assets/A_pricing.png) | ![Empty projects screen built with the skill](assets/B_empty.png) |
+| | Without the skill | With the skill |
+|---|---|---|
+| **First screen** | ![](assets/billing-without-top.png) | ![](assets/billing-with-top.png) |
+| **After pressing "Cancel subscription"** | ![](assets/billing-without-cancel.png) | ![](assets/billing-with-cancel.png) |
+| **Phone, 390 px** | ![](assets/billing-without-phone.png) | ![](assets/billing-with-phone.png) |
 
-Each demo has a plain-answer version next to it. Open the side-by-side pages locally and press the controls, the
-states are real: [`demos/compare_A_pricing.html`](demos/compare_A_pricing.html),
-[`demos/compare_B_empty.html`](demos/compare_B_empty.html).
+What to read from it:
+
+- A plain Sonnet already makes a clean, competent page, with its own green brand, icons and a working cancel dialog.
+  The skill's first version of this run was *not* better on the first screen (generic blue, a black square for a
+  logo, a dead corner in the plan card); that comparison is what produced the direction card and the pro bar in  version 3.2.
+- With the skill the screen has a point of view: a hero plan card with the decisive number, a real card face, an icon
+  language, usage bars with a warning mark and a "you pass the limit around Nov 26" pace marker, and a dark theme.
+- The behavior is where it pulls away: a cancel dialog that shows a timeline of what changes and when, an *Undo* in the
+  toast, a banner and a *Resume* button in place, the plan card turning into a "no more charges" state, a menu button on
+  the phone where the plain version has no way to reach the other pages, and no invented policy ("data deleted after
+  30 days") that the product never promised.
+- The cost is real: this run took about 8.5 minutes and 34 tool calls, against about 2.7 minutes and 6 for the plain
+  answer. It is one run per side, not a benchmark; rerun it yourself.
+
+Open the two files side by side: [`demos/C_billing/without.html`](demos/C_billing/without.html) and
+[`demos/C_billing/with.html`](demos/C_billing/with.html) (desktop width), or the older pairs
+[`compare_A_pricing.html`](demos/compare_A_pricing.html) and [`compare_B_empty.html`](demos/compare_B_empty.html).
 
 ## Install
 
@@ -131,8 +149,8 @@ skills/interface-limb/
   references/          27 files, read on demand
   scripts/             the five tools above
   evals/               prompts, expected outputs, fixtures
-demos/                 two with/without screens and the page builder
-assets/                screenshots used above
+demos/                 three with/without pages and the page builder
+assets/                the comparison screenshots above
 ```
 
 ## Built on

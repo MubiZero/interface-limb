@@ -8,6 +8,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 const demos = [
   ["A_pricing", "Demo A: a SaaS “Pro” pricing card"],
   ["B_empty", "Demo B: an empty “Projects” list screen"],
+  ["C_billing", "Demo C: a billing settings page (open the two files in C_billing/ for the full desktop view)"],
 ];
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");

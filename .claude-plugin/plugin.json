@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "interface-limb",
   "displayName": "Interface Limb",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "A system-first design layer for Claude Code, behavior included: finds or sets up the product's design system (tokens, components, one surface per job, one grammar of gestures and feedback), learns who does which job, builds only from the system, renders every width, presses every control, and judges both look and behavior. Grounded in cited standards (WCAG 2.2, Material, Apple HIG, NN/g, Core Web Vitals). Covers web, mobile, desktop shells, POS and landing pages.",
   "author": {
     "name": "MubiZero",
