@@ -97,7 +97,6 @@ skills/
       marketing-landing.md hero, proof, conversion
     evals/              test prompts used to develop and verify the skill
 demos/                  the two showcase screens, with/without and a live compare page
-dist/                   interface-limb.skill, the packaged bundle
 assets/                 the screenshots above
 ```
 
