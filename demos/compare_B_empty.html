@@ -1,21 +1,18 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Демо B — пустой экран списка «Projects»</title>
+<title>Demo B: an empty “Projects” list screen</title>
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-          background: #f4f5f7; color: #16181d; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f4f5f7; color: #16181d; }
   header { padding: 20px 24px 8px; }
   h1 { font-size: 18px; margin: 0 0 4px; letter-spacing: -0.01em; }
   p.sub { margin: 0; color: #6b7280; font-size: 13px; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px 24px 28px; }
   @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
-  .panel { background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden;
-            box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.05); }
-  .panel .label { display: flex; align-items: center; gap: 8px; padding: 10px 14px; font-size: 13px;
-                   font-weight: 600; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .panel { background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.05); }
+  .panel .label { display: flex; align-items: center; gap: 8px; padding: 10px 14px; font-size: 13px; font-weight: 600; border-bottom: 1px solid rgba(0,0,0,0.06); }
   .dot { width: 8px; height: 8px; border-radius: 50%; }
   .without .dot { background: #9ca3af; }
   .with .dot { background: #10b981; }
@@ -24,12 +21,12 @@
 </style></head>
 <body>
   <header>
-    <h1>Демо B — пустой экран списка «Projects»</h1>
-    <p class="sub">Слева — обычный ответ Claude. Справа — Claude со скиллом <b>interface-limb</b>. Обе версии сгенерированы независимыми агентами по одинаковому запросу. Наведи/нажми/потабай по элементам — состояния настоящие.</p>
+    <h1>Demo B: an empty “Projects” list screen</h1>
+    <p class="sub">Left: a plain Claude answer. Right: Claude with the <b>interface-limb</b> skill. Both were generated from the same prompt. Hover, press and tab through the elements; the states are real.</p>
   </header>
   <div class="grid">
     <div class="panel without">
-      <div class="label"><span class="dot"></span>Без скилла<span class="tag">baseline</span></div>
+      <div class="label"><span class="dot"></span>Without the skill<span class="tag">baseline</span></div>
       <iframe srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -491,7 +488,7 @@
 " title="without skill"></iframe>
     </div>
     <div class="panel with">
-      <div class="label"><span class="dot"></span>Со скиллом<span class="tag">interface-limb</span></div>
+      <div class="label"><span class="dot"></span>With the skill<span class="tag">interface-limb</span></div>
       <iframe srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -552,7 +549,7 @@
   body {
     margin: 0;
     min-height: 100dvh;
-    font-family: &#x27;DM Sans&#x27;, system-ui, sans-serif;
+    font-family: 'DM Sans', system-ui, sans-serif;
     color: var(--text);
     background-color: var(--bg);
     /* considered background: faint dot grid, not a flat fill or purple glow */
@@ -586,7 +583,7 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
-    font-family: &#x27;Space Grotesk&#x27;, system-ui, sans-serif;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
     font-weight: 600;
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
@@ -755,7 +752,7 @@
 
   .empty h1 {
     margin: 0 0 var(--space-3);
-    font-family: &#x27;Space Grotesk&#x27;, system-ui, sans-serif;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
     font-weight: 600;
     font-size: 1.5rem;       /* ~24px, modular 1.25 from 16 base */
     line-height: 1.2;
@@ -914,20 +911,20 @@
     // Search: open on click/focus, give focus to the field, collapse on
     // Escape or on blur when left empty. The field is the source of truth.
     (function () {
-      var box = document.getElementById(&#x27;search&#x27;);
-      var input = box.querySelector(&#x27;input&#x27;);
+      var box = document.getElementById('search');
+      var input = box.querySelector('input');
       function open() {
-        box.classList.add(&#x27;is-open&#x27;);
+        box.classList.add('is-open');
         input.focus();
       }
       function maybeClose() {
-        if (input.value.trim() === &#x27;&#x27;) box.classList.remove(&#x27;is-open&#x27;);
+        if (input.value.trim() === '') box.classList.remove('is-open');
       }
-      box.addEventListener(&#x27;click&#x27;, open);
-      input.addEventListener(&#x27;keydown&#x27;, function (e) {
-        if (e.key === &#x27;Escape&#x27;) { input.value = &#x27;&#x27;; box.classList.remove(&#x27;is-open&#x27;); input.blur(); }
+      box.addEventListener('click', open);
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { input.value = ''; box.classList.remove('is-open'); input.blur(); }
       });
-      input.addEventListener(&#x27;blur&#x27;, maybeClose);
+      input.addEventListener('blur', maybeClose);
     })();
   &lt;/script&gt;
 &lt;/body&gt;

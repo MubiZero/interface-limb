@@ -53,6 +53,27 @@
       "prompt": "Add swipe and long-press interactions to our React Native order list: swipe to remove, long press for options, and make the order sheet feel native.",
       "expected_output": "Uses one gesture grammar (swipe left removes with Undo, swipe right does the row's main next step, long press opens choices and never acts), each gesture with a visible alternative (WCAG 2.5.1/2.5.7), reveal-under-row feedback with a commit threshold and spring-back, sheet draggable from anywhere when its list is at the top, scrim ignores the opening tap, motion from one module with a spring, haptics mapped by meaning, reduced motion honored.",
       "files": []
+    },
+    {
+      "id": 7,
+      "name": "ready-to-ship-verdict",
+      "prompt": "We plan to ship our new onboarding flow (5 screens: sign up, verify phone, pick a plan, add a card, welcome) on Friday. The team says everything is fine. Review it and tell me honestly whether it is ready. I can describe each screen if you ask.",
+      "expected_output": "Runs the release gate review: asks to use the build cold on a real device or says it cannot judge from a description, names the one thing the flow is for, counts steps to first value and challenges each, checks the back of the fence (error, offline, empty, cancel, emails and push texts, the 404), proposes a cut list before a fix list, rates each finding 0-4 with the highest severity first, and ends with a blunt Ship or Not done verdict. States what was not checked.",
+      "files": []
+    },
+    {
+      "id": 8,
+      "name": "lost-users-orientation",
+      "prompt": "Support keeps getting the same question: \"where do I find my invoices?\" Our web app has a left sidebar with 14 items, a settings page and a profile menu. Figure out what is wrong and what to change.",
+      "expected_output": "Applies the orientation test (where am I, what are my options, how do I get back) and the information-architecture rules: starts from the job (find an invoice) and who does it, not from the menu; severity-rates the finding; fixes the class in the shared layer (grouping by job, search as navigation, a visible path from the places people look first) rather than adding another menu item; proposes a measurable signal for success (fewer where-is-it tickets).",
+      "files": []
+    },
+    {
+      "id": 9,
+      "name": "flutter-ios-native-idiom",
+      "prompt": "Our Flutter app looks fine on Android but testers on iPhone say it feels off: the bottom button is half under the home indicator, the back swipe sometimes does nothing, and big text sizes break the layout. Fix the screen scaffold and tell me what to check.",
+      "expected_output": "Uses SafeArea and MediaQuery padding so nothing interactive sits under the home indicator or Dynamic Island, stops custom gestures from claiming the left-edge swipe-back, scales text with the system (tests the largest step, no fixed heights on text containers), keeps 44 pt targets, mentions dark mode semantic colors, and says that safe areas, gestures and text scaling must be checked on a real iPhone.",
+      "files": []
     }
   ]
 }

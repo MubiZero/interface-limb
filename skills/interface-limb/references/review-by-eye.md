@@ -26,7 +26,11 @@ the pixels. This file is the protocol for looking, and the checks that catch the
   one batched fix round for everything the render turned up, one re-render to confirm, then stop. Open-ended
   re-polishing past that burns the person's money doing worse what a real finish review does better.
 
-## 2. The seven questions (ask each, answer yes or fix)
+## 2. The seven things, as questions (ask each, answer yes or fix)
+
+The same seven as SKILL.md step 4, phrased as checks. The seven behavior questions of step 5 have their detail in
+[interaction.md](interaction.md), [states.md](states.md), [input.md](input.md) and [motion.md](motion.md); press them
+in step 6, not by eye.
 
 1. **What is the one thing this screen is for — and is it the most obvious thing on it?** Look for:
    a badge, a gradient headline, two equal buttons, a stat bar and three cards all competing. Fix by

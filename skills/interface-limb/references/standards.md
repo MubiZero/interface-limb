@@ -172,7 +172,7 @@ visual change.
 
 ## What makes Linear / Vercel / Stripe feel premium (recurring techniques)
 
-- **Six microstates** on every interactive element — default, hover, focus, active, disabled, loading — audited before ship.
+- **Seven states** on every interactive element — default, hover, pressed, focus-visible, disabled, loading, error — audited before ship.
 - **Keyboard-first**, visible `:focus-visible` rings, full WAI-ARIA operability.
 - **Optimistic UI**: update immediately, reconcile on response, roll back / offer Undo on failure.
 - **Restrained palette**: monochrome base + one accent that "does all the work"; color = meaning, not decoration.

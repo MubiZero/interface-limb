@@ -182,7 +182,7 @@ buttons, search. Encode them as component variants, never per screen.
 | [accessibility.md](references/accessibility.md) | Beyond the floor: semantics, focus, gestures, time, reflow, cognitive load |
 | [performance.md](references/performance.md) | Response and frame budgets, layout shift, slow devices |
 | [critique.md](references/critique.md) | Reviews, heuristics, briefing critics and agents, testing with people |
-| [review-by-eye.md](references/review-by-eye.md) | Steps 4 and 6: render protocol, the seven questions in detail, checks |
+| [review-by-eye.md](references/review-by-eye.md) | Steps 4 and 6: render protocol, the seven things in detail, grayscale and blur tests, checks |
 | [anti-slop.md](references/anti-slop.md) | Step 6, every time: visual and behavior tells |
 | [libraries.md](references/libraries.md) | Toasts, drawers, command menus, animated numbers; picking a library |
 | [standards.md](references/standards.md) | Any number: contrast, targets, durations, springs, gestures, WCAG 2.2 |
@@ -195,7 +195,7 @@ buttons, search. Encode them as component variants, never per screen.
 |---|---|
 | People can't find things, abandon a form, get lost | [critique.md](references/critique.md) (severity, orientation test), [discovery.md](references/discovery.md) (jobs, navigation), [input.md](references/input.md) |
 | The wrong control gets pressed, nobody knows why | [critique.md](references/critique.md) "Why a control fails", [components.md](references/components.md), [interaction.md](references/interaction.md) |
-| Works, but plain; flat hierarchy; four button styles | [review-by-eye.md](references/review-by-eye.md) (seven questions, grayscale and blur tests), [visual.md](references/visual.md), [design-system.md](references/design-system.md) |
+| Works, but plain; flat hierarchy; four button styles | [review-by-eye.md](references/review-by-eye.md) (the seven things, grayscale and blur tests), [visual.md](references/visual.md), [design-system.md](references/design-system.md) |
 | Sharp headlines, nobody reads the text | [visual.md](references/visual.md) (measure, line height), [i18n.md](references/i18n.md) (glyphs) |
 | Works, but no action is acknowledged | [states.md](references/states.md), [motion.md](references/motion.md) "Small moments" |
 | Competent but forgettable | [direction.md](references/direction.md); for a launch page [marketing-landing.md](references/marketing-landing.md) §7 |

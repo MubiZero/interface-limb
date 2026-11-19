@@ -62,7 +62,7 @@ utilities like `bg-surface`, `shadow-md`, `p-4` stay token-driven.
 body { font-family: 'Inter', system-ui, sans-serif; }
 .h1 { font-size: 2rem; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
 .h2 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.015em; font-weight: 600; }
-.body { font-size: 1rem; line-height: 1.55; letter-spacing: 0; }
+.body { font-size: 1rem; line-height: 1.5; letter-spacing: 0; }
 .caption { font-size: 0.8125rem; line-height: 1.4; color: var(--text-muted); }
 ```
 - Tighten tracking only on larger text; leave body at 0.
@@ -104,18 +104,18 @@ Express every state. Example button with Tailwind:
 - `focus-visible:ring-*` = real focus state; never bare `outline:none`.
 - Loading lives *inside* the button so layout doesn't jump.
 
-## Press feedback / motion
+## Motion on the web
 
-- Keep transitions 150–300ms, ease-out. Tailwind `duration-150 ease-out`.
-- Prefer `transform` and `opacity` (GPU-friendly) over animating layout properties.
-- Respect reduced motion:
+Durations, curves, the spring and the named moves live in one module ([motion.md](motion.md)); a screen never writes
+its own. Web specifics: tokens as CSS variables (`--dur-fast`, `--ease-out`) consumed by Tailwind `duration-*` /
+`ease-*` extensions, and a global reduced-motion fallback that shortens rather than kills feedback:
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
+  *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 ```
-(or use Tailwind's `motion-reduce:` variants for targeted control.)
+(or Tailwind's `motion-reduce:` variants for targeted control; keep spinners and progress running.)
 
 ## Shimmer skeletons (not spinners)
 
@@ -129,10 +129,9 @@ Express every state. Example button with Tailwind:
 }
 @keyframes shimmer { 0% { background-position: 100% 0 } 100% { background-position: 0 0 } }
 ```
-Build skeletons that mirror the real layout (same boxes/sizes) so the swap-in is seamless.
-Anti-flicker: only show the skeleton after a **~150–300ms delay** (instant loads shouldn't flash
-one) and keep it visible a **~300–500ms minimum** once shown. Wrap the shimmer animation in
-`@media (prefers-reduced-motion: no-preference)` so reduced-motion users get a static skeleton.
+When to show one, the mirrored layout and the anti-flicker timings: [states.md](states.md), numbers in
+[standards.md](standards.md). Wrap the shimmer animation in `@media (prefers-reduced-motion: no-preference)` so
+reduced-motion users get a static skeleton.
 
 ## Text over images
 
@@ -148,8 +147,8 @@ toward the image, keeping the photo crisp where there's no text.
 
 ## Empty states
 
-A component, not an afterthought — illustration/icon + heading + one line of guidance +
-a primary action:
+A component, not an afterthought; what it says and when ([states.md](states.md), [ux-writing.md](ux-writing.md)).
+The shape:
 
 ```jsx
 <EmptyState
@@ -170,6 +169,11 @@ a primary action:
   the request is in flight (and show the spinner in the button).
 - Associate every control with a `<label>`; Enter submits a single-input form, ⌘/Ctrl+Enter
   from a textarea.
+- Set `type` + `inputmode` (`email`/`tel`/`numeric`/`url`) so mobile shows the right keyboard, and
+  correct `autocomplete` tokens (don't blanket `autocomplete="off"`).
+- Per-field errors with `role="alert"` / `aria-live`, not one summary at the top.
+- Password show/hide toggle; disable the submit button with a spinner in flight to prevent double submission.
+  More on forms, money and codes: [input.md](input.md).
 
 ## Responsive & mobile-web
 
@@ -189,18 +193,8 @@ a primary action:
 - **Semantic z-index scale** (e.g. dropdown 10 / sticky 20 / modal 30 / toast 40 / tooltip 50) — never
   `z-[9999]`. Remember transform/opacity/filter on a parent creates a new stacking context.
 
-## Forms (mobile-web specifics)
-
-- Set `type` + `inputmode` (`email`/`tel`/`numeric`/`url`) so mobile shows the right keyboard, and
-  correct `autocomplete` tokens (don't blanket `autocomplete="off"`).
-- Per-field errors with `role="alert"` / `aria-live`, not one summary at the top.
-- Provide a password show/hide toggle; **disable + spinner the submit button on submit** to prevent
-  double submission.
-
 ## Systematize
 
-- States → component variants (e.g. with `cva`/variant props), so every button/input
-  inherits hover/active/focus/disabled/loading automatically.
-- **Concentric radii**: a child's `border-radius` ≤ its parent's, so nested corners stay parallel.
-- Tokens → Tailwind theme + CSS variables; one source of truth for color/space/radius/shadow.
+The layers and the guard tests are in [design-system.md](design-system.md). Web mapping: states as component variants
+(`cva` / variant props), tokens as Tailwind theme + CSS variables, child `border-radius` ≤ parent's.
 - Empty/loading/error → first-class props/states of data components.

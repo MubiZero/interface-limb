@@ -161,31 +161,25 @@ should adapt smoothly.
 
 ## Motion
 
-- Pick duration by scale: micro-feedback **100–150ms**, standard transitions **200–300ms**,
-  large/screen **400–500ms**; never exceed ~500ms for routine motion.
-- **Ease-out for entering, ease-in for exiting**; make exits ~30% shorter. Flutter
-  `Curves.easeOutCubic` (enter) / `Curves.easeInCubic` (exit), or the M3
-  `Easing.emphasizedDecelerate` / `emphasizedAccelerate`. RN: Reanimated easing on
-  `transform`/`opacity` only.
-- Screen transitions: gentle fade / shared-axis / natural scale, not flashy slides.
-- Feedback must *begin* within ~100ms to feel instantaneous.
-- Honor reduced motion: Flutter `MediaQuery.of(context).disableAnimations`;
-  RN `AccessibilityInfo.isReduceMotionEnabled()` — replace big motion with a quick fade, keep
-  essential motion.
+The durations, curves, spring and named moves are defined once in the motion module ([motion.md](motion.md)); screens
+call it. Mobile mapping:
 
-## Shimmer skeletons (not spinners)
+- **Flutter:** a `MotionTokens` `ThemeExtension` holds the durations and curves (`Curves.easeOutCubic` enter,
+  `Curves.easeInCubic` exit, or M3 `Easing.emphasizedDecelerate` / `emphasizedAccelerate`) and one
+  `SpringDescription`; screens never write `Duration(...)` or `Curves.*`.
+- **React Native:** one `motion.ts` over Reanimated (`withSpring` with the shared config, easing on `transform` and
+  `opacity` only).
+- **Reduced motion:** Flutter `MediaQuery.of(context).disableAnimations`; RN `AccessibilityInfo.isReduceMotionEnabled()`.
+  Big moves become a quick fade, essential indicators stay.
+- Screen transitions: fade, shared axis or a natural scale, not flashy slides.
 
-While loading, show a shimmering skeleton mirroring the real layout.
-- **Flutter:** `shimmer` package, or an `AnimatedBuilder` sweeping a `LinearGradient` across
-  placeholder boxes.
-- **RN:** `react-content-loader` / `moti` skeletons, or an animated gradient overlay.
-Mirror the actual content boxes so the swap-in is seamless.
+## Shimmer skeletons and empty states
 
-## Empty states
+Behavior, timings and copy: [states.md](states.md). Implementation:
 
-Not "No data." Explain the area and give a first action:
-- icon/illustration + short title + one line of guidance + a primary button.
-- Build it as a reusable widget/component you drop into any empty list.
+- **Flutter:** `shimmer` package, or an `AnimatedBuilder` sweeping a `LinearGradient` across placeholder boxes that
+  mirror the real layout. An `EmptyState` widget (icon, title, one line, one action) dropped into any empty list.
+- **RN:** `react-content-loader` / `moti` skeletons, or an animated gradient overlay; the same reusable empty component.
 
 ## Permission priming — never ask cold
 
@@ -203,8 +197,6 @@ This raises grant rates and respects the user.
 
 ## Systematize
 
-- States (default/pressed/disabled/loading) → component variants / a shared `AppButton`,
-  `AppTextField`, etc., so every screen inherits them.
-- Tokens → `ThemeData` / tokens module; one source of truth for color/space/radius.
-- Empty/loading/error → first-class states of your data widgets, with shimmer + empty
-  components built in.
+The layers and guard tests: [design-system.md](design-system.md). Mobile mapping: states as variants of a shared
+`AppButton` / `AppTextField`, tokens in `ThemeData` or a tokens module, empty / loading / error as built-in states of
+the data widgets.
