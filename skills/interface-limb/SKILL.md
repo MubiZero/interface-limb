@@ -69,9 +69,12 @@ dashboard and a consumer app value different things.
 
 ### 2. Decide direction, and what "premium" means to this buyer
 
-Decide before building ([direction.md](references/direction.md)): who judges it and what reads as care to them; 2–4
-real references from shipped products plus one anti-reference; one decision only this product would make; the dials
-(variance, motion, density).
+Decide before building ([direction.md](references/direction.md)), and **write the direction card in your answer
+before the first line of code**: design read, scene, 2–3 references plus one anti-reference, the brand idea, hue with
+its reason and tinted neutrals, type, and the one signature decision only this product would make. For a pattern that
+exists in shipped products (billing, settings, checkout, empty state), look at 2–3 real examples first instead of
+drawing from memory. If the accent is the framework's default blue and the neutrals are cold gray, that is the
+absence of a decision: change it.
 
 For a restructure — new navigation, merged screens, a new main screen, a new flow — **mock it in the product's own
 tokens and get approval one area at a time** ([redesign.md](references/redesign.md)); when behavior matters, make the
@@ -133,6 +136,8 @@ Never call UI done from the code.
 - **Walk each job end to end** through all its screens on each device, and switch each variant.
 - **Check** the seven things, the seven questions, the anti-slop list ([anti-slop.md](references/anti-slop.md)),
   clipping and overlap, every data state ([states.md](references/states.md)), the accessibility floor.
+- **Score the pro bar** ([critique.md](references/critique.md)): identity, hierarchy, craft, behavior, content,
+  everywhere, each 0–4, all at least 3 before "done"; one bounded fix round for any 2.
 - Hierarchy: grayscale and blur tests ([review-by-eye.md](references/review-by-eye.md)); orientation: where am I, what
   can I do, how do I go back ([critique.md](references/critique.md)).
 - For a review or a critic, brief with the jobs and ask to measure ([critique.md](references/critique.md)). For
@@ -232,6 +237,7 @@ Tokens / components / patterns / behavior: <found, gaps>; adherence: <ds_audit n
 ### Strengths
 - <what already works>
 Seven things <n/7> · seven questions <n/7> (a count of what holds, with the failing ones named in Findings).
+Pro bar (0–4): identity <n> · hierarchy <n> · craft <n> · behavior <n> · content <n> · everywhere <n>.
 ### Findings (ordered by severity, then impact; a class of problem, not a single place)
 1. [Behavior · sev 3] <issue> → <fix in the shared layer> — <why it matters to the person> — <checked live | read in code>
 2. [Hierarchy · sev 2] …

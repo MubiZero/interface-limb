@@ -41,6 +41,10 @@ One quality sans-serif, used with care, looks more professional than three fonts
   picks a hex in a widget.
 - **Mostly neutral, one accent.** ~60 % neutral background, ~30 % secondary surfaces, ~10 % accent. The accent marks
   the primary action, the selection, focus, links. When everything is colored, nothing is.
+- **Restrained is the floor, not the goal.** "Mostly neutral" stops a screen from shouting; it does not give it a
+  face. With no brand supplied, commit to a hue chosen for the product ([direction.md](direction.md), the card) and
+  tint every neutral toward it (OKLCH chroma 0.005-0.015 on the same hue). Cold pure gray plus default blue reads as
+  unfinished next to a warm paper background with a deep brand green.
 - **Status colors carry meaning everywhere the same way** (red = needs you now, amber = in progress or a warning,
   green = done, blue/brand = in motion or informational) and never alone: a word, an icon or a position goes with them
   (8 % of men do not see red/green apart).
@@ -63,6 +67,28 @@ One quality sans-serif, used with care, looks more professional than three fonts
 - **State changes the icon, not a caption:** a link icon that becomes a crossed cloud, a bell with a count. Swap with
   the motion module, never a hard cut.
 - **Emoji are not icons** (anti-slop): they render differently per platform and read as unfinished.
+
+## What reads as designed, not defaulted
+
+The details a professional adds without being asked. Check each against the screen before calling it done:
+
+- **A brand mark with a shape,** not a letter in a black square: a simple geometric glyph in the accent, drawn inline
+  as SVG; the same mark as favicon and in empty states.
+- **Icons where the eye scans:** every navigation item and every row that has a type (invoice, member, project)
+  carries one icon from one set, one stroke, labelled. A nav of bare words next to a nav of icons-with-words reads
+  as the cheaper one.
+- **Cards are not all equal.** One hero surface (larger, with the decisive number set big in tabular figures), the
+  rest quieter. Two columns of same-weight cards is a grid of boxes, not a page.
+- **No dead regions.** A column or corner more than ~30 % empty inside a card means the layout is wrong: rebalance,
+  move the key figure there, or shrink the card to its content.
+- **Data gets its own treatment:** a usage bar shows its limit and a warning threshold, changes hue near it, and says
+  in words what happens past it; a chart or sparkline beats three numbers when a trend matters.
+- **Objects look like what they are:** a payment card shows brand and last digits on a small card face; a person has
+  an avatar; a file has a type icon. A gray pill that says "VISA" is a placeholder.
+- **Two depth levels at most:** page, raised surface. Borders hairline, shadows faint; depth is not a decoration
+  budget.
+- **The product speaks in one voice:** concrete numbers and dates in the copy ("On pace to pass the limit around
+  Nov 25"), never generic reassurance.
 
 ## Photos, illustration, avatars
 

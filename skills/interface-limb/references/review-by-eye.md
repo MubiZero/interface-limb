@@ -62,6 +62,9 @@ in step 6, not by eye.
   the eye reads first; it must be the screen's one thing. If three blobs compete, demote two.
 
 ### Across widths, not just within one
+- **The shell survives the phone width.** At 390 px the sidebar usually vanishes: check there is a visible way to
+  reach every destination (a menu button, a bottom bar), the title and the primary action are still on the first
+  screen, and nothing the desktop header carried (workspace, account, help) became unreachable.
 - **Section height drifts between breakpoints.** The same block is three lines at 1440 and eleven at 390 because
   a card grid became a single column — check that nothing above the fold at one width got pushed below it at
   another, not just that each width looks fine alone.

@@ -5,6 +5,37 @@ the same look. This file covers: (1) reading the brief and the existing codebase
 intensity dials, (3) choosing a real aesthetic direction, (4) tailoring to the product's industry,
 and (5) choosing a style and fonts with their tradeoffs visible.
 
+## 0. The direction card: write it before the first line of code
+
+A direction that stays in your head is skipped, and the result is a competent screen with no character: cold gray,
+default blue, system font, every card the same weight. Write this card in your answer (new screen, mock, redesign;
+a one-property fix skips it) and fill every line with a decision, not an adjective:
+
+```
+Design read:   <page kind> for <audience>, <vibe>, <density>
+Scene:         <who, where, what light and mood>: forces light or dark, calm or energetic
+References:    <2-3 shipped products that solve this exact pattern> + anti-reference <what it must not become>
+Brand idea:    <one sentence: what this product feels like and why>, e.g. "calm studio tool: forest green, warm paper"
+Color:         <hue and why>, commitment level (restrained / committed / full / drenched), neutrals tinted toward the hue
+Type:          <families or the system stack on purpose>, scale ratio, where the display weight goes
+Signature:     <the one decision only this product would make>
+```
+
+**Reference first, for any known pattern** (billing, settings, empty state, checkout, table, onboarding): before
+drawing, look at 2-3 real shipped examples (a design-gallery connector such as Mobbin if one is available, otherwise
+web search and the products' own docs and screenshots). Write down three things they do that matter to the job, and
+which you borrow. Designing a known pattern from memory gives the average of all of them.
+
+**Default detector.** If the accent is the framework's default blue or indigo, the neutrals are pure cool gray, the
+brand mark is a black square with a letter, and a stranger could guess the look from the category, it is the reflexive
+default: change the hue with a reason, tint the neutrals toward it, give the mark a shape. A blue accent is fine when
+the card says why (fintech trust, a link-heavy tool); it is not fine as the absence of a decision.
+
+**Identity test, at the end.** Cover the logo and the product name. Could this be any SaaS? It passes when at least
+three choices are visibly this product's: the brand mark, an accent with a logic, one icon language used on every
+nav item and row, a signature detail, copy in the product's voice, a data treatment of its own (usage bars with
+thresholds, not a bare progress element).
+
 ## 1. Read the brief, and read the codebase first
 
 **Infer the brief** from six signals: page kind, vibe words, reference signals (URLs/screenshots/

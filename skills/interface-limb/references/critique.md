@@ -101,6 +101,24 @@ For "is this ready to ship?" on a working build (staging, a clickable prototype;
 
 This is the opposite of a design-by-committee round: one reviewer, a blunt verdict, a short list.
 
+## The pro bar: six dimensions, scored before "done"
+
+A screen can pass every rule and still read as average. Score the rendered result (not the code) 0-4 on each, as a
+senior product designer reviewing a colleague's work would. Be strict: **2 is "competent", 3 is "I would ship it",
+4 is "I would show it in a portfolio".**
+
+| Dimension | 4 looks like |
+|---|---|
+| **Identity** | passes the identity test in [direction.md](direction.md): visibly this product's, a brand mark with a shape, an accent with a reason |
+| **Hierarchy** | passes grayscale and blur tests; one hero surface; no dead regions; the key figure is the biggest thing |
+| **Craft** | the details in [visual.md](visual.md) "What reads as designed": icons, objects look like themselves, data has its own treatment, alignment on one grid |
+| **Behavior** | the seven questions hold; every state change shows where the person looks first (a banner, the disabled control says why) |
+| **Content** | real, specific, honest; no invented policy that scares or flatters (a "data deleted in 30 days" the product never promised) |
+| **Everywhere** | every width, both themes, the shell works at phone width (navigation still reachable), 200 % text |
+
+Done means every dimension is **at least 3**. A 2 gets one batched fix round and one re-render, then stop (the bounded
+loop in [review-by-eye.md](review-by-eye.md)); say what is still a 2. Put the six numbers in the review output.
+
 ## Quick self-check before real people are available
 
 Five archetypes to walk the job through yourself when no round of real users is scheduled yet — a cheap filter before
