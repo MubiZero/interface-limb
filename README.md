@@ -124,10 +124,7 @@ git clone https://github.com/MubiZero/interface-limb.git
 cp -r interface-limb/skills/interface-limb ~/.claude/skills/interface-limb
 ```
 
-**From the bundle:** download [`dist/interface-limb.skill`](dist/interface-limb.skill) (a zip with an
-`interface-limb/` folder inside) and unzip it into `~/.claude/skills/`.
-
-Any of the three, then restart Claude Code. The skill announces itself when it triggers on UI work.
+Either way, then restart Claude Code. The skill announces itself when it triggers on UI work.
 
 ## How it was built
 
