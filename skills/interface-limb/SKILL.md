@@ -133,7 +133,10 @@ Never call UI done from the code.
 - **Walk each job end to end** through all its screens on each device, and switch each variant.
 - **Check** the seven things, the seven questions, the anti-slop list ([anti-slop.md](references/anti-slop.md)),
   clipping and overlap, every data state ([states.md](references/states.md)), the accessibility floor.
-- For a review or a critic, brief with the jobs and ask to measure ([critique.md](references/critique.md)).
+- Hierarchy: grayscale and blur tests ([review-by-eye.md](references/review-by-eye.md)); orientation: where am I, what
+  can I do, how do I go back ([critique.md](references/critique.md)).
+- For a review or a critic, brief with the jobs and ask to measure ([critique.md](references/critique.md)). For
+  "is it ready to ship", run the release gate review there: one verdict, a cut list, a ranked fix list.
 
 Fix what you find and look again. A fix at one width breaks another: re-render all of them.
 
@@ -186,6 +189,22 @@ buttons, search. Encode them as component variants, never per screen.
 | [web.md](references/web.md) · [angular-primeng.md](references/angular-primeng.md) · [mobile.md](references/mobile.md) | Stack specifics |
 | [marketing-landing.md](references/marketing-landing.md) | A page that must convince a stranger |
 
+## By symptom — where to start
+
+| The complaint | Start with |
+|---|---|
+| People can't find things, abandon a form, get lost | [critique.md](references/critique.md) (severity, orientation test), [discovery.md](references/discovery.md) (jobs, navigation), [input.md](references/input.md) |
+| The wrong control gets pressed, nobody knows why | [critique.md](references/critique.md) "Why a control fails", [components.md](references/components.md), [interaction.md](references/interaction.md) |
+| Works, but plain; flat hierarchy; four button styles | [review-by-eye.md](references/review-by-eye.md) (seven questions, grayscale and blur tests), [visual.md](references/visual.md), [design-system.md](references/design-system.md) |
+| Sharp headlines, nobody reads the text | [visual.md](references/visual.md) (measure, line height), [i18n.md](references/i18n.md) (glyphs) |
+| Works, but no action is acknowledged | [states.md](references/states.md), [motion.md](references/motion.md) "Small moments" |
+| Competent but forgettable | [direction.md](references/direction.md); for a launch page [marketing-landing.md](references/marketing-landing.md) §7 |
+| About to build the wrong thing | [discovery.md](references/discovery.md) "A request is a hypothesis", [redesign.md](references/redesign.md) |
+| A week before launch and "everything is fine" | [critique.md](references/critique.md) "Release gate review", then the pre-flight below |
+
+Order when several apply: comprehension first (jobs, orientation, feedback), then craft (hierarchy, system), then
+drama (a signature moment). Drama over a broken hierarchy only makes the break louder.
+
 ## Pre-flight: before you call it done
 
 - **System:** built only from tokens, components, patterns and the behavior layer; anything new went into the system;
@@ -212,13 +231,19 @@ Tokens / components / patterns / behavior: <found, gaps>; adherence: <ds_audit n
 <role · job · devices · where it broke>
 ### Strengths
 - <what already works>
-### Findings (ordered by impact; a class of problem, not a single place)
-1. [Behavior] <issue> → <fix in the shared layer> — <why it matters to the person> — <checked live | read in code>
-2. [Hierarchy] …
+Seven things <n/7> · seven questions <n/7> (a count of what holds, with the failing ones named in Findings).
+### Findings (ordered by severity, then impact; a class of problem, not a single place)
+1. [Behavior · sev 3] <issue> → <fix in the shared layer> — <why it matters to the person> — <checked live | read in code>
+2. [Hierarchy · sev 2] …
+Severity 0–4: cosmetic, minor, major, catastrophic ([critique.md](references/critique.md)).
+### Cut list
+- <what to remove or merge: a control, a screen, a second dialog for one job>
 ### Not checked
 - <real device touch, sound, screen reader, …>
 ### Quick wins
 - <1–3 small changes with outsized payoff>
+### Verdict (only when asked "ready to ship?")
+Ship | Not done — <the one thing this screen is for, kept or not>.
 ```
 
 Tags: System, Pattern, Behavior, Way back, Feedback, Input, Motion, States, Layout, Direction, Focal point, Spacing,

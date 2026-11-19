@@ -51,6 +51,12 @@ the pixels. This file is the protocol for looking, and the checks that catch the
 
 ## 3. Checks that catch the most
 
+### Hierarchy in two tests
+- **Grayscale test:** take the screenshot to grayscale (or design in gray first, color last). If the order of
+  importance is no longer readable, hierarchy was carried by hue, not by weight, size and contrast. Fix that first.
+- **Blur test:** blur the screenshot until the text is unreadable (about 8 px, or squint). What still stands out is what
+  the eye reads first; it must be the screen's one thing. If three blobs compete, demote two.
+
 ### Across widths, not just within one
 - **Section height drifts between breakpoints.** The same block is three lines at 1440 and eleven at 390 because
   a card grid became a single column — check that nothing above the fold at one width got pushed below it at

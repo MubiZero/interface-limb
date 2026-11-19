@@ -129,3 +129,25 @@ On top of the global [anti-slop.md](anti-slop.md) bans:
   [anti-slop.md](anti-slop.md)).
 - **Burying the CTA** — making a convinced visitor hunt for how to act.
 - **Crowding** — packing the page edge-to-edge to "fit more," which signals low-rent.
+
+## 7. Memorable, once the basics hold (a launch page, never a dense tool)
+
+Only after the hero, hierarchy, proof and CTA pass (§1–§6). Drama laid over broken hierarchy is just louder. Skip this
+section for dashboards, admin panels and any internal tool.
+
+- **The signature moment is a composition decision first** (one oversized type line, one asymmetric block, one real
+  product shot that breaks the grid), an animation second. Pick one; the rest stays calm.
+- **Type at scale:** display to body ratio of about 10:1 or more (a 120–180 px headline over 14–16 px text), tracking
+  −0.02 to −0.05 em on large sizes, tight line height (~1.0–1.1). Check the display face covers the page language
+  (Cyrillic, Tajik letters ҳ қ ӯ ғ ҷ ӣ: [i18n.md](i18n.md)).
+- **Easing:** the browser defaults (`ease`, `ease-in`, `linear`) are the tell. Use named product curves from the
+  motion module, for example `cubic-bezier(0.16, 1, 0.3, 1)` (expressive out), `cubic-bezier(0.25, 1, 0.5, 1)`
+  (calm out), `cubic-bezier(0.87, 0, 0.13, 1)` (in-out for a big move).
+- **Load choreography, in one breath:** structure 0–200 ms, headline 200–600 ms, subhead 400–800 ms, nav 600–900 ms,
+  supporting content 800–1200 ms. Anything past ~1.2 s needs a reason; nothing blocks reading or the CTA.
+- **Budget first:** decide the performance budget before the effects (LCP under 2.5 s, 60 fps, only `transform` and
+  `opacity`, no parallax on text). Heavy costs, in order: WebGL, full-bleed video, scroll-hijack libraries, display
+  fonts. Pure black and the purple-to-blue gradient are tells ([anti-slop.md](anti-slop.md)).
+- **Reduced motion keeps the layout and drops the choreography:** the page must still look designed with every
+  animation off ([motion.md](motion.md)).
+- **Cursor tricks and scroll effects are opt-in,** never on a page whose job is to convert a hurried visitor.

@@ -84,6 +84,14 @@ ask, and if a new mechanism is agreed, write it as a product requirement next to
   in fixed places ([interaction.md](interaction.md) on status icons).
 - **Search is navigation** in any area with more than a screenful of things: by name, by number, by phone.
 
+## A request is a hypothesis (Lean UX)
+
+"Add a filter", "make it a wizard", "put it on the home screen" is a solution. Before drawing it, rewrite it once:
+*we believe [change] will [outcome] for [role]; we will know it worked when [observable signal]* (fewer abandoned
+forms, a job done in under a minute, fewer "where is it" questions). Then build the smallest version that can show the
+signal, and look at it before extending. If the signal cannot be named, the request is not understood yet: ask for the
+job behind it (step 1), not for the mock.
+
 ## Output of discovery
 
 Four written lists before the first pixel: roles and conditions, jobs as steps (with the screen each step is on), the

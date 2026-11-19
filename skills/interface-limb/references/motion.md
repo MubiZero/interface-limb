@@ -10,6 +10,7 @@ its own. Motion is a system layer like color: tokens, a few named moves, one mod
 - Durations, curves, the spring
 - Where motion comes from
 - Gestures and motion
+- Small moments: spec them
 - What not to animate
 - Reduced motion
 - Verifying motion
@@ -71,6 +72,25 @@ Fewer moves used consistently beat many moves used once.
 - A dragged thing follows the finger 1:1 (no easing while held), then a spring takes over with the release velocity.
 - Past the commit threshold it continues off; before it, it springs back — that spring-back is the "no" a user feels.
 - While dragging, show the consequence (the red «Remove» under a row, the scrim lightening as a sheet goes down).
+
+## Small moments: spec them (Saffer)
+
+A toggle, a save button, a pull to refresh, a like: each is a small designed moment. Write four lines per moment
+before building it, and fill the rows the screen would otherwise skip:
+
+- **Trigger:** what starts it (a tap, a gesture, a system event) and how the person finds it. A gesture-only trigger
+  needs a visible alternative ([interaction.md](interaction.md)).
+- **Rules:** what happens, in what order, and which states are impossible (a disabled "Pay" until the form is valid
+  beats a message after). Cover zero, the maximum, a double tap, an interrupted run.
+- **Feedback:** what the person sees, and when: within 100 ms, scaled to the weight of the event (a checkbox needs a
+  tick, a payment needs a result screen). Visual first; sound and haptic only as support. No fake progress.
+- **Loops and modes:** what changes on the 2nd and 50th use. A hint shows on the first sessions and then goes away; a
+  counter resets; a repeated failure escalates in wording, not in volume. Avoid invisible modes; if one exists, show it.
+
+**One signature moment per product, at most** (the sent animation, the confirmed payment), and quiet competence
+everywhere else. Removal test: if people would not miss it, it is decoration; cut it. A bounce on every button and a
+spinner as the memorable part are the anti-patterns. Design the unglamorous states too: disabled, loading, partial,
+failed.
 
 ## What not to animate
 
