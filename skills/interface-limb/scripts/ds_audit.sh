@@ -52,7 +52,7 @@ row() { printf '  %-34s %7s %7s %6s\n' "$1" "$2" "$3" "$4"; }
 for dir in "$@"; do
   [ -d "$dir" ] || { echo "skip $dir (not a directory)"; continue; }
   ndart=$(find "$dir" -name '*.dart' ! -path '*/l10n/*' ! -name '*.g.dart' 2>/dev/null | wc -l | tr -d ' ')
-  nweb=$(find "$dir" \( -name '*.tsx' -o -name '*.ts' -o -name '*.jsx' -o -name '*.js' -o -name '*.vue' -o -name '*.svelte' -o -name '*.css' -o -name '*.scss' -o -name '*.html' \) ! -path '*/node_modules/*' ! -path '*/build/*' ! -path '*/dist/*' 2>/dev/null | wc -l | tr -d ' ')
+  nweb=$(find "$dir" \( -name '*.tsx' -o -name '*.ts' -o -name '*.jsx' -o -name '*.js' -o -name '*.vue' -o -name '*.svelte' -o -name '*.css' -o -name '*.scss' -o -name '*.html' -o -name '*.tmpl' -o -name '*.gohtml' \) ! -path '*/node_modules/*' ! -path '*/build/*' ! -path '*/dist/*' 2>/dev/null | wc -l | tr -d ' ')
   echo
   echo "== $dir  (dart files: $ndart, web files: $nweb)"
   row "" "literal" "token" "lit%"
@@ -78,8 +78,8 @@ for dir in "$@"; do
   fi
 
   if [ "$nweb" -gt 0 ]; then
-    W1='*.tsx'; W2='*.ts'; W3='*.jsx'; W4='*.js'; W5='*.vue'; W6='*.svelte'; W7='*.css'; W8='*.scss'; W9='*.html'
-    all=("$W1" "$W2" "$W3" "$W4" "$W5" "$W6" "$W7" "$W8" "$W9")
+    W1='*.tsx'; W2='*.ts'; W3='*.jsx'; W4='*.js'; W5='*.vue'; W6='*.svelte'; W7='*.css'; W8='*.scss'; W9='*.html'; W10='*.tmpl'; W11='*.gohtml'
+    all=("$W1" "$W2" "$W3" "$W4" "$W5" "$W6" "$W7" "$W8" "$W9" "$W10" "$W11")
     l=$(count_files '#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b|rgba?\(' "$dir" "${all[@]}"); t=$(count_files 'var\(--' "$dir" "${all[@]}"); row "colors (hex/rgb vs var(--))" "$l" "$t" "$(pct "$l" "$t")"
     l=$(count_files '\[[0-9.]+(px|rem)\]' "$dir" "${all[@]}"); t=$(count_files '\b(p|px|py|pt|pb|pl|pr|m|mx|my|mt|mb|gap|space-[xy])-[0-9]+\b' "$dir" "${all[@]}"); row "tailwind arbitrary vs scale (space)" "$l" "$t" "$(pct "$l" "$t")"
     l=$(count_files '(padding|margin|gap)(-[a-z]+)?: *[0-9.]+px' "$dir" "${all[@]}"); row "css px spacing (padding/margin/gap)" "$l" "" ""

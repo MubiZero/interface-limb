@@ -11,7 +11,7 @@ description: >-
   someone asks "do we have a design system", "why does this look AI-made / vibe-coded", "make it premium", "add
   animations / swipes", "unify these screens", "too many dialogs", "review this mock", or "audit the UI", even if they
   never say the word design. Grounded in cited standards (WCAG 2.2, Material and Apple motion and targets, NN/g, Core
-  Web Vitals). Covers React/Tailwind/CSS, Angular/PrimeNG, Flutter and React Native.
+  Web Vitals). Covers Go html/template (`kit/webkit`), Flutter, React/Tailwind/CSS, Angular/PrimeNG and React Native.
 ---
 
 # Interface Limb
@@ -191,7 +191,7 @@ buttons, search. Encode them as component variants, never per screen.
 | [anti-slop.md](references/anti-slop.md) | Step 6, every time: visual and behavior tells |
 | [libraries.md](references/libraries.md) | Toasts, drawers, command menus, animated numbers; picking a library |
 | [standards.md](references/standards.md) | Any number: contrast, targets, durations, springs, gestures, WCAG 2.2 |
-| [web.md](references/web.md) · [angular-primeng.md](references/angular-primeng.md) · [mobile.md](references/mobile.md) | Stack specifics |
+| [go-webkit.md](references/go-webkit.md) · [web.md](references/web.md) · [angular-primeng.md](references/angular-primeng.md) · [mobile.md](references/mobile.md) | Stack specifics (Go html/template + webkit, React/Tailwind, Angular, Flutter/RN) |
 | [marketing-landing.md](references/marketing-landing.md) | A page that must convince a stranger |
 
 ## By symptom — where to start

@@ -1,0 +1,17 @@
+{
+  "name": "interface-limb",
+  "displayName": "Interface Limb",
+  "version": "3.3.0",
+  "description": "System-first UI/UX design layer (Claude Code & Antigravity): tokens, components, one surface per job, gesture & feedback grammar, rendered width checks and live control audits.",
+  "author": {
+    "name": "MubiZero",
+    "url": "https://github.com/MubiZero"
+  },
+  "homepage": "https://github.com/MubiZero/interface-limb",
+  "repository": "https://github.com/MubiZero/interface-limb",
+  "suggestedPrompts": [
+    "Audit our design system adherence with ds_audit.sh and summarize the 4 layers",
+    "Review this screen across desktop, tablet, and phone widths against the 7 look & 7 behavior rules",
+    "Write a direction card and interactive mock before we restructure this flow"
+  ]
+}

@@ -1,6 +1,6 @@
 # interface-limb
 
-[![version](https://img.shields.io/badge/version-3.2.0-0f766e)](.claude-plugin/plugin.json)
+[![version](https://img.shields.io/badge/version-3.3.0-0f766e)](.claude-plugin/plugin.json)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-d97757)](https://claude.com/claude-code)
 [![check](https://github.com/MubiZero/interface-limb/actions/workflows/check.yml/badge.svg)](https://github.com/MubiZero/interface-limb/actions/workflows/check.yml)

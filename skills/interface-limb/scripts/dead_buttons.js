@@ -5,15 +5,11 @@
 //   await deadButtons()                                   // all visible buttons, from the page as it is
 //   await deadButtons({ home: () => resetToStart(), from: 0, count: 20, wait: 200 })
 //
-// For each button: ok   — something outside the pressed button changed (a sheet opened, a list changed, a toast);
+// For each button: ok   — something outside the pressed button changed (a sheet opened, a list changed, a toast, or a real href navigation was intercepted);
 //                  SELF — only the button itself changed (its class, its aria): fine for a toggle, a fake otherwise;
 //                  DEAD — nothing changed.
-// "Visible" means a finger could press it: inside the viewport, not inside a hidden, display:none, transparent
-// (opacity < 0.05) or pointer-events:none ancestor (closed panels are often only faded out).
-//
-// home: a function that brings the page back to the same start before each press (close sheets, go to the screen).
-// Without it, presses run in sequence from wherever the previous one left the page.
-// Run it in a visible tab: in a hidden or background tab transitions and requestAnimationFrame do not run.
+// Disambiguates duplicate labels (e.g., multiple "Delete" rows) by occurrence rank (#1, #2, ...) and intercepts
+// real <a href> navigations so a link click does not unload the page mid-audit.
 window.deadButtons = async function ({ home = null, selector = 'button, [role="button"], a[href]', skip = '', from = 0, count = 40, wait = 200 } = {}) {
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const visible = (e) => {
@@ -27,24 +23,45 @@ window.deadButtons = async function ({ home = null, selector = 'button, [role="b
     }
     return true;
   };
-  const label = (e) => (e.getAttribute('aria-label') || e.innerText || e.id || e.className || e.tagName)
+  const baseLabel = (e) => (e.getAttribute('aria-label') || e.innerText || e.id || e.className || e.tagName)
     .replace(/\s+/g, ' ').replace(/\d+/g, '#').trim().slice(0, 48);
-  const list = () => [...document.querySelectorAll(selector)]
-    .filter((b) => !b.disabled && b.getAttribute('aria-disabled') !== 'true' && visible(b) && !(skip && b.closest(skip)));
+  const listWithKeys = () => {
+    const counts = new Map();
+    return [...document.querySelectorAll(selector)]
+      .filter((b) => !b.disabled && b.getAttribute('aria-disabled') !== 'true' && visible(b) && !(skip && b.closest(skip)))
+      .map((el) => {
+        const lbl = baseLabel(el);
+        const n = (counts.get(lbl) || 0) + 1;
+        counts.set(lbl, n);
+        return { el, key: n === 1 ? lbl : `${lbl} [${n}]` };
+      });
+  };
   if (home) { await home(); await sleep(wait); }
-  const names = list().map(label);
+  const keys = listWithKeys().map((x) => x.key);
   const out = [];
-  for (let i = from; i < Math.min(names.length, from + count); i++) {
+  for (let i = from; i < Math.min(keys.length, from + count); i++) {
     if (home) { await home(); await sleep(wait); }
-    const b = list().find((x) => label(x) === names[i]);
-    if (!b) { out.push('gone ' + names[i] + '  (its label changed or it left the screen: check by hand)'); continue; }
-    let outside = 0, self = 0;
+    const hit = listWithKeys().find((x) => x.key === keys[i]);
+    const b = hit && hit.el;
+    if (!b) { out.push('gone ' + keys[i] + '  (its label changed or it left the screen: check by hand)'); continue; }
+    let outside = 0, self = 0, navIntercepted = 0;
+    const onNav = (ev) => {
+      const a = ev.target.closest && ev.target.closest('a[href]');
+      if (!a) return;
+      const href = (a.getAttribute('href') || '').trim();
+      if (href && href !== '#' && !href.startsWith('javascript:')) {
+        ev.preventDefault();
+        navIntercepted++;
+      }
+    };
+    document.addEventListener('click', onNav, true);
     const mo = new MutationObserver((m) => m.forEach((r) => (b.contains(r.target) ? self++ : outside++)));
     mo.observe(document.body, { subtree: true, childList: true, attributes: true, characterData: true });
     b.click();
     await sleep(wait);
     mo.disconnect();
-    out.push((outside ? 'ok   ' : self ? 'SELF ' : 'DEAD ') + names[i]);
+    document.removeEventListener('click', onNav, true);
+    out.push(((outside || navIntercepted) ? 'ok   ' : self ? 'SELF ' : 'DEAD ') + keys[i]);
   }
-  return { total: names.length, out, problems: out.filter((x) => !x.startsWith('ok')) };
+  return { total: keys.length, out, problems: out.filter((x) => !x.startsWith('ok')) };
 };

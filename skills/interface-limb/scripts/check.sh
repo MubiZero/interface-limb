@@ -12,7 +12,8 @@ ok()  { echo "ok    $*"; }
 # 1. manifests: valid JSON, versions agree
 pv=$(node -e 'console.log(require(process.argv[1]).version)' "$root/.claude-plugin/plugin.json" 2>/dev/null)
 mv=$(node -e 'console.log(require(process.argv[1]).plugins[0].version)' "$root/.claude-plugin/marketplace.json" 2>/dev/null)
-if [ -n "$pv" ] && [ "$pv" = "$mv" ]; then ok "manifest versions agree ($pv)"; else bad "manifest versions differ: plugin.json=$pv marketplace.json=$mv"; fi
+av=$(node -e 'console.log(require(process.argv[1]).version)' "$root/plugin.json" 2>/dev/null)
+if [ -n "$pv" ] && [ "$pv" = "$mv" ] && [ "$pv" = "$av" ]; then ok "manifest versions agree ($pv)"; else bad "manifest versions differ: .claude-plugin=$pv marketplace=$mv plugin.json=$av"; fi
 
 # 2. SKILL.md frontmatter and size
 head -1 "$skill/SKILL.md" | grep -q '^---$' || bad "SKILL.md has no frontmatter"
