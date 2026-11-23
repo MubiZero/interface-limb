@@ -1,17 +1,10 @@
 ---
 name: interface-limb
 description: >-
-  Design intelligence for application interfaces, system first and behavior included: before drawing a screen, find
-  (or set up) the product's design system — tokens, shared components, one shared surface per kind of job, one grammar
-  of gestures and feedback — learn who does which job in what conditions, build only from the system, then render the
-  result at every width, press every control, and judge both how it looks and how it behaves. Use it whenever you
-  plan, build, review, refine, redesign, mock or prototype any UI for a web, mobile or desktop app (screens, components,
-  forms, dialogs, sheets, navigation, dashboards, onboarding, settings, checkout, POS/till and kiosk screens, admin
-  panels, landing pages, empty/loading/error/offline states, gestures, animations, interactive mocks), and whenever
-  someone asks "do we have a design system", "why does this look AI-made / vibe-coded", "make it premium", "add
-  animations / swipes", "unify these screens", "too many dialogs", "review this mock", or "audit the UI", even if they
-  never say the word design. Grounded in cited standards (WCAG 2.2, Material and Apple motion and targets, NN/g, Core
-  Web Vitals). Covers Go html/template (`kit/webkit`), Flutter, React/Tailwind/CSS, Angular/PrimeNG and React Native.
+  System-first UI/UX design and behavior workflow (Go html/template + webkit, Flutter, React/Tailwind, Angular, RN):
+  audits or sets up tokens, shared components, one surface per job, and gesture/feedback grammar; renders all widths and
+  presses every control. Use whenever planning, building, mocking, redesigning, or reviewing any web/mobile/desktop/POS
+  screen, or on "why does this look AI-made", "make it premium", "unify dialogs", "audit the UI".
 ---
 
 # Interface Limb
